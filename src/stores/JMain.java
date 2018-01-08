@@ -63,11 +63,6 @@ public class JMain extends javax.swing.JFrame {
 
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         mnuItems.setText("Items");
-        mnuItems.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuItemsActionPerformed(evt);
-            }
-        });
         mnuFile.add(mnuItems);
 
         mnuTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
@@ -128,10 +123,6 @@ public class JMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void mnuItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuItemsActionPerformed
 
     /**
      * @param args the command line arguments
