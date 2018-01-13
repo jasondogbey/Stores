@@ -22,12 +22,7 @@ public class jplLogin extends JPanel {
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x,y);
-        this.bar=bar;
-        this.reg=reg;
-        this.pri=pri;
-        this.bar.setVisible(false);
-        this.reg.setVisible(false);
-        this.pri.setVisible(false);
+       
         this.setVisible(true);
         
     }
@@ -49,6 +44,8 @@ public class jplLogin extends JPanel {
         bnLogin = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+
+        setBackground(new java.awt.Color(0, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Login");

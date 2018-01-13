@@ -14,7 +14,7 @@ public class JMain extends JFrame {
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
         //utility.DBConnection.connection();
-        //displayForm(new jplLogin(jplMain)); 
+        displayForm(new jplLogin(jplMain)); 
     }
 
     public void displayForm(JPanel jp){
@@ -49,15 +49,17 @@ public class JMain extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jplMain.setBackground(new java.awt.Color(255, 102, 102));
+
         javax.swing.GroupLayout jplMainLayout = new javax.swing.GroupLayout(jplMain);
         jplMain.setLayout(jplMainLayout);
         jplMainLayout.setHorizontalGroup(
             jplMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
         jplMainLayout.setVerticalGroup(
             jplMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         mnuFile.setText("File");
