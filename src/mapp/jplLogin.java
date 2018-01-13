@@ -1,5 +1,9 @@
+package mapp;
+import com.sun.glass.events.KeyEvent;
+import java.sql.ResultSet;
+import javax.swing.*;
 
-package stores;
+
 import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.*;
@@ -12,7 +16,7 @@ public class jplLogin extends JPanel {
     JMenuItem reg;
     JMenu pri;
     
-    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenu pri) {
+    public jplLogin(JPanel jplMain) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
