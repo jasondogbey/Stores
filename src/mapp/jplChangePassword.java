@@ -1,5 +1,5 @@
 
-package stores;
+package mapp;
 import javax.swing.*;
 
 

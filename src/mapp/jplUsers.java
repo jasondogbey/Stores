@@ -1,5 +1,5 @@
 
-package stores;
+package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
 

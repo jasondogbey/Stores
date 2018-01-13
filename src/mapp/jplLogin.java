@@ -1,5 +1,9 @@
+package mapp;
+import com.sun.glass.events.KeyEvent;
+import java.sql.ResultSet;
+import javax.swing.*;
 
-package stores;
+
 import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.*;
@@ -12,18 +16,13 @@ public class jplLogin extends JPanel {
     JMenuItem reg;
     JMenu pri;
     
-    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenu pri) {
+    public jplLogin(JPanel jplMain) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x,y);
-        this.bar=bar;
-        this.reg=reg;
-        this.pri=pri;
-        this.bar.setVisible(false);
-        this.reg.setVisible(false);
-        this.pri.setVisible(false);
+       
         this.setVisible(true);
         
     }
@@ -45,6 +44,8 @@ public class jplLogin extends JPanel {
         bnLogin = new javax.swing.JButton();
         bnCancel = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+
+        setBackground(new java.awt.Color(0, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Login");
