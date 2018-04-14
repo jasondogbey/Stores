@@ -4,18 +4,30 @@
  * and open the template in the editor.
  */
 package mapp;
-
+import java.sql.ResultSet;
+import javax.swing.*;
 /**
  *
  * @author Unknown
  */
-public class jplTransaction extends javax.swing.JPanel {
-
+public class jplTransaction extends JPanel {
+    final int pWidth = 800;
+    final int pHeight = 450;
     /**
      * Creates new form jplTransaction
      */
-    public jplTransaction() {
+    public jplTransaction(JPanel jplMain) {
         initComponents();
+        this.setSize(pWidth, pHeight);
+        int x = (jplMain.getWidth()-pWidth)/2;
+        int y = (jplMain.getHeight()-pHeight)/2;
+        this.setLocation(x, y);
+        this.setVisible(true);
+        //bnSearch.setText("Search");
+        initialization();
+    }
+    public void initialization(){
+        
     }
 
     /**
