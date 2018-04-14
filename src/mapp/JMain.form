@@ -33,6 +33,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Transaction"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuTransactionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuPurchaseTransaction">
               <Properties>
