@@ -4,18 +4,39 @@
  * and open the template in the editor.
  */
 package mapp;
-
+import java.sql.ResultSet;
+import javax.swing.*;
 /**
  *
  * @author Unknown
  */
-public class jplItems extends javax.swing.JPanel {
-
+public class jplItems extends JPanel {
+    final int pWidth = 800;
+    final int pHeight = 450;
     /**
      * Creates new form jplItems
      */
-    public jplItems() {
+    public jplItems(JPanel jplMain) {
         initComponents();
+        this.setSize(pWidth, pHeight);
+        int x = (jplMain.getWidth()-pWidth)/2;
+        int y = (jplMain.getHeight()-pHeight)/2;
+        this.setLocation(x, y);
+        this.setVisible(true);
+        //bnSearch.setText("Search");
+        initialization();
+    }
+    public void initialization(){
+        tfItemId.setText("");
+        tfItemName.setText("");
+        tfUnitPrice.setText("");
+        tfStockLevel.setText("");
+        taSuppliers.setText("");
+        tfLocation.setText("");
+        taNotes.setText("");
+        bnDelete.setEnabled(false);
+        bnSearch.setText("Search");
+        
     }
 
     /**
@@ -37,18 +58,19 @@ public class jplItems extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bnSearch = new javax.swing.JButton();
+        bnDelete = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         tfItemId = new javax.swing.JTextField();
         tfItemName = new javax.swing.JTextField();
         tfUnitPrice = new javax.swing.JTextField();
         tfStockLevel = new javax.swing.JTextField();
-        tfLocation = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        tfLocation1 = new javax.swing.JTextField();
+        taSuppliers = new javax.swing.JTextArea();
+        tfLocation = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        taNotes = new javax.swing.JTextArea();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,7 +101,7 @@ public class jplItems extends javax.swing.JPanel {
         jLabel5.setText("Stock Level");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Supplier");
+        jLabel6.setText("Suppliers");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Location");
@@ -87,13 +109,18 @@ public class jplItems extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Notes");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch.setText("Search");
+        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSearchActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setText("Delete");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete.setText("Delete");
+        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setText("Add New");
@@ -108,9 +135,13 @@ public class jplItems extends javax.swing.JPanel {
         jButton4.setText("Close");
         jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        taSuppliers.setColumns(20);
+        taSuppliers.setRows(5);
+        jScrollPane2.setViewportView(taSuppliers);
+
+        taNotes.setColumns(20);
+        taNotes.setRows(5);
+        jScrollPane3.setViewportView(taNotes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,9 +151,9 @@ public class jplItems extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(jButton1)
+                        .addComponent(bnSearch)
                         .addGap(48, 48, 48)
-                        .addComponent(jButton2)
+                        .addComponent(bnDelete)
                         .addGap(40, 40, 40)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
@@ -149,15 +180,15 @@ public class jplItems extends javax.swing.JPanel {
                                     .addComponent(tfUnitPrice)
                                     .addComponent(tfItemName)
                                     .addComponent(tfItemId)
-                                    .addComponent(tfLocation)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(tfLocation1))))
+                                    .addComponent(tfLocation)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
@@ -177,24 +208,28 @@ public class jplItems extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tfStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel6)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(tfLocation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(bnSearch)
+                    .addComponent(bnDelete)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addContainerGap())
@@ -205,10 +240,30 @@ public class jplItems extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
+       if (bnSearch.getText().equals("Search")){
+            if (tfItemId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Enter Transaction ID");
+                return;  
+            }
+            String ItemId = tfItemId.getText().trim();
+            String query = "Select * from item where Item_id='"+ItemId+"'";
+            
+            try{
+                ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+                while(rs.next()){
+                    tfItemId.setText(ItemId);
+                    //cbItem.add(rs.getString("Item_name"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                }
+            }
+        }
+    }//GEN-LAST:event_bnSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton bnDelete;
+    private javax.swing.JButton bnSearch;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -221,12 +276,13 @@ public class jplItems extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea taNotes;
+    private javax.swing.JTextArea taSuppliers;
     private javax.swing.JTextField tfItemId;
     private javax.swing.JTextField tfItemName;
     private javax.swing.JTextField tfLocation;
-    private javax.swing.JTextField tfLocation1;
     private javax.swing.JTextField tfStockLevel;
     private javax.swing.JTextField tfUnitPrice;
     // End of variables declaration//GEN-END:variables
