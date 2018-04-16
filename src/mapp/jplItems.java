@@ -32,7 +32,7 @@ public class jplItems extends JPanel {
         tfUnitPrice.setText("");
         tfStockLevel.setText("");
         taSuppliers.setText("");
-        tfLocation.setText("");
+        taLocation.setText("");
         taNotes.setText("");
         bnDelete.setEnabled(false);
         bnSearch.setText("Search");
@@ -60,8 +60,8 @@ public class jplItems extends JPanel {
         jLabel8 = new javax.swing.JLabel();
         bnSearch = new javax.swing.JButton();
         bnDelete = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bnAddNew = new javax.swing.JButton();
+        bnClose = new javax.swing.JButton();
         tfItemId = new javax.swing.JTextField();
         tfItemName = new javax.swing.JTextField();
         tfUnitPrice = new javax.swing.JTextField();
@@ -72,6 +72,7 @@ public class jplItems extends JPanel {
         taNotes = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         taLocation = new javax.swing.JTextArea();
+        bnSave = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,19 +123,29 @@ public class jplItems extends JPanel {
         bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnDelete.setText("Delete");
         bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setText("Add New");
-        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bnDeleteActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setText("Close");
-        jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnAddNew.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnAddNew.setText("Add New");
+        bnAddNew.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnAddNewActionPerformed(evt);
+            }
+        });
+
+        bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClose.setText("Close");
+        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCloseActionPerformed(evt);
+            }
+        });
 
         taSuppliers.setColumns(20);
         taSuppliers.setRows(5);
@@ -148,6 +159,15 @@ public class jplItems extends JPanel {
         taLocation.setRows(5);
         jScrollPane4.setViewportView(taLocation);
 
+        bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSave.setText("Save");
+        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,14 +175,16 @@ public class jplItems extends JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addContainerGap(54, Short.MAX_VALUE)
+                        .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(bnSearch)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(bnDelete)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(bnAddNew)
+                        .addGap(18, 18, 18)
+                        .addComponent(bnClose)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +210,7 @@ public class jplItems extends JPanel {
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -233,15 +255,16 @@ public class jplItems extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnSearch)
                     .addComponent(bnDelete)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(bnAddNew)
+                    .addComponent(bnClose)
+                    .addComponent(bnSave))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddNewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bnAddNewActionPerformed
 
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
        if (bnSearch.getText().equals("Search")){
@@ -260,17 +283,131 @@ public class jplItems extends JPanel {
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfStockLevel.setText(rs.getString("Stock_level"));
                     taSuppliers.setText(rs.getString("Suppliers"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
                 }
+                tfItemId.setEditable(false);
+                tfItemName.setEditable(false);
+                tfUnitPrice.setEditable(false);
+                tfStockLevel.setEditable(false);
+                taSuppliers.setEditable(false);
+                taLocation.setEditable(false);
+                taNotes.setEditable(false);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnAddNew.setEnabled(false);
+                bnSearch.setText("Edit");
+                
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                tfItemId.setText("");
+            }
+        } else if (bnSearch.getText().equals("Edit")){
+            tfItemId.setEditable(false);
+            tfItemName.setEditable(true);
+            tfUnitPrice.setEditable(true);
+            tfStockLevel.setEditable(true);
+            taSuppliers.setEditable(true);
+            taLocation.setEditable(true);
+            taNotes.setEditable(true);
+            bnSearch.setText("Update");
+        } else if (bnSearch.getText().equals("Update")){
+            String query = "update item set Item_name='"+tfItemName.getText()+"', Unit_price='"+tfUnitPrice.getText()+"', Stock_level='"+tfStockLevel.getText()+"', Suppliers='"+taSuppliers.getText()+"', Location='"+taLocation.getText()+"', Notes='"+taNotes.getText()+"' where Item_id='"+tfItemId.getText()+"'";
+            try {
+                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Update is Successful");
+                    tfItemId.setText("");
+                    tfItemName.setText("");
+                    tfUnitPrice.setText("");
+                    tfStockLevel.setText("");
+                    taSuppliers.setText("");
+                    taLocation.setText("");
+                    taNotes.setText("");
+                    //bnSearch.setText("Search");
+                    initialization();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Could not update data");
+                    tfItemId.setText("");
+                    tfItemName.setText("");
+                    tfUnitPrice.setText("");
+                    tfStockLevel.setText("");
+                    taSuppliers.setText("");
+                    taLocation.setText("");
+                    taNotes.setText("");
+                    //bnSearch.setText("Search");
+                    
+                    tfItemId.setEditable(true);
+                    tfItemName.setEditable(true);
+                    tfUnitPrice.setEditable(true);
+                    tfStockLevel.setEditable(true);
+                    taSuppliers.setEditable(true);
+                    taLocation.setEditable(true);
+                    taNotes.setEditable(true);
+                }
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
             }
         }
     }//GEN-LAST:event_bnSearchActionPerformed
 
+    private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bnSaveActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+         String query= "delete from item where Item_id='"+tfItemId.getText().trim()+"'";
+            try{
+                if(utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Delete is Successful");
+                    tfItemId.setText("");
+                    tfItemName.setText("");
+                    tfUnitPrice.setText("");
+                    tfStockLevel.setText("");
+                    taSuppliers.setText("");
+                    taLocation.setText("");
+                    taNotes.setText("");
+                    initialization();
+                    
+                    tfItemId.setEditable(true);
+                    tfItemName.setEditable(true);
+                    tfUnitPrice.setEditable(true);
+                    tfStockLevel.setEditable(true);
+                    taSuppliers.setEditable(true);
+                    taLocation.setEditable(true);
+                    taNotes.setEditable(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Delete not Successful");
+                }
+             }catch(Exception e){
+                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+             }
+    }//GEN-LAST:event_bnDeleteActionPerformed
+
+    private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
+        if (utility.Utility.universalCode == 1){
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save changes?","Warning",JOptionPane.YES_NO_OPTION);
+            if (res==JOptionPane.YES_OPTION){
+                if (bnSearch.getText().equals("Update")){
+                    bnSearch.doClick();
+                }else{
+                    bnSave.doClick();
+                }
+            }else{
+                this.setVisible(false);
+            }
+        }else{
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_bnCloseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnAddNew;
+    private javax.swing.JButton bnClose;
     private javax.swing.JButton bnDelete;
+    private javax.swing.JButton bnSave;
     private javax.swing.JButton bnSearch;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
