@@ -28,7 +28,7 @@ public class jplTransaction extends JPanel {
     }
     public void initialization(){
         tfTransactionId.setText("");
-        tfSupplier.setText("");
+        tfCollector.setText("");
         tfUnitCost.setText("");
         tfQuantity.setText("");
         tfUserCode.setText("");
@@ -68,7 +68,7 @@ public class jplTransaction extends JPanel {
         tfTransactionDate = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
         cbItem = new javax.swing.JComboBox<String>();
-        tfSupplier = new javax.swing.JTextField();
+        tfCollector = new javax.swing.JTextField();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Collector");
@@ -110,6 +110,11 @@ public class jplTransaction extends JPanel {
         bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnDelete.setText("Delete");
         bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDeleteActionPerformed(evt);
+            }
+        });
 
         bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnSave.setText("Save");
@@ -126,6 +131,11 @@ public class jplTransaction extends JPanel {
         bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnClose.setText("Close");
         bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCloseActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Transaction ID");
@@ -151,8 +161,6 @@ public class jplTransaction extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bnDelete)
-                        .addGap(169, 169, 169)
                         .addComponent(bnClose)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -178,7 +186,7 @@ public class jplTransaction extends JPanel {
                                         .addGap(25, 25, 25)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(tfSupplier)
+                                                .addComponent(tfCollector)
                                                 .addComponent(tfUnitCost, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(tfTransactionId, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(tfUserCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
@@ -188,7 +196,9 @@ public class jplTransaction extends JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(bnSearch)
-                                        .addGap(36, 36, 36)))))
+                                        .addGap(56, 56, 56)
+                                        .addComponent(bnDelete)
+                                        .addGap(21, 21, 21)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,7 +230,7 @@ public class jplTransaction extends JPanel {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(tfSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -248,17 +258,17 @@ public class jplTransaction extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
-        String query="insert into item values ('"+tfItemId.getText()+"','"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfStockLevel.getText()+"','"+taSuppliers.getText()+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
+        String query="insert into item values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"'";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
-               JOptionPane.showMessageDialog(null, "Successfully saved to Inventory");
-                tfItemId.setText("");
-                tfItemName.setText("");
-                tfUnitPrice.setText("");
-                tfStockLevel.setText("");
-                taSuppliers.setText("");
-                taLocation.setText("");
-                taNotes.setText("");
+               JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
+                tfTransactionId.setText("");
+                cbItem.setSelectedItem("");
+                tfCollector.setText("");
+                tfUnitCost.setText("");
+                tfQuantity.setText("");
+                tfUserCode.setText("");
+                tfTransactionDate.setText("");
                initialization();
            }else{
                JOptionPane.showMessageDialog(null, "Could not save data");
@@ -275,22 +285,134 @@ public class jplTransaction extends JPanel {
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
         if (bnSearch.getText().equals("Search")){
             if (tfTransactionId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Enter Transaction ID");
+                JOptionPane.showMessageDialog(null, "Enter Item ID");
                 return;  
             }
-            String transactionId = tfTransactionId.getText().trim();
-            String query = "Select * from purchase_transaction where Transaction_id='"+transactionId+"'";
+            String TransactionId = tfTransactionId.getText().trim();
+            String query = "Select * from transaction where Transaction_id='"+TransactionId+"'";
             
             try{
                 ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
                 while(rs.next()){
-                    tfTransactionId.setText(transactionId);
-                    //cbItem.add(rs.getString("Item_name"));
-                    tfSupplier.setText(rs.getString("Supplier"));
+                    tfTransactionId.setText(TransactionId);
+                    cbItem.setSelectedItem(rs.getString("item"));
+                    tfCollector.setText(rs.getString("Collector"));
+                    tfUnitCost.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    tfUserCode.setText(rs.getString("User_code"));
+                    tfTransactionDate.setText(rs.getString("Transaction_date"));
+                    
                 }
+                tfTransactionId.setEditable(true);
+                cbItem.setEditable(true);
+                tfCollector.setEditable(true);
+                tfUnitCost.setEditable(true);
+                tfQuantity.setEditable(true);
+                tfUserCode.setEditable(true);
+                tfTransactionDate.setEditable(true);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+                
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                tfTransactionId.setText("");
+            }
+        } else if (bnSearch.getText().equals("Edit")){
+            tfTransactionId.setEditable(false);
+            cbItem.setEditable(true);
+            tfCollector.setEditable(true);
+            tfUnitCost.setEditable(true);
+            tfQuantity.setEditable(true);
+            tfUserCode.setEditable(true);
+            tfTransactionDate.setEditable(true);
+            bnSearch.setText("Update");
+        } else if (bnSearch.getText().equals("Update")){
+            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfUserCode.getText()+"', Transaction_date='"+tfTransactionDate.getText()+"' where Transaction_id='"+tfTransactionId.getText()+"'";
+            try {
+                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Update is Successful");
+                    tfTransactionId.setText("");
+                    cbItem.setSelectedItem("");
+                    tfCollector.setText("");
+                    tfUnitCost.setText("");
+                    tfQuantity.setText("");
+                    tfUserCode.setText("");
+                    tfTransactionDate.setText("");
+                    //bnSearch.setText("Search");
+                    initialization();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Could not update data");
+                    tfTransactionId.setText("");
+                    cbItem.setSelectedItem("");
+                    tfCollector.setText("");
+                    tfUnitCost.setText("");
+                    tfQuantity.setText("");
+                    tfUserCode.setText("");
+                    tfTransactionDate.setText("");
+                    //bnSearch.setText("Search");
+                    
+                    tfTransactionId.setEditable(true);
+                    cbItem.setEditable(true);
+                    tfCollector.setEditable(true);
+                    tfUnitCost.setEditable(true);
+                    tfQuantity.setEditable(true);
+                    tfUserCode.setEditable(true);
+                    tfTransactionDate.setEditable(true);
+                }
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
             }
         }
     }//GEN-LAST:event_bnSearchActionPerformed
+
+    private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
+        if (utility.Utility.universalCode == 1){
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save changes?","Warning",JOptionPane.YES_NO_OPTION);
+            if (res==JOptionPane.YES_OPTION){
+                if (bnSearch.getText().equals("Update")){
+                    bnSearch.doClick();
+                }else{
+                    bnSave.doClick();
+                }
+            }else{
+                this.setVisible(false);
+            }
+        }else{
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_bnCloseActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+        String query= "delete from transaction where Transaction_id='"+tfTransactionId.getText().trim()+"'";
+            try{
+                if(utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Delete is Successful");
+                    tfTransactionId.setText("");
+                    cbItem.setSelectedItem("");
+                    tfCollector.setText("");
+                    tfUnitCost.setText("");
+                    tfQuantity.setText("");
+                    tfUserCode.setText("");
+                    tfTransactionDate.setText("");
+                    initialization();
+                    
+                    tfTransactionId.setEditable(true);
+                    cbItem.setEditable(true);
+                    tfCollector.setEditable(true);
+                    tfUnitCost.setEditable(true);
+                    tfQuantity.setEditable(true);
+                    tfUserCode.setEditable(true);
+                    tfTransactionDate.setEditable(true);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Delete not Successful");
+                }
+             }catch(Exception e){
+                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+             }
+    }//GEN-LAST:event_bnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -311,8 +433,8 @@ public class jplTransaction extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField tfCollector;
     private javax.swing.JTextField tfQuantity;
-    private javax.swing.JTextField tfSupplier;
     private javax.swing.JTextField tfTransactionDate;
     private javax.swing.JTextField tfTransactionId;
     private javax.swing.JTextField tfUnitCost;
