@@ -66,6 +66,11 @@ public class JMain extends JFrame {
 
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         mnuItems.setText("Items");
+        mnuItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemsActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuItems);
 
         mnuTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
@@ -134,6 +139,10 @@ public class JMain extends JFrame {
     private void mnuTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTransactionActionPerformed
      displayForm(new jplTransaction(jplMain));  
     }//GEN-LAST:event_mnuTransactionActionPerformed
+
+    private void mnuItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemsActionPerformed
+        displayForm(new jplItems(jplMain));
+    }//GEN-LAST:event_mnuItemsActionPerformed
 
     public static void main(String args[]) {
        
