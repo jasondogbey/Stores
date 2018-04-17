@@ -240,11 +240,12 @@ public class jplItems extends JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bnSearch)
-                    .addComponent(bnDelete)
-                    .addComponent(bnClose)
-                    .addComponent(bnSave))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnDelete)
+                        .addComponent(bnClose)
+                        .addComponent(bnSave)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -337,7 +338,7 @@ public class jplItems extends JPanel {
         String query="insert into item values ('"+tfItemId.getText()+"','"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfQuantity.getText()+"','"+taSuppliers.getText()+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
-               JOptionPane.showMessageDialog(null, "Successfully saved to Inventory");
+               JOptionPane.showMessageDialog(null, "Successfully saved Item");
                 tfItemId.setText("");
                 tfItemName.setText("");
                 tfUnitPrice.setText("");
