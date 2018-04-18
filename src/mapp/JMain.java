@@ -13,7 +13,7 @@ public class JMain extends JFrame {
         int x = (d.width-this.getWidth())/2;
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
-        //utility.DBConnection.connection();
+        utility.DBconnection.connection();
         displayForm(new jplLogin(jplMain)); 
     }
 
@@ -66,10 +66,20 @@ public class JMain extends JFrame {
 
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         mnuItems.setText("Items");
+        mnuItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemsActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuItems);
 
         mnuTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
         mnuTransaction.setText("Transaction");
+        mnuTransaction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTransactionActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuTransaction);
 
         mnuPurchaseTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
@@ -125,6 +135,14 @@ public class JMain extends JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mnuTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTransactionActionPerformed
+     displayForm(new jplTransaction(jplMain));  
+    }//GEN-LAST:event_mnuTransactionActionPerformed
+
+    private void mnuItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemsActionPerformed
+        displayForm(new jplItems(jplMain));
+    }//GEN-LAST:event_mnuItemsActionPerformed
 
     public static void main(String args[]) {
        

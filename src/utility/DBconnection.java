@@ -13,7 +13,7 @@ public class DBconnection extends IPaddress{
          //Default connector
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://"+getAddress()+"/java";
+            String url = "jdbc:mysql://"+getAddress()+"/stores_db";
             con=DriverManager.getConnection(url, user, password);
             stmt = con.createStatement();
             System.out.print("Database Successfully Connected!!");
@@ -29,7 +29,7 @@ public class DBconnection extends IPaddress{
         //connect to database
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://"+sIP+"/java";
+            String url = "jdbc:mysql://"+sIP+"/stores_db";
             con = DriverManager.getConnection(url, user, password);
             stmt = con.createStatement();    
             System.out.println("Database Successfully Connected!!");

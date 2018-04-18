@@ -4,18 +4,37 @@
  * and open the template in the editor.
  */
 package mapp;
-
+import java.sql.ResultSet;
+import javax.swing.*;
 /**
  *
  * @author Unknown
  */
-public class jplTransaction extends javax.swing.JPanel {
-
+public class jplTransaction extends JPanel {
+    final int pWidth = 800;
+    final int pHeight = 450;
     /**
      * Creates new form jplTransaction
      */
-    public jplTransaction() {
+    public jplTransaction(JPanel jplMain) {
         initComponents();
+        this.setSize(pWidth, pHeight);
+        int x = (jplMain.getWidth()-pWidth)/2;
+        int y = (jplMain.getHeight()-pHeight)/2;
+        this.setLocation(x, y);
+        this.setVisible(true);
+        //bnSearch.setText("Search");
+        initialization();
+    }
+    public void initialization(){
+        tfTransactionId.setText("");
+        tfCollector.setText("");
+        tfUnitCost.setText("");
+        tfQuantity.setText("");
+        tfUserCode.setText("");
+        bnDelete.setEnabled(false);
+        bnSearch.setText("Search");
+        
     }
 
     /**
@@ -28,35 +47,31 @@ public class jplTransaction extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        tfItemId = new javax.swing.JTextField();
+        tfTransactionId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tfStockLevel = new javax.swing.JTextField();
+        tfUnitCost = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tfLocation = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tfUserCode = new javax.swing.JTextField();
+        bnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bnDelete = new javax.swing.JButton();
+        bnSave = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        bnClose = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        tfTransactionDate = new javax.swing.JTextField();
+        tfQuantity = new javax.swing.JTextField();
+        cbItem = new javax.swing.JComboBox<String>();
+        tfCollector = new javax.swing.JTextField();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Supplier");
+        jLabel3.setText("Collector");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Item");
@@ -70,9 +85,14 @@ public class jplTransaction extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Transaction Date");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch.setText("Search");
+        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSearchActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,25 +107,35 @@ public class jplTransaction extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setText("Delete");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setText("Add New");
-        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete.setText("Delete");
+        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bnDeleteActionPerformed(evt);
+            }
+        });
+
+        bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSave.setText("Save");
+        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSaveActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Transaction");
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setText("Close");
-        jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClose.setText("Close");
+        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCloseActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Transaction ID");
@@ -113,20 +143,15 @@ public class jplTransaction extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("All Purchases");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("Type");
-
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Purchase");
-
-        jRadioButton2.setText("Distribute");
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("User Code");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbItem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbItemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -135,52 +160,46 @@ public class jplTransaction extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton1)
-                        .addGap(48, 48, 48)
-                        .addComponent(jButton2)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bnClose)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(33, 33, 33)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel10)
-                                    .addGap(95, 95, 95)
-                                    .addComponent(jRadioButton1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jRadioButton2))
-                                .addComponent(jSeparator2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(bnSave)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfStockLevel)
-                                    .addComponent(tfItemId)
-                                    .addComponent(tfLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(tfCollector)
+                                                .addComponent(tfUnitCost, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfTransactionId, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfUserCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                                .addComponent(tfTransactionDate, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfQuantity, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(bnSearch)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(bnDelete)
+                                        .addGap(21, 21, 21)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -198,66 +217,211 @@ public class jplTransaction extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(40, 40, 40)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(tfItemId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfTransactionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(tfStockLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfUnitCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(tfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
+                            .addComponent(bnSearch)
+                            .addComponent(bnDelete)
+                            .addComponent(bnSave)
+                            .addComponent(bnClose))
                         .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
+        String query="insert into item values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"'";
+        try{
+           if(utility.DBconnection.getStatement().executeUpdate(query)>0){
+               JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
+                tfTransactionId.setText("");
+                cbItem.setSelectedItem("");
+                tfCollector.setText("");
+                tfUnitCost.setText("");
+                tfQuantity.setText("");
+                tfUserCode.setText("");
+                tfTransactionDate.setText("");
+               initialization();
+           }else{
+               JOptionPane.showMessageDialog(null, "Could not save data");
+           }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_bnSaveActionPerformed
+
+    private void cbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_cbItemActionPerformed
+
+    private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
+        if (bnSearch.getText().equals("Search")){
+            if (tfTransactionId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Enter Item ID");
+                return;  
+            }
+            String TransactionId = tfTransactionId.getText().trim();
+            String query = "Select * from transaction where Transaction_id='"+TransactionId+"'";
+            
+            try{
+                ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+                while(rs.next()){
+                    tfTransactionId.setText(TransactionId);
+                    cbItem.setSelectedItem(rs.getString("item"));
+                    tfCollector.setText(rs.getString("Collector"));
+                    tfUnitCost.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    tfUserCode.setText(rs.getString("User_code"));
+                    tfTransactionDate.setText(rs.getString("Transaction_date"));
+                    
+                }
+                tfTransactionId.setEditable(true);
+                cbItem.setEditable(true);
+                tfCollector.setEditable(true);
+                tfUnitCost.setEditable(true);
+                tfQuantity.setEditable(true);
+                tfUserCode.setEditable(true);
+                tfTransactionDate.setEditable(true);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+                
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                tfTransactionId.setText("");
+            }
+        } else if (bnSearch.getText().equals("Edit")){
+            tfTransactionId.setEditable(false);
+            cbItem.setEditable(true);
+            tfCollector.setEditable(true);
+            tfUnitCost.setEditable(true);
+            tfQuantity.setEditable(true);
+            tfUserCode.setEditable(true);
+            tfTransactionDate.setEditable(true);
+            bnSearch.setText("Update");
+        } else if (bnSearch.getText().equals("Update")){
+            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfUserCode.getText()+"', Transaction_date='"+tfTransactionDate.getText()+"' where Transaction_id='"+tfTransactionId.getText()+"'";
+            try {
+                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Update is Successful");
+                    tfTransactionId.setText("");
+                    cbItem.setSelectedItem("");
+                    tfCollector.setText("");
+                    tfUnitCost.setText("");
+                    tfQuantity.setText("");
+                    tfUserCode.setText("");
+                    tfTransactionDate.setText("");
+                    //bnSearch.setText("Search");
+                    initialization();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Could not update data");
+                    tfTransactionId.setText("");
+                    cbItem.setSelectedItem("");
+                    tfCollector.setText("");
+                    tfUnitCost.setText("");
+                    tfQuantity.setText("");
+                    tfUserCode.setText("");
+                    tfTransactionDate.setText("");
+                    //bnSearch.setText("Search");
+                    
+                    tfTransactionId.setEditable(true);
+                    cbItem.setEditable(true);
+                    tfCollector.setEditable(true);
+                    tfUnitCost.setEditable(true);
+                    tfQuantity.setEditable(true);
+                    tfUserCode.setEditable(true);
+                    tfTransactionDate.setEditable(true);
+                }
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_bnSearchActionPerformed
+
+    private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
+        if (utility.Utility.universalCode == 1){
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save changes?","Warning",JOptionPane.YES_NO_OPTION);
+            if (res==JOptionPane.YES_OPTION){
+                if (bnSearch.getText().equals("Update")){
+                    bnSearch.doClick();
+                }else{
+                    bnSave.doClick();
+                }
+            }else{
+                this.setVisible(false);
+            }
+        }else{
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_bnCloseActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+        String query= "delete from transaction where Transaction_id='"+tfTransactionId.getText().trim()+"'";
+            try{
+                if(utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Delete is Successful");
+                    tfTransactionId.setText("");
+                    cbItem.setSelectedItem("");
+                    tfCollector.setText("");
+                    tfUnitCost.setText("");
+                    tfQuantity.setText("");
+                    tfUserCode.setText("");
+                    tfTransactionDate.setText("");
+                    initialization();
+                    
+                    tfTransactionId.setEditable(true);
+                    cbItem.setEditable(true);
+                    tfCollector.setEditable(true);
+                    tfUnitCost.setEditable(true);
+                    tfQuantity.setEditable(true);
+                    tfUserCode.setEditable(true);
+                    tfTransactionDate.setEditable(true);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Delete not Successful");
+                }
+             }catch(Exception e){
+                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+             }
+    }//GEN-LAST:event_bnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton bnClose;
+    private javax.swing.JButton bnDelete;
+    private javax.swing.JButton bnSave;
+    private javax.swing.JButton bnSearch;
+    private javax.swing.JComboBox<String> cbItem;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -266,16 +430,14 @@ public class jplTransaction extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField tfItemId;
-    private javax.swing.JTextField tfLocation;
-    private javax.swing.JTextField tfStockLevel;
+    private javax.swing.JTextField tfCollector;
+    private javax.swing.JTextField tfQuantity;
+    private javax.swing.JTextField tfTransactionDate;
+    private javax.swing.JTextField tfTransactionId;
+    private javax.swing.JTextField tfUnitCost;
+    private javax.swing.JTextField tfUserCode;
     // End of variables declaration//GEN-END:variables
 }
