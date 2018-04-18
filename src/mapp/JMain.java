@@ -13,7 +13,7 @@ public class JMain extends JFrame {
         int x = (d.width-this.getWidth())/2;
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
-        //utility.DBConnection.connection();
+        utility.DBconnection.connection();
         displayForm(new jplLogin(jplMain)); 
     }
 
