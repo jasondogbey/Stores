@@ -73,6 +73,12 @@ public class jplTransaction extends JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Collector");
 
+        tfTransactionId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfTransactionIdFocusLost(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Item");
 
@@ -423,6 +429,10 @@ public class jplTransaction extends JPanel {
     private void tfQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfQuantityActionPerformed
+
+    private void tfTransactionIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTransactionIdFocusLost
+        tfTransactionId.setText(tfTransactionId.getText().toUpperCase());
+    }//GEN-LAST:event_tfTransactionIdFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
