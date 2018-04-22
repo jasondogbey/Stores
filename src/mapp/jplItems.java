@@ -137,6 +137,12 @@ public class jplItems extends JPanel {
             }
         });
 
+        tfItemId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfItemIdFocusLost(evt);
+            }
+        });
+
         taSuppliers.setColumns(20);
         taSuppliers.setRows(5);
         jScrollPane2.setViewportView(taSuppliers);
@@ -400,6 +406,10 @@ public class jplItems extends JPanel {
             this.setVisible(false);
         }
     }//GEN-LAST:event_bnCloseActionPerformed
+
+    private void tfItemIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfItemIdFocusLost
+        tfItemId.setText(tfItemId.getText().toUpperCase());
+    }//GEN-LAST:event_tfItemIdFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
