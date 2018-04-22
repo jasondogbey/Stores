@@ -87,6 +87,11 @@ public class JMain extends JFrame {
 
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuSuppliers.setText("Suppliers");
+        mnuSuppliers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSuppliersActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuSuppliers);
 
         mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
@@ -147,6 +152,10 @@ public class JMain extends JFrame {
     private void mnuAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAccountsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuAccountsActionPerformed
+
+    private void mnuSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSuppliersActionPerformed
+        displayForm(new jplSuppliers(jplMain));
+    }//GEN-LAST:event_mnuSuppliersActionPerformed
 
     public static void main(String args[]) {
        
