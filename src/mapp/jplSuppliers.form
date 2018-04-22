@@ -48,10 +48,10 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfName" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfAddress" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfContact" alignment="0" pref="273" max="32767" attributes="0"/>
+                                  <Component id="tfName" alignment="0" pref="273" max="32767" attributes="0"/>
                                   <Component id="tfProducts" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfAddress" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfContact" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -213,11 +213,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfSupplierIdActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="tfAddress">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAddressActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="bnSearch">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -233,8 +228,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnSearchActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="tfContact">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -276,6 +269,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfProducts">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfAddress">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfContact">
     </Component>
   </SubComponents>
 </Form>

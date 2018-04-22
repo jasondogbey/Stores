@@ -56,14 +56,14 @@ public class jplSuppliers extends JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         tfSupplierId = new javax.swing.JTextField();
-        tfAddress = new javax.swing.JPasswordField();
         bnSearch = new javax.swing.JButton();
-        tfContact = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         bnDelete = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tfProducts = new javax.swing.JTextField();
+        tfAddress = new javax.swing.JTextField();
+        tfContact = new javax.swing.JTextField();
 
         bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnSave.setText("Save");
@@ -119,12 +119,6 @@ public class jplSuppliers extends JPanel {
         tfSupplierId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSupplierIdActionPerformed(evt);
-            }
-        });
-
-        tfAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAddressActionPerformed(evt);
             }
         });
 
@@ -191,10 +185,10 @@ public class jplSuppliers extends JPanel {
                                     .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfName)
+                                    .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(tfProducts)
                                     .addComponent(tfAddress)
-                                    .addComponent(tfContact, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(tfProducts)))
+                                    .addComponent(tfContact)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -263,20 +257,16 @@ public class jplSuppliers extends JPanel {
     }//GEN-LAST:event_bnSaveActionPerformed
 
     private void tfSupplierIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSupplierIdFocusLost
-        tfSupplierId.setText(tfSupplierId.getText().toUpperCase());
+    tfSupplierId.setText(tfSupplierId.getText().toUpperCase());
     }//GEN-LAST:event_tfSupplierIdFocusLost
 
     private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
-        tfName.setText(tfName.getText().toUpperCase());
+       
     }//GEN-LAST:event_tfNameFocusLost
 
     private void tfSupplierIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSupplierIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfSupplierIdActionPerformed
-
-    private void tfAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAddressActionPerformed
 
     private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
         if (utility.Utility.universalCode == 1){
@@ -407,8 +397,8 @@ public class jplSuppliers extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JPasswordField tfAddress;
-    private javax.swing.JPasswordField tfContact;
+    private javax.swing.JTextField tfAddress;
+    private javax.swing.JTextField tfContact;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfProducts;
     private javax.swing.JTextField tfSupplierId;
