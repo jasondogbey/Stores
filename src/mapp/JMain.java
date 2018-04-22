@@ -36,7 +36,6 @@ public class JMain extends JFrame {
         mnuTransaction = new javax.swing.JMenuItem();
         mnuPurchaseTransaction = new javax.swing.JMenuItem();
         mnuSuppliers = new javax.swing.JMenuItem();
-        mnuCollectors = new javax.swing.JMenuItem();
         mnuAccounts = new javax.swing.JMenuItem();
         mnuPrint = new javax.swing.JMenu();
         mnuPrintTransaction = new javax.swing.JMenuItem();
@@ -90,12 +89,13 @@ public class JMain extends JFrame {
         mnuSuppliers.setText("Suppliers");
         mnuFile.add(mnuSuppliers);
 
-        mnuCollectors.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuCollectors.setText("Collectors");
-        mnuFile.add(mnuCollectors);
-
         mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         mnuAccounts.setText("Accounts");
+        mnuAccounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAccountsActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuAccounts);
 
         mnuBar.add(mnuFile);
@@ -144,6 +144,10 @@ public class JMain extends JFrame {
         displayForm(new jplItems(jplMain));
     }//GEN-LAST:event_mnuItemsActionPerformed
 
+    private void mnuAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAccountsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuAccountsActionPerformed
+
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -159,7 +163,6 @@ public class JMain extends JFrame {
     private javax.swing.JMenuItem mnuAccounts;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuChangePassword;
-    private javax.swing.JMenuItem mnuCollectors;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuItems;
     private javax.swing.JMenu mnuPrint;
