@@ -4,18 +4,37 @@
  * and open the template in the editor.
  */
 package mapp;
-
+import java.sql.ResultSet;
+import javax.swing.*;
 /**
  *
  * @author Unknown
  */
-public class jplSuppliers extends javax.swing.JPanel {
-
+public class jplSuppliers extends JPanel {
+    final int pWidth = 800;
+    final int pHeight = 450;
     /**
      * Creates new form jplSuppliers
      */
-    public jplSuppliers() {
+    public jplSuppliers(JPanel jplMain) {
         initComponents();
+        this.setSize(pWidth, pHeight);
+        int x = (jplMain.getWidth()-pWidth)/2;
+        int y = (jplMain.getHeight()-pHeight)/2;
+        this.setLocation(x, y);
+        this.setVisible(true);
+        //bnSearch.setText("Search");
+        initialization();
+    }
+    public void initialization(){
+        tfSupplierId.setText("");
+        tfName.setText("");
+        tfAddress.setText("");
+        tfContact.setText("");
+        tfProducts.setText("");
+        bnDelete.setEnabled(false);
+        bnSearch.setText("Search");
+        
     }
 
     /**
@@ -27,31 +46,31 @@ public class jplSuppliers extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton3 = new javax.swing.JButton();
+        bnSave = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        bnClose = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        tfUserCode = new javax.swing.JTextField();
-        pfPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        pfConfirmPass = new javax.swing.JPasswordField();
+        tfSupplierId = new javax.swing.JTextField();
+        tfAddress = new javax.swing.JPasswordField();
+        bnSearch = new javax.swing.JButton();
+        tfContact = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        bnDelete = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfProducts = new javax.swing.JTextField();
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setText("Add New");
-        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSave.setText("Save");
+        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bnSaveActionPerformed(evt);
             }
         });
 
@@ -63,9 +82,14 @@ public class jplSuppliers extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Suppliers");
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setText("Close");
-        jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClose.setText("Close");
+        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCloseActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,34 +111,44 @@ public class jplSuppliers extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Supplier ID");
 
-        tfUserCode.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfSupplierId.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfUserCodeFocusLost(evt);
+                tfSupplierIdFocusLost(evt);
             }
         });
-        tfUserCode.addActionListener(new java.awt.event.ActionListener() {
+        tfSupplierId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfUserCodeActionPerformed(evt);
+                tfSupplierIdActionPerformed(evt);
             }
         });
 
-        pfPassword.addActionListener(new java.awt.event.ActionListener() {
+        tfAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pfPasswordActionPerformed(evt);
+                tfAddressActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch.setText("Search");
+        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSearchActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Name:");
         jLabel3.setToolTipText("");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setText("Delete");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete.setText("Delete");
+        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDeleteActionPerformed(evt);
+            }
+        });
 
         tfName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -139,13 +173,13 @@ public class jplSuppliers extends javax.swing.JPanel {
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(bnSearch)
                                 .addGap(38, 38, 38)
-                                .addComponent(jButton2)
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton3)
-                                .addGap(35, 35, 35)
-                                .addComponent(jButton4)
+                                .addComponent(bnDelete)
+                                .addGap(37, 37, 37)
+                                .addComponent(bnClose)
                                 .addGap(42, 42, 42))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -158,13 +192,13 @@ public class jplSuppliers extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfName)
-                                    .addComponent(pfPassword)
-                                    .addComponent(pfConfirmPass, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)))
+                                    .addComponent(tfAddress)
+                                    .addComponent(tfContact, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(tfProducts)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -182,7 +216,7 @@ public class jplSuppliers extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -190,51 +224,180 @@ public class jplSuppliers extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(bnSearch)
+                    .addComponent(bnDelete)
+                    .addComponent(bnSave)
+                    .addComponent(bnClose))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
+        String query="insert into supplier values ('"+tfSupplierId.getText()+"','"+tfName.getText()+"','"+tfAddress.getText()+"','"+tfContact.getText()+"','"+tfProducts.getText()+"')";
+        try{
+           if(utility.DBconnection.getStatement().executeUpdate(query)>0){
+               JOptionPane.showMessageDialog(null, "Successfully saved Item");
+                tfSupplierId.setText("");
+                tfName.setText("");
+                tfAddress.setText("");
+                tfContact.setText("");
+                tfProducts.setText("");
+               initialization();
+           }else{
+               JOptionPane.showMessageDialog(null, "Could not save data");
+           }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_bnSaveActionPerformed
 
-    private void tfUserCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUserCodeFocusLost
-        tfUserCode.setText(tfUserCode.getText().toUpperCase());
-    }//GEN-LAST:event_tfUserCodeFocusLost
+    private void tfSupplierIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSupplierIdFocusLost
+        tfSupplierId.setText(tfSupplierId.getText().toUpperCase());
+    }//GEN-LAST:event_tfSupplierIdFocusLost
 
     private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
         tfName.setText(tfName.getText().toUpperCase());
     }//GEN-LAST:event_tfNameFocusLost
 
-    private void tfUserCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserCodeActionPerformed
+    private void tfSupplierIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSupplierIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfUserCodeActionPerformed
+    }//GEN-LAST:event_tfSupplierIdActionPerformed
 
-    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
+    private void tfAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pfPasswordActionPerformed
+    }//GEN-LAST:event_tfAddressActionPerformed
+
+    private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
+        if (utility.Utility.universalCode == 1){
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save changes?","Warning",JOptionPane.YES_NO_OPTION);
+            if (res==JOptionPane.YES_OPTION){
+                if (bnSearch.getText().equals("Update")){
+                    bnSearch.doClick();
+                }else{
+                    bnSave.doClick();
+                }
+            }else{
+                this.setVisible(false);
+            }
+        }else{
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_bnCloseActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+         String query= "delete from supplier where Supplier_id='"+tfSupplierId.getText().trim()+"'";
+            try{
+                if(utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Delete is Successful");
+                    tfSupplierId.setText("");
+                    tfName.setText("");
+                    tfAddress.setText("");
+                    tfContact.setText("");
+                    tfProducts.setText("");
+                    initialization();
+                    
+                    tfSupplierId.setEditable(true);
+                    tfName.setEditable(true);
+                    tfAddress.setEditable(true);
+                    tfContact.setEditable(true);
+                    tfProducts.setEditable(true);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Delete not Successful");
+                }
+             }catch(Exception e){
+                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+             }
+    }//GEN-LAST:event_bnDeleteActionPerformed
+
+    private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
+        if (bnSearch.getText().equals("Search")){
+            if (tfSupplierId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Enter Supplier ID");
+                return;  
+            }
+            String SupplierId = tfSupplierId.getText().trim();
+            String query = "Select * from supplier where Supplier_id='"+SupplierId+"'";
+            
+            try{
+                ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+                while(rs.next()){
+                    tfSupplierId.setText(SupplierId);
+                    tfName.setText(rs.getString("Supplier_name"));
+                    tfAddress.setText(rs.getString("Address"));
+                    tfContact.setText(rs.getString("Contact"));
+                    tfProducts.setText(rs.getString("Products"));
+                    
+                }
+                tfSupplierId.setEditable(false);
+                tfName.setEditable(false);
+                tfAddress.setEditable(false);
+                tfContact.setEditable(false);
+                tfProducts.setEditable(false);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+                
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                tfSupplierId.setText("");
+            }
+        } else if (bnSearch.getText().equals("Edit")){
+                tfSupplierId.setEditable(false);
+                tfName.setEditable(true);
+                tfAddress.setEditable(true);
+                tfContact.setEditable(true);
+                tfProducts.setEditable(true);
+                bnSearch.setText("Update");
+        } else if (bnSearch.getText().equals("Update")){
+            String query = "update supplier set Supplier_name='"+tfName.getText()+"', Address='"+tfAddress.getText()+"', Contact='"+tfContact.getText()+"', Products='"+tfProducts.getText()+"'";
+            try {
+                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
+                    JOptionPane.showMessageDialog(null, "Update is Successful");
+                    tfSupplierId.setText("");
+                    tfName.setText("");
+                    tfAddress.setText("");
+                    tfContact.setText("");
+                    tfProducts.setText("");
+                    initialization();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Could not update data");
+                    tfSupplierId.setText("");
+                    tfName.setText("");
+                    tfAddress.setText("");
+                    tfContact.setText("");
+                    tfProducts.setText("");
+                    
+                    tfSupplierId.setEditable(false);
+                    tfName.setEditable(true);
+                    tfAddress.setEditable(true);
+                    tfContact.setEditable(true);
+                    tfProducts.setEditable(true);
+                }
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_bnSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton bnClose;
+    private javax.swing.JButton bnDelete;
+    private javax.swing.JButton bnSave;
+    private javax.swing.JButton bnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -244,10 +407,10 @@ public class jplSuppliers extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JPasswordField pfConfirmPass;
-    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JPasswordField tfAddress;
+    private javax.swing.JPasswordField tfContact;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfUserCode;
+    private javax.swing.JTextField tfProducts;
+    private javax.swing.JTextField tfSupplierId;
     // End of variables declaration//GEN-END:variables
 }
