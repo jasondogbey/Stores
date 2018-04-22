@@ -146,6 +146,12 @@ public class jplTransaction extends JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("User Code");
 
+        tfQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfQuantityActionPerformed(evt);
+            }
+        });
+
         cbItem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +264,7 @@ public class jplTransaction extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
-        String query="insert into item values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"'";
+        String query="insert into transaction(Transaction_id,item,Collector,Unit_price,Quantity,User_Code,Transaction_date) values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"'";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
@@ -413,6 +419,10 @@ public class jplTransaction extends JPanel {
                  JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
              }
     }//GEN-LAST:event_bnDeleteActionPerformed
+
+    private void tfQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfQuantityActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

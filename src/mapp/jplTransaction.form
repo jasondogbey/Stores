@@ -314,6 +314,9 @@
     <Component class="javax.swing.JTextField" name="tfTransactionDate">
     </Component>
     <Component class="javax.swing.JTextField" name="tfQuantity">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfQuantityActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbItem">
       <Properties>
