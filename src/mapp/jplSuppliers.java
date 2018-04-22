@@ -92,6 +92,17 @@ public class jplSuppliers extends javax.swing.JPanel {
                 tfUserCodeFocusLost(evt);
             }
         });
+        tfUserCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfUserCodeActionPerformed(evt);
+            }
+        });
+
+        pfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pfPasswordActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("Search");
@@ -209,6 +220,14 @@ public class jplSuppliers extends javax.swing.JPanel {
     private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
         tfName.setText(tfName.getText().toUpperCase());
     }//GEN-LAST:event_tfNameFocusLost
+
+    private void tfUserCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfUserCodeActionPerformed
+
+    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pfPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
