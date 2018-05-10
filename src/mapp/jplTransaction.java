@@ -323,7 +323,7 @@ public class jplTransaction extends JPanel {
                 tfUserCode.setEditable(true);
                 tfTransactionDate.setEditable(true);
                 
-                bnSave.setEnabled(false);
+                bnSave.setEnabled(true);
                 bnDelete.setEnabled(true);
                 bnSearch.setText("Edit");
                 
