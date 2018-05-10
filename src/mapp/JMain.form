@@ -82,9 +82,9 @@
                 <Property name="text" type="java.lang.String" value="Transaction"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuPrintPurchaseTransaction">
+            <MenuItem class="javax.swing.JMenuItem" name="mnuPrintUsers">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Purchase Transaction"/>
+                <Property name="text" type="java.lang.String" value="Users"/>
               </Properties>
             </MenuItem>
           </SubComponents>

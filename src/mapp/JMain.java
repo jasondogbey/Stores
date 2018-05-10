@@ -39,7 +39,7 @@ public class JMain extends JFrame {
         mnuAccounts = new javax.swing.JMenuItem();
         mnuPrint = new javax.swing.JMenu();
         mnuPrintTransaction = new javax.swing.JMenuItem();
-        mnuPrintPurchaseTransaction = new javax.swing.JMenuItem();
+        mnuPrintUsers = new javax.swing.JMenuItem();
         mnuUsers = new javax.swing.JMenu();
         mnuChangePassword = new javax.swing.JMenuItem();
         mnuSwitchUser = new javax.swing.JMenuItem();
@@ -110,8 +110,8 @@ public class JMain extends JFrame {
         mnuPrintTransaction.setText("Transaction");
         mnuPrint.add(mnuPrintTransaction);
 
-        mnuPrintPurchaseTransaction.setText("Purchase Transaction");
-        mnuPrint.add(mnuPrintPurchaseTransaction);
+        mnuPrintUsers.setText("Users");
+        mnuPrint.add(mnuPrintUsers);
 
         mnuBar.add(mnuPrint);
 
@@ -175,8 +175,8 @@ public class JMain extends JFrame {
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuItems;
     private javax.swing.JMenu mnuPrint;
-    private javax.swing.JMenuItem mnuPrintPurchaseTransaction;
     private javax.swing.JMenuItem mnuPrintTransaction;
+    private javax.swing.JMenuItem mnuPrintUsers;
     private javax.swing.JMenuItem mnuPurchaseTransaction;
     private javax.swing.JMenuItem mnuSuppliers;
     private javax.swing.JMenuItem mnuSwitchUser;
