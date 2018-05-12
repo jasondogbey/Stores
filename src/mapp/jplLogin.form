@@ -48,9 +48,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="tfIPaddress" min="-2" pref="153" max="-2" attributes="0"/>
+                              <Component id="tfIPAddress" min="-2" pref="153" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="bnConnect" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -80,8 +80,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfIPaddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfIPAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bnConnect" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
@@ -184,15 +184,18 @@
         <Property name="text" type="java.lang.String" value="IP Address:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfIPaddress">
+    <Component class="javax.swing.JTextField" name="tfIPAddress">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="bnConnect">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Connect"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnConnectActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
