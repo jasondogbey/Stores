@@ -14,7 +14,7 @@ public class JMain extends JFrame {
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
         utility.DBconnection.connection();
-        displayForm(new jplLogin(jplMain)); 
+        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuPrint)); 
     }
 
     public void displayForm(JPanel jp){
@@ -34,7 +34,6 @@ public class JMain extends JFrame {
         mnuFile = new javax.swing.JMenu();
         mnuItems = new javax.swing.JMenuItem();
         mnuTransaction = new javax.swing.JMenuItem();
-        mnuPurchaseTransaction = new javax.swing.JMenuItem();
         mnuSuppliers = new javax.swing.JMenuItem();
         mnuCollectors = new javax.swing.JMenuItem();
         mnuAccounts = new javax.swing.JMenuItem();
@@ -81,10 +80,6 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuTransaction);
-
-        mnuPurchaseTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuPurchaseTransaction.setText("Purchase Transaction");
-        mnuFile.add(mnuPurchaseTransaction);
 
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuSuppliers.setText("Suppliers");
@@ -165,7 +160,6 @@ public class JMain extends JFrame {
     private javax.swing.JMenu mnuPrint;
     private javax.swing.JMenuItem mnuPrintPurchaseTransaction;
     private javax.swing.JMenuItem mnuPrintTransaction;
-    private javax.swing.JMenuItem mnuPurchaseTransaction;
     private javax.swing.JMenuItem mnuSuppliers;
     private javax.swing.JMenuItem mnuSwitchUser;
     private javax.swing.JMenuItem mnuTransaction;
