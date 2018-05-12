@@ -14,7 +14,7 @@ public class JMain extends JFrame {
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
         utility.DBconnection.connection();
-        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuPrint)); 
+        displayForm(new jplLogin(jplMain,mnuBar,mnuRegistration,mnuPrint)); 
     }
 
     public void displayForm(JPanel jp){
@@ -36,7 +36,7 @@ public class JMain extends JFrame {
         mnuTransaction = new javax.swing.JMenuItem();
         mnuSuppliers = new javax.swing.JMenuItem();
         mnuCollectors = new javax.swing.JMenuItem();
-        mnuAccounts = new javax.swing.JMenuItem();
+        mnuRegistration = new javax.swing.JMenuItem();
         mnuPrint = new javax.swing.JMenu();
         mnuPrintTransaction = new javax.swing.JMenuItem();
         mnuPrintPurchaseTransaction = new javax.swing.JMenuItem();
@@ -89,9 +89,9 @@ public class JMain extends JFrame {
         mnuCollectors.setText("Collectors");
         mnuFile.add(mnuCollectors);
 
-        mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuAccounts.setText("Accounts");
-        mnuFile.add(mnuAccounts);
+        mnuRegistration.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuRegistration.setText("Register User");
+        mnuFile.add(mnuRegistration);
 
         mnuBar.add(mnuFile);
 
@@ -151,7 +151,6 @@ public class JMain extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jplMain;
-    private javax.swing.JMenuItem mnuAccounts;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuChangePassword;
     private javax.swing.JMenuItem mnuCollectors;
@@ -160,6 +159,7 @@ public class JMain extends JFrame {
     private javax.swing.JMenu mnuPrint;
     private javax.swing.JMenuItem mnuPrintPurchaseTransaction;
     private javax.swing.JMenuItem mnuPrintTransaction;
+    private javax.swing.JMenuItem mnuRegistration;
     private javax.swing.JMenuItem mnuSuppliers;
     private javax.swing.JMenuItem mnuSwitchUser;
     private javax.swing.JMenuItem mnuTransaction;
