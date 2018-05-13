@@ -129,6 +129,11 @@ public class JMain extends JFrame {
         mnuUsers.add(mnuChangePassword);
 
         mnuSwitchUser.setText("Switch User");
+        mnuSwitchUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSwitchUserActionPerformed(evt);
+            }
+        });
         mnuUsers.add(mnuSwitchUser);
 
         mnuBar.add(mnuUsers);
@@ -166,6 +171,12 @@ public class JMain extends JFrame {
             displayForm(new jplChangePassword(jplMain));
         }
     }//GEN-LAST:event_mnuChangePasswordActionPerformed
+
+    private void mnuSwitchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSwitchUserActionPerformed
+        if (closeOption()){
+            displayForm(new jplLogin(jplMain,mnuBar,mnuRegistration,mnuPrint));      
+        }
+    }//GEN-LAST:event_mnuSwitchUserActionPerformed
 
     public static void main(String args[]) {
        
