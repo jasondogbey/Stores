@@ -157,7 +157,7 @@ public class jplChangePassword extends JPanel {
             return;
         }
         if(!(pfNewPassword.getText().equals(pfConfirmPassword.getText()))){
-           JOptionPane.showMessageDialog(null,"Password fields doesn't match"); 
+           JOptionPane.showMessageDialog(null,"Password should match!"); 
            return;
         }
         
@@ -168,10 +168,7 @@ public class jplChangePassword extends JPanel {
               initialization();
               return;
          }
-        if(pfNewPassword==pfConfirmPassword){
-           JOptionPane.showMessageDialog(null,"The same"); 
-           return;
-        }
+        
         
          try{
                if (utility.DBconnection.getStatement().executeUpdate(s)>0){
