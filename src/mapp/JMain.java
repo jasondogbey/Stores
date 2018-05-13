@@ -23,6 +23,19 @@ public class JMain extends JFrame {
         jplMain.validate();
         jplMain.repaint();
     }
+    private boolean closeOption(){
+        if (utility.Utility.universalCode==1){
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save your work?","Warning",JOptionPane.YES_NO_OPTION);
+            if (res==JOptionPane.YES_OPTION){
+                return false;
+            }else{
+                utility.Utility.universalCode=0;
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -108,6 +121,11 @@ public class JMain extends JFrame {
         mnuUsers.setText("Users");
 
         mnuChangePassword.setText("Change Password");
+        mnuChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuChangePasswordActionPerformed(evt);
+            }
+        });
         mnuUsers.add(mnuChangePassword);
 
         mnuSwitchUser.setText("Switch User");
@@ -132,12 +150,22 @@ public class JMain extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTransactionActionPerformed
-     displayForm(new jplTransaction(jplMain));  
+     if (closeOption()){
+        displayForm(new jplTransaction(jplMain));
+     }
     }//GEN-LAST:event_mnuTransactionActionPerformed
 
     private void mnuItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemsActionPerformed
+        if (closeOption()){
         displayForm(new jplItems(jplMain));
+        }
     }//GEN-LAST:event_mnuItemsActionPerformed
+
+    private void mnuChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuChangePasswordActionPerformed
+        if (closeOption()){
+            displayForm(new jplChangePassword(jplMain));
+        }
+    }//GEN-LAST:event_mnuChangePasswordActionPerformed
 
     public static void main(String args[]) {
        
