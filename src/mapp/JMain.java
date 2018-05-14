@@ -48,7 +48,6 @@ public class JMain extends JFrame {
         mnuItems = new javax.swing.JMenuItem();
         mnuTransaction = new javax.swing.JMenuItem();
         mnuSuppliers = new javax.swing.JMenuItem();
-        mnuCollectors = new javax.swing.JMenuItem();
         mnuRegistration = new javax.swing.JMenuItem();
         mnuPrint = new javax.swing.JMenu();
         mnuPrintTransaction = new javax.swing.JMenuItem();
@@ -97,10 +96,6 @@ public class JMain extends JFrame {
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuSuppliers.setText("Suppliers");
         mnuFile.add(mnuSuppliers);
-
-        mnuCollectors.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuCollectors.setText("Collectors");
-        mnuFile.add(mnuCollectors);
 
         mnuRegistration.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         mnuRegistration.setText("Register User");
@@ -203,7 +198,6 @@ public class JMain extends JFrame {
     private javax.swing.JPanel jplMain;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuChangePassword;
-    private javax.swing.JMenuItem mnuCollectors;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuItems;
     private javax.swing.JMenu mnuPrint;
