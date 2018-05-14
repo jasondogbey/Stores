@@ -3,28 +3,37 @@ import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.*;
 
-
-import com.sun.glass.events.KeyEvent;
-import java.sql.ResultSet;
-import javax.swing.*;
-
 public class jplLogin extends JPanel {
 
-    final int pWidth = 300;
-    final int pHeight = 220;
+    final int pWidth = 370;
+    final int pHeight = 250;
     JMenuBar bar;
     JMenuItem reg;
     JMenu pri;
     
-    public jplLogin(JPanel jplMain) {
+    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenu pri) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x,y);
-       
+        this.bar=bar;
+        this.reg=reg;
+        this.pri=pri;
+        this.bar.setVisible(false);
+        this.reg.setVisible(false);
+        this.pri.setVisible(false);
         this.setVisible(true);
-        
+        if (utility.DBconnection.getStatus() == true){
+            tfIPAddress.setEnabled(false);
+            bnConnect.setEnabled(false);
+            bnLogin.setEnabled(true);
+            tfIPAddress.setText(utility.IPaddress.getAddress());
+        }else{
+            tfIPAddress.setEnabled(true);
+            bnConnect.setEnabled(true);
+            bnLogin.setEnabled(false);
+        }
     }
 
     /**
@@ -45,8 +54,8 @@ public class jplLogin extends JPanel {
         bnCancel = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        tfIPaddress = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tfIPAddress = new javax.swing.JTextField();
+        bnConnect = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 204, 204));
 
@@ -102,8 +111,13 @@ public class jplLogin extends JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("IP Address:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Connect");
+        bnConnect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnConnect.setText("Connect");
+        bnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnConnectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,9 +145,9 @@ public class jplLogin extends JPanel {
                                 .addContainerGap()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfIPaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
+                                .addComponent(bnConnect)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -155,8 +169,8 @@ public class jplLogin extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tfIPaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(tfIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnConnect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -176,7 +190,7 @@ public class jplLogin extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnLoginActionPerformed
-        if (tfUserCode.getText().isEmpty() || pfPassword.getText().isEmpty()){
+     if (tfUserCode.getText().isEmpty() || pfPassword.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Complete all fieds");
             return;
         }
@@ -184,9 +198,35 @@ public class jplLogin extends JPanel {
         String pass = pfPassword.getText();
         String password="";
         String sLevel="";
-        String s = "select password, level from registration where usercode='"+usercode+"'";
-       
-         
+        String s = "select password, level from account where User_code='"+usercode+"'";
+        try{
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(s);
+            while(rs.next()){
+                password=rs.getString("password");
+                sLevel = rs.getString("level");
+            }
+            if (pass.equals(password)){
+                this.setVisible(false);
+                this.bar.setVisible(true);
+                if (sLevel.equals("3")){
+                    this.pri.setVisible(true);
+                    this.reg.setVisible(true);
+                }else if (sLevel.equals("2")){
+                    this.pri.setVisible(false);
+                    this.reg.setVisible(true);
+                }else if (sLevel.equals("1")){
+                    this.pri.setVisible(false);
+                    this.reg.setVisible(false);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Password Mismatch");
+                pfPassword.setText("");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+            tfUserCode.setText("");
+            pfPassword.setText("");
+        }
         
     }//GEN-LAST:event_bnLoginActionPerformed
 
@@ -214,18 +254,33 @@ public class jplLogin extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUserCodeActionPerformed
 
+    private void bnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnConnectActionPerformed
+        utility.DBconnection.Connection(tfIPAddress.getText().trim());
+        if (utility.DBconnection.getStatus()== true){
+            tfIPAddress.setEnabled(false);
+            bnConnect.setEnabled(false);
+            bnLogin.setEnabled(true);
+            //saving
+            utility.IPaddress.saveAddress(tfIPAddress.getText());
+        }else{
+            tfIPAddress.setEnabled(true);
+            bnConnect.setEnabled(true);
+            bnLogin.setEnabled(false);
+        }
+    }//GEN-LAST:event_bnConnectActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnCancel;
+    private javax.swing.JButton bnConnect;
     private javax.swing.JButton bnLogin;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPasswordField pfPassword;
-    private javax.swing.JTextField tfIPaddress;
+    private javax.swing.JTextField tfIPAddress;
     private javax.swing.JTextField tfUserCode;
     // End of variables declaration//GEN-END:variables
 }
