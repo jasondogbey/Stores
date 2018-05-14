@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class jplUsers extends JPanel {
 
-    final int pWidth = 550;
-    final int pHeight = 500;
+    final int pWidth = 600;
+    final int pHeight = 420;
     
     /**
      * Creates new form jplRegistration
