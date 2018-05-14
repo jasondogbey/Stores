@@ -63,6 +63,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Register User"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuRegistrationActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

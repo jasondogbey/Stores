@@ -104,6 +104,11 @@ public class JMain extends JFrame {
 
         mnuRegistration.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         mnuRegistration.setText("Register User");
+        mnuRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRegistrationActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuRegistration);
 
         mnuBar.add(mnuFile);
@@ -177,6 +182,12 @@ public class JMain extends JFrame {
             displayForm(new jplLogin(jplMain,mnuBar,mnuRegistration,mnuPrint));      
         }
     }//GEN-LAST:event_mnuSwitchUserActionPerformed
+
+    private void mnuRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRegistrationActionPerformed
+           if (closeOption()){
+            displayForm(new jplUsers(jplMain));
+        }
+    }//GEN-LAST:event_mnuRegistrationActionPerformed
 
     public static void main(String args[]) {
        
