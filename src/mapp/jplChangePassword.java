@@ -10,7 +10,7 @@ import javax.swing.*;
 public class jplChangePassword extends JPanel {
     
     final int pWidth = 450;
-    final int pHeight = 300;
+    final int pHeight = 250;
 
     /**
      * Creates new form jplChangePassword
