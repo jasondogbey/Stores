@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class jplUsers extends JPanel {
 
-    final int pWidth = 450;
-    final int pHeight = 300;
+    final int pWidth = 550;
+    final int pHeight = 500;
     
     /**
      * Creates new form jplRegistration
@@ -23,7 +23,17 @@ public class jplUsers extends JPanel {
     }
 
     private void initialization(){
-       
+        bnAddNew.setEnabled(true);
+        bnSave.setEnabled(false);
+        bnSearch.setEnabled(true);
+        bnSearch.setText("Search");
+        bnDelete.setEnabled(false);
+        tfUserCode.setEditable(true);
+        tfName.setEditable(false);
+        cbLevel.setEnabled(false);
+        pfPassword.setEditable(false);
+        pfConfirmPass.setEditable(false);
+        utility.Utility.universalCode=0; 
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,11 +57,12 @@ public class jplUsers extends JPanel {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bnSearch = new javax.swing.JButton();
+        bnDelete = new javax.swing.JButton();
+        bnAddNew = new javax.swing.JButton();
+        bnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        bnClose = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -103,66 +114,94 @@ public class jplUsers extends JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setText("Delete");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setText("Add New");
-        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch.setText("Search");
+        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bnSearchActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setText("Close");
-        jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete.setText("Delete");
+        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDeleteActionPerformed(evt);
+            }
+        });
+
+        bnAddNew.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnAddNew.setText("Add New");
+        bnAddNew.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnAddNewActionPerformed(evt);
+            }
+        });
+
+        bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSave.setText("Save");
+        bnSave.setActionCommand("Save");
+        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSaveActionPerformed(evt);
+            }
+        });
+
+        bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClose.setText("Close");
+        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton2)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton3)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton4)
-                        .addGap(58, 58, 58))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfUserCode)
+                                .addComponent(tfName)
+                                .addComponent(cbLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel4))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfUserCode)
-                                        .addComponent(tfName)
-                                        .addComponent(cbLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)))
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(bnSearch)
+                                .addGap(31, 31, 31)
+                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bnAddNew)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bnDelete)
+                                .addGap(35, 35, 35)
+                                .addComponent(bnClose))
+                            .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -196,10 +235,11 @@ public class jplUsers extends JPanel {
                             .addComponent(jLabel6))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)))
+                            .addComponent(bnSearch)
+                            .addComponent(bnAddNew)
+                            .addComponent(bnClose)
+                            .addComponent(bnSave)
+                            .addComponent(bnDelete)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
@@ -222,17 +262,146 @@ public class jplUsers extends JPanel {
         tfName.setText(tfName.getText().toUpperCase());
     }//GEN-LAST:event_tfNameFocusLost
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void bnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddNewActionPerformed
+        bnAddNew.setEnabled(false);
+        bnSave.setEnabled(true);
+        bnSearch.setEnabled(false);
+        bnDelete.setEnabled(false);
+        tfUserCode.setEditable(true);
+        tfName.setEditable(true);
+        cbLevel.setEnabled(true);
+        pfPassword.setEditable(true);
+        pfConfirmPass.setEditable(true);
+        utility.Utility.universalCode=1;
+    }//GEN-LAST:event_bnAddNewActionPerformed
+
+    private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
+        if (utility.Utility.universalCode == 1){
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save your work?","Warning",JOptionPane.YES_NO_OPTION);
+            if (res==JOptionPane.YES_OPTION){
+                if (bnSearch.getText().equals("Update")){
+                    bnSearch.doClick();
+                }else{
+                    bnSave.doClick();
+                }
+            }else{
+                this.setVisible(false);
+            }
+        }else{
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_bnCloseActionPerformed
+
+    private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
+        if (!validation()){
+            JOptionPane.showMessageDialog(null,"Complete all fields");
+            return;
+        }
+        if (!(pfPassword.getText().equals(pfConfirmPass.getText()))){
+            JOptionPane.showMessageDialog(null, "Passwords should match");
+            pfPassword.setText("");
+            pfConfirmPass.setText("");
+            return;
+        }
+        String s="insert into account values ('"+tfUserCode.getText()+"','"+tfName.getText()+"','"+cbLevel.getSelectedItem()+"','"+pfPassword.getText()+"')";
+        try{
+           if(utility.DBconnection.getStatement().executeUpdate(s)>0){
+               JOptionPane.showMessageDialog(null, "Save is Successful");
+               tfUserCode.setText("");
+               tfName.setText("");
+               cbLevel.setSelectedIndex(0);
+               pfPassword.setText("");
+               pfConfirmPass.setText("");
+               initialization();
+           }else{
+               JOptionPane.showMessageDialog(null, "Could not save data");
+           }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_bnSaveActionPerformed
+
+    private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
+        if (bnSearch.getText().equals("Search")){
+            if (tfUserCode.getText().isEmpty()){
+               JOptionPane.showMessageDialog(null,"Enter User Code");
+               return;
+            }
+            
+            String usercode = tfUserCode.getText().trim();
+            String s = "select User_name, level from account where User_code='"+usercode+"'";
+            try{
+                ResultSet rs = utility.DBconnection.getStatement().executeQuery(s);
+                while(rs.next()){
+                    tfUserCode.setText(usercode);
+                    tfName.setText(rs.getString("User_name"));
+                    cbLevel.setSelectedItem(rs.getString("level"));
+                }
+                tfUserCode.setEditable(false);
+                tfName.setEditable(false);
+                cbLevel.setEnabled(false);
+                pfPassword.setEditable(false);
+                pfConfirmPass.setEditable(false);
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnAddNew.setEnabled(false);
+                bnSearch.setText("Edit");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+                tfUserCode.setText("");
+            }
+        }else if (bnSearch.getText().equals("Edit")){
+            tfName.setEditable(true);
+            cbLevel.setEnabled(true);
+            bnSearch.setText("Update");
+            utility.Utility.universalCode=1;
+        }else if (bnSearch.getText().equals("Update")){
+            String s= "update account set User_name='"+tfName.getText()+"', level='"+cbLevel.getSelectedItem()+"' where User_code='"+tfUserCode.getText()+"'";
+            try{
+                if(utility.DBconnection.getStatement().executeUpdate(s)>0){
+                    JOptionPane.showMessageDialog(null, "Update is Successful");
+                    tfUserCode.setText("");
+                    tfName.setText("");
+                    cbLevel.setSelectedIndex(0);
+                    pfPassword.setText("");
+                    pfConfirmPass.setText("");
+                    initialization();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Could not update data");
+                }
+             }catch(Exception e){
+                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+             }
+        }
+    }//GEN-LAST:event_bnSearchActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+        String s= "delete from account where User_code='"+tfUserCode.getText().trim()+"'";
+            try{
+                if(utility.DBconnection.getStatement().executeUpdate(s)>0){
+                    JOptionPane.showMessageDialog(null, "Delete is Successful");
+                    tfUserCode.setText("");
+                    tfName.setText("");
+                    cbLevel.setSelectedIndex(0);
+                    pfPassword.setText("");
+                    pfConfirmPass.setText("");
+                    initialization();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Could not delete data");
+                }
+             }catch(Exception e){
+                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+             }
+    }//GEN-LAST:event_bnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnAddNew;
+    private javax.swing.JButton bnClose;
+    private javax.swing.JButton bnDelete;
+    private javax.swing.JButton bnSave;
+    private javax.swing.JButton bnSearch;
     private javax.swing.JComboBox cbLevel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
