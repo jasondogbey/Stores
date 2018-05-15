@@ -47,14 +47,15 @@ public class JMain extends JFrame {
         mnuFile = new javax.swing.JMenu();
         mnuItems = new javax.swing.JMenuItem();
         mnuTransaction = new javax.swing.JMenuItem();
-        mnuAccounts = new javax.swing.JMenuItem();
         mnuSuppliers = new javax.swing.JMenuItem();
+        mnuExit = new javax.swing.JMenuItem();
         mnuPrint = new javax.swing.JMenu();
         mnuPrintTransaction = new javax.swing.JMenuItem();
         mnuPrintUsers = new javax.swing.JMenuItem();
         mnuUsers = new javax.swing.JMenu();
         mnuChangePassword = new javax.swing.JMenuItem();
         mnuSwitchUser = new javax.swing.JMenuItem();
+        mnuAccounts = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -93,15 +94,6 @@ public class JMain extends JFrame {
         });
         mnuFile.add(mnuTransaction);
 
-        mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuAccounts.setText("Register User");
-        mnuAccounts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAccountsActionPerformed(evt);
-            }
-        });
-        mnuFile.add(mnuAccounts);
-
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuSuppliers.setText("Suppliers");
         mnuSuppliers.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +102,15 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuSuppliers);
+
+        mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Close-icon.png"))); // NOI18N
+        mnuExit.setText("Exit");
+        mnuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuExitActionPerformed(evt);
+            }
+        });
+        mnuFile.add(mnuExit);
 
         mnuBar.add(mnuFile);
 
@@ -125,6 +126,7 @@ public class JMain extends JFrame {
 
         mnuUsers.setText("Users");
 
+        mnuChangePassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-change-password-icon.png"))); // NOI18N
         mnuChangePassword.setText("Change Password");
         mnuChangePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +135,7 @@ public class JMain extends JFrame {
         });
         mnuUsers.add(mnuChangePassword);
 
+        mnuSwitchUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Executive-Green-icon.png"))); // NOI18N
         mnuSwitchUser.setText("Switch User");
         mnuSwitchUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +143,16 @@ public class JMain extends JFrame {
             }
         });
         mnuUsers.add(mnuSwitchUser);
+
+        mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Executive-Green-icon.png"))); // NOI18N
+        mnuAccounts.setText("Register User");
+        mnuAccounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAccountsActionPerformed(evt);
+            }
+        });
+        mnuUsers.add(mnuAccounts);
 
         mnuBar.add(mnuUsers);
 
@@ -186,7 +199,9 @@ public class JMain extends JFrame {
 
 
     private void mnuSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSuppliersActionPerformed
+        if (closeOption()){
         displayForm(new jplSuppliers(jplMain));
+        }
     }//GEN-LAST:event_mnuSuppliersActionPerformed
 
     private void mnuAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAccountsActionPerformed
@@ -194,6 +209,12 @@ public class JMain extends JFrame {
         displayForm(new jplUsers(jplMain));
         }
     }//GEN-LAST:event_mnuAccountsActionPerformed
+
+    private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
+        if (closeOption()){
+        System.exit(0);
+        }
+    }//GEN-LAST:event_mnuExitActionPerformed
 
 
     public static void main(String args[]) {
@@ -211,6 +232,7 @@ public class JMain extends JFrame {
     private javax.swing.JMenuItem mnuAccounts;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuChangePassword;
+    private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuItems;
     private javax.swing.JMenu mnuPrint;
