@@ -2,10 +2,12 @@
 package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
+import com.sun.glass.events.KeyEvent;
+import net.proteanit.sql.DbUtils;
 
 public class jplUsers extends JPanel {
 
-    final int pWidth = 600;
+    final int pWidth = 800;
     final int pHeight = 420;
     
     /**
@@ -20,6 +22,7 @@ public class jplUsers extends JPanel {
         this.setLocation(x,y);
         this.setVisible(true);
         initialization();
+        filltable();
     }
 
     private void initialization(){
@@ -34,6 +37,16 @@ public class jplUsers extends JPanel {
         pfPassword.setEditable(false);
         pfConfirmPass.setEditable(false);
         utility.Utility.universalCode=0; 
+    }
+    private void filltable(){
+        String query="select USer_code, User_name, level from account";
+        try{
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            jtUsers.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,13 +69,14 @@ public class jplUsers extends JPanel {
         pfConfirmPass = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtUsers = new javax.swing.JTable();
         bnSearch = new javax.swing.JButton();
         bnDelete = new javax.swing.JButton();
         bnAddNew = new javax.swing.JButton();
         bnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         bnClose = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -95,13 +109,13 @@ public class jplUsers extends JPanel {
         jLabel5.setText("Level:");
         jLabel5.setToolTipText("");
 
-        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User Level", "1", "2", "3" }));
+        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User Level", "WORKER", "MANAGER", "ADMIN" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Confirm Password:");
         jLabel6.setToolTipText("");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,7 +126,17 @@ public class jplUsers extends JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jtUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtUsersMouseClicked(evt);
+            }
+        });
+        jtUsers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtUsersKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtUsers);
 
         bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnSearch.setText("Search");
@@ -143,7 +167,6 @@ public class jplUsers extends JPanel {
 
         bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnSave.setText("Save");
-        bnSave.setActionCommand("Save");
         bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +182,9 @@ public class jplUsers extends JPanel {
                 bnCloseActionPerformed(evt);
             }
         });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("All Users");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -201,17 +227,24 @@ public class jplUsers extends JPanel {
                                 .addGap(35, 35, 35)
                                 .addComponent(bnClose))
                             .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jLabel7))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -240,8 +273,8 @@ public class jplUsers extends JPanel {
                             .addComponent(bnClose)
                             .addComponent(bnSave)
                             .addComponent(bnDelete)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -313,6 +346,7 @@ public class jplUsers extends JPanel {
                pfPassword.setText("");
                pfConfirmPass.setText("");
                initialization();
+               filltable();
            }else{
                JOptionPane.showMessageDialog(null, "Could not save data");
            }
@@ -366,6 +400,7 @@ public class jplUsers extends JPanel {
                     pfPassword.setText("");
                     pfConfirmPass.setText("");
                     initialization();
+                    filltable();
                 }else{
                     JOptionPane.showMessageDialog(null, "Could not update data");
                 }
@@ -386,6 +421,7 @@ public class jplUsers extends JPanel {
                     pfPassword.setText("");
                     pfConfirmPass.setText("");
                     initialization();
+                    filltable();
                 }else{
                     JOptionPane.showMessageDialog(null, "Could not delete data");
                 }
@@ -393,6 +429,62 @@ public class jplUsers extends JPanel {
                  JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
              }
     }//GEN-LAST:event_bnDeleteActionPerformed
+
+    private void jtUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsersMouseClicked
+        try{
+            int row=jtUsers.getSelectedRow();
+            String TableClick=jtUsers.getModel().getValueAt(row, 0).toString();
+            String query="select * from account where User_code='"+TableClick+"'";
+            
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfUserCode.setText(rs.getString("User_code"));
+                    tfName.setText(rs.getString("User_name"));
+                    cbLevel.setSelectedItem(rs.getString("level"));
+                }
+                tfUserCode.setEditable(false);
+                tfName.setEditable(false);
+                cbLevel.setEnabled(false);
+                pfPassword.setEditable(false);
+                pfConfirmPass.setEditable(false);
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnAddNew.setEnabled(false);
+                bnSearch.setText("Edit");
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jtUsersMouseClicked
+
+    private void jtUsersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtUsersKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN||evt.getKeyCode() == KeyEvent.VK_UP){
+          try{
+            int row=jtUsers.getSelectedRow();
+            String TableClick=jtUsers.getModel().getValueAt(row, 0).toString();
+            String query="select * from account where User_code='"+TableClick+"'";
+            
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfUserCode.setText(rs.getString("User_code"));
+                    tfName.setText(rs.getString("User_name"));
+                    cbLevel.setSelectedItem(rs.getString("level"));
+                }
+                tfUserCode.setEditable(false);
+                tfName.setEditable(false);
+                cbLevel.setEnabled(false);
+                pfPassword.setEditable(false);
+                pfConfirmPass.setEditable(false);
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnAddNew.setEnabled(false);
+                bnSearch.setText("Edit");
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }  
+        }
+    }//GEN-LAST:event_jtUsersKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -408,9 +500,10 @@ public class jplUsers extends JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtUsers;
     private javax.swing.JPasswordField pfConfirmPass;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfName;
