@@ -44,7 +44,7 @@ public class jplItems extends JPanel {
         String query="select * from item";
         try{
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
-            jtTransactions.setModel(DbUtils.resultSetToTableModel(rs));
+            jtItems.setModel(DbUtils.resultSetToTableModel(rs));
             
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
@@ -61,7 +61,7 @@ public class jplItems extends JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtTransactions = new javax.swing.JTable();
+        jtItems = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -86,7 +86,7 @@ public class jplItems extends JPanel {
         bnSave = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
-        jtTransactions.setModel(new javax.swing.table.DefaultTableModel(
+        jtItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -97,7 +97,12 @@ public class jplItems extends JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtTransactions);
+        jtItems.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtItemsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtItems);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Items");
@@ -439,6 +444,39 @@ public class jplItems extends JPanel {
         tfItemId.setText(tfItemId.getText().toUpperCase());
     }//GEN-LAST:event_tfItemIdFocusLost
 
+    private void jtItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtItemsMouseClicked
+
+        try{
+            int row=jtItems.getSelectedRow();
+            String TableClick=jtItems.getModel().getValueAt(row, 0).toString();
+            String query="select * from item where Item_id='"+TableClick+"'";
+            
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    taSuppliers.setText(rs.getString("Suppliers"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                tfItemId.setEditable(false);
+                tfItemName.setEditable(false);
+                tfUnitPrice.setEditable(false);
+                tfQuantity.setEditable(false);
+                taSuppliers.setEditable(false);
+                taLocation.setEditable(false);
+                taNotes.setEditable(false);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jtItemsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnClose;
@@ -458,7 +496,7 @@ public class jplItems extends JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jtTransactions;
+    private javax.swing.JTable jtItems;
     private javax.swing.JTextArea taLocation;
     private javax.swing.JTextArea taNotes;
     private javax.swing.JTextArea taSuppliers;
