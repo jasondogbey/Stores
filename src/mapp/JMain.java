@@ -47,8 +47,8 @@ public class JMain extends JFrame {
         mnuFile = new javax.swing.JMenu();
         mnuItems = new javax.swing.JMenuItem();
         mnuTransaction = new javax.swing.JMenuItem();
-        mnuSuppliers = new javax.swing.JMenuItem();
         mnuAccounts = new javax.swing.JMenuItem();
+        mnuSuppliers = new javax.swing.JMenuItem();
         mnuPrint = new javax.swing.JMenu();
         mnuPrintTransaction = new javax.swing.JMenuItem();
         mnuPrintUsers = new javax.swing.JMenuItem();
@@ -93,6 +93,15 @@ public class JMain extends JFrame {
         });
         mnuFile.add(mnuTransaction);
 
+        mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuAccounts.setText("Register User");
+        mnuAccounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAccountsActionPerformed(evt);
+            }
+        });
+        mnuFile.add(mnuAccounts);
+
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuSuppliers.setText("Suppliers");
         mnuSuppliers.addActionListener(new java.awt.event.ActionListener() {
@@ -101,14 +110,6 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuSuppliers);
-
-        mnuAccounts.setText("Register User");
-        mnuAccounts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAccountsActionPerformed(evt);
-            }
-        });
-        mnuFile.add(mnuAccounts);
 
         mnuBar.add(mnuFile);
 
