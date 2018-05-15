@@ -208,13 +208,13 @@ public class jplLogin extends JPanel {
             if (pass.equals(password)){
                 this.setVisible(false);
                 this.bar.setVisible(true);
-                if (sLevel.equals("3")){
+                if (sLevel.equals("ADMIN")){
                     this.pri.setVisible(true);
                     this.reg.setVisible(true);
-                }else if (sLevel.equals("2")){
+                }else if (sLevel.equals("MANAGER")){
                     this.pri.setVisible(false);
                     this.reg.setVisible(true);
-                }else if (sLevel.equals("1")){
+                }else if (sLevel.equals("WORKER")){
                     this.pri.setVisible(false);
                     this.reg.setVisible(false);
                 }
