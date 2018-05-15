@@ -354,6 +354,7 @@ public class jplItems extends JPanel {
                     //bnSearch.setText("Search");
                     initialization();
                     tfItemId.setEditable(true);
+                    bnSave.setEnabled(true);
                     filltable();
                 } else {
                     JOptionPane.showMessageDialog(null, "Could not update data");
