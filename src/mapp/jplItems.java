@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mapp;
+import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
@@ -100,6 +101,14 @@ public class jplItems extends JPanel {
         jtItems.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtItemsMouseClicked(evt);
+            }
+        });
+        jtItems.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtItemsKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtItemsKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jtItems);
@@ -476,6 +485,44 @@ public class jplItems extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
     }//GEN-LAST:event_jtItemsMouseClicked
+
+    private void jtItemsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtItemsKeyPressed
+
+    }//GEN-LAST:event_jtItemsKeyPressed
+
+    private void jtItemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtItemsKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN||evt.getKeyCode() == KeyEvent.VK_UP){
+          try{
+            int row=jtItems.getSelectedRow();
+            String TableClick=jtItems.getModel().getValueAt(row, 0).toString();
+            String query="select * from item where Item_id='"+TableClick+"'";
+            
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    taSuppliers.setText(rs.getString("Suppliers"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                tfItemId.setEditable(false);
+                tfItemName.setEditable(false);
+                tfUnitPrice.setEditable(false);
+                tfQuantity.setEditable(false);
+                taSuppliers.setEditable(false);
+                taLocation.setEditable(false);
+                taNotes.setEditable(false);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }  
+        }
+    }//GEN-LAST:event_jtItemsKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
