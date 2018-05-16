@@ -14,7 +14,7 @@ public class JMain extends JFrame {
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
         utility.DBconnection.connection();
-        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuPrint)); 
+        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts)); 
     }
 
     public void displayForm(JPanel jp){
@@ -49,9 +49,6 @@ public class JMain extends JFrame {
         mnuTransaction = new javax.swing.JMenuItem();
         mnuSuppliers = new javax.swing.JMenuItem();
         mnuExit = new javax.swing.JMenuItem();
-        mnuPrint = new javax.swing.JMenu();
-        mnuPrintTransaction = new javax.swing.JMenuItem();
-        mnuPrintUsers = new javax.swing.JMenuItem();
         mnuUsers = new javax.swing.JMenu();
         mnuChangePassword = new javax.swing.JMenuItem();
         mnuSwitchUser = new javax.swing.JMenuItem();
@@ -116,16 +113,6 @@ public class JMain extends JFrame {
         mnuFile.add(mnuExit);
 
         mnuBar.add(mnuFile);
-
-        mnuPrint.setText("Print");
-
-        mnuPrintTransaction.setText("Transaction");
-        mnuPrint.add(mnuPrintTransaction);
-
-        mnuPrintUsers.setText("Users");
-        mnuPrint.add(mnuPrintUsers);
-
-        mnuBar.add(mnuPrint);
 
         mnuUsers.setText("Users");
 
@@ -196,7 +183,7 @@ public class JMain extends JFrame {
 
     private void mnuSwitchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSwitchUserActionPerformed
         if (closeOption()){
-            displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuPrint));      
+            displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts));      
         }
     }//GEN-LAST:event_mnuSwitchUserActionPerformed
 
@@ -238,9 +225,6 @@ public class JMain extends JFrame {
     private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuItems;
-    private javax.swing.JMenu mnuPrint;
-    private javax.swing.JMenuItem mnuPrintTransaction;
-    private javax.swing.JMenuItem mnuPrintUsers;
     private javax.swing.JMenuItem mnuSuppliers;
     private javax.swing.JMenuItem mnuSwitchUser;
     private javax.swing.JMenuItem mnuTransaction;

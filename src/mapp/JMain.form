@@ -73,23 +73,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuPrint">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Print"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuPrintTransaction">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Transaction"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuPrintUsers">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Users"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="mnuUsers">
           <Properties>
             <Property name="text" type="java.lang.String" value="Users"/>
