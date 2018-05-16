@@ -6,6 +6,20 @@
 package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
+import java.awt.print.PrinterException;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger; 
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import utility.DBconnection;
 
 /**
  *
@@ -14,11 +28,13 @@ import javax.swing.*;
 public class jplTransaction extends JPanel {
     final int pWidth = 800;
     final int pHeight = 450;
+    private static Connection conn;
     /**
      * Creates new form jplTransaction
      */
     public jplTransaction(JPanel jplMain) {
         initComponents();
+        
         this.setSize(pWidth, pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
@@ -26,7 +42,6 @@ public class jplTransaction extends JPanel {
         this.setVisible(true);
         //bnSearch.setText("Search");
         initialization();
-      
     }
     public void initialization(){
         tfTransactionId.setText("");
@@ -36,9 +51,9 @@ public class jplTransaction extends JPanel {
         tfUserCode.setText("");
         bnDelete.setEnabled(false);
         bnSearch.setText("Search");
+        tfUserCode1.setVisible(false);
         
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,19 +82,20 @@ public class jplTransaction extends JPanel {
         jLabel8 = new javax.swing.JLabel();
         tfTransactionDate = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
-        cbItem = new javax.swing.JComboBox<>();
+        cbItem = new javax.swing.JComboBox<String>();
         tfCollector = new javax.swing.JTextField();
-
-        setBackground(new java.awt.Color(153, 204, 255));
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtReciept = new javax.swing.JTextArea();
+        bnDelete1 = new javax.swing.JButton();
+        bnDelete2 = new javax.swing.JButton();
+        bnDelete3 = new javax.swing.JButton();
+        tfUserCode1 = new javax.swing.JTextField();
+        tfReportPath = new javax.swing.JTextField();
+        bnDelete4 = new javax.swing.JButton();
+        bnSearch1 = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Collector");
-
-        tfTransactionId.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfTransactionIdFocusLost(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Item");
@@ -90,36 +106,33 @@ public class jplTransaction extends JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Quantity");
 
+        tfUnitCost.setEditable(false);
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Transaction Date");
 
-        bnSearch.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-search-icon.png"))); // NOI18N
         bnSearch.setText("Search");
-        bnSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnSearchActionPerformed(evt);
             }
         });
 
-        bnDelete.setBackground(new java.awt.Color(255, 255, 255));
         bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-trash-icon.png"))); // NOI18N
         bnDelete.setText("Delete");
-        bnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDeleteActionPerformed(evt);
             }
         });
 
-        bnSave.setBackground(new java.awt.Color(255, 255, 255));
         bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Save-icon.png"))); // NOI18N
         bnSave.setText("Save");
-        bnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.setEnabled(false);
         bnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnSaveActionPerformed(evt);
@@ -127,14 +140,11 @@ public class jplTransaction extends JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 153));
         jLabel1.setText("Transaction");
 
-        bnClose.setBackground(new java.awt.Color(255, 255, 255));
         bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-close blue-icon.png"))); // NOI18N
         bnClose.setText("Close");
-        bnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnCloseActionPerformed(evt);
@@ -147,16 +157,69 @@ public class jplTransaction extends JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("User Code");
 
-        tfQuantity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfQuantityActionPerformed(evt);
-            }
-        });
+        tfQuantity.setEditable(false);
 
-        cbItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbItem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbItemActionPerformed(evt);
+            }
+        });
+
+        txtReciept.setEditable(false);
+        txtReciept.setColumns(20);
+        txtReciept.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        txtReciept.setRows(5);
+        txtReciept.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        jScrollPane2.setViewportView(txtReciept);
+
+        bnDelete1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete1.setText("Print");
+        bnDelete1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDelete1ActionPerformed(evt);
+            }
+        });
+
+        bnDelete2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete2.setText("New");
+        bnDelete2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDelete2ActionPerformed(evt);
+            }
+        });
+
+        bnDelete3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete3.setText("Done");
+        bnDelete3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDelete3ActionPerformed(evt);
+            }
+        });
+
+        tfUserCode1.setText("0");
+
+        tfReportPath.setEditable(false);
+        tfReportPath.setText("C:\\\\Users\\\\TOMTOM-PC\\\\Documents\\\\NetBeansProjects\\\\Stores-master\\\\src\\\\mapp\\\\report1.jrxml");
+
+        bnDelete4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete4.setText("Browse");
+        bnDelete4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDelete4ActionPerformed(evt);
+            }
+        });
+
+        bnSearch1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch1.setText("Transactions");
+        bnSearch1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnSearch1ActionPerformed(evt);
             }
         });
 
@@ -164,46 +227,81 @@ public class jplTransaction extends JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(25, 25, 25)
+                                .addComponent(tfTransactionDate))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(tfTransactionId)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addComponent(bnSave)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfUserCode)
+                                            .addComponent(tfUnitCost)
+                                            .addComponent(tfQuantity)
+                                            .addComponent(tfCollector)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(tfReportPath, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(bnDelete4))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(bnSearch)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(bnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(bnDelete)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(bnClose)
+                                        .addGap(21, 21, 21)))))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(242, 242, 242))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(bnDelete2)
+                        .addGap(47, 47, 47)
+                        .addComponent(bnDelete3)
+                        .addGap(53, 53, 53)
+                        .addComponent(bnDelete1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(tfCollector)
-                                        .addComponent(tfUnitCost, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfTransactionId, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfUserCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                        .addComponent(tfTransactionDate, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfQuantity, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)))
-                        .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,47 +309,86 @@ public class jplTransaction extends JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(46, 46, 46)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfTransactionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfUnitCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnSearch)
-                    .addComponent(bnDelete)
-                    .addComponent(bnSave)
-                    .addComponent(bnClose))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bnDelete1)
+                            .addComponent(bnDelete2)
+                            .addComponent(bnDelete3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(tfTransactionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(tfUnitCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfReportPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bnDelete4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bnDelete)
+                            .addComponent(bnSave)
+                            .addComponent(bnClose)
+                            .addComponent(bnSearch)
+                            .addComponent(bnSearch1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
-        String query="insert into transaction(Transaction_id,item,Collector,Unit_price,Quantity,User_Code,Transaction_date) values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"'";
+        if (tfQuantity.getText().isEmpty()||tfUnitCost.getText().isEmpty() )
+        {
+            JOptionPane.showMessageDialog(null, "Unit Cost fiels or Price field cannot be empty");
+            return;
+        }
+        String s,q,p;
+        Double quantity,price,total;
+        q=tfQuantity.getText();
+        p=tfUnitCost.getText();
+        quantity=Double.parseDouble(q);
+        price=Double.parseDouble(p);
+        total=price * quantity;
+        s=txtReciept.getText();
+        Double initial;
+        String initialString;
+        initialString=tfUserCode1.getText();
+        initial=Double.parseDouble(initialString);
+        initial = initial + total;
+        tfUserCode1.setText(initial.toString());
+       
+            txtReciept.append("\n"+cbItem.getSelectedItem().toString()+ "\t\t      "+ p+" X "+ q+"\t\t   ₵" + total);
+       
+        String query="insert into transaction values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
@@ -269,6 +406,7 @@ public class jplTransaction extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
         }
+               
     }//GEN-LAST:event_bnSaveActionPerformed
 
     private void cbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbItemActionPerformed
@@ -276,42 +414,44 @@ public class jplTransaction extends JPanel {
     }//GEN-LAST:event_cbItemActionPerformed
 
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
-        if (bnSearch.getText().equals("Search")){
+ 
+        
+              if (bnSearch.getText().equals("Search")){
             if (tfTransactionId.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Enter Item ID");
                 return;  
             }
-            String TransactionId = tfTransactionId.getText().trim();
-            String query = "Select * from transaction where Transaction_id='"+TransactionId+"'";
             
-            try{
-                ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
-                while(rs.next()){
-                    tfTransactionId.setText(TransactionId);
-                    cbItem.setSelectedItem(rs.getString("item"));
-                    tfCollector.setText(rs.getString("Collector"));
-                    tfUnitCost.setText(rs.getString("Unit_price"));
-                    tfQuantity.setText(rs.getString("Quantity"));
-                    tfUserCode.setText(rs.getString("User_code"));
-                    tfTransactionDate.setText(rs.getString("Transaction_date"));
-                    
-                }
-                tfTransactionId.setEditable(true);
-                cbItem.setEditable(true);
-                tfCollector.setEditable(true);
-                tfUnitCost.setEditable(true);
-                tfQuantity.setEditable(true);
-                tfUserCode.setEditable(true);
-                tfTransactionDate.setEditable(true);
-                
-                bnSave.setEnabled(true);
-                bnDelete.setEnabled(true);
-                bnSearch.setText("Edit");
-                
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
-                tfTransactionId.setText("");
-            }
+            try
+       {
+           HashMap para = new HashMap();
+           conn=DBconnection.getConnection();
+           String reportPath=tfReportPath.getText();
+           String transactionId=tfTransactionId.getText();
+           JasperDesign jd = JRXmlLoader.load(reportPath);
+           String sql ="SELECT\n" +
+"     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
+"     transaction.`item` AS transaction_item,\n" +
+"     transaction.`Collector` AS transaction_Collector,\n" +
+"     transaction.`Unit_price` AS transaction_Unit_price,\n" +
+"     transaction.`Quantity` AS transaction_Quantity,\n" +
+"     transaction.`User_code` AS transaction_User_code,\n" +
+"     transaction.`Transaction_date` AS transaction_Transaction_date\n" +
+"FROM\n" +
+"     `transaction` transaction where Transaction_Id='"+ transactionId + "'";
+           JRDesignQuery newQuery =new JRDesignQuery();
+           newQuery.setText(sql);
+           jd.setQuery(newQuery);
+           JasperReport jr = JasperCompileManager.compileReport(jd);
+           JasperPrint jp = JasperFillManager.fillReport(jr,para,conn);
+           JasperViewer.viewReport(jp);
+       
+       }
+       catch(Exception e)
+       {
+           JOptionPane.showMessageDialog(null, e);
+       }
+        
         } else if (bnSearch.getText().equals("Edit")){
             tfTransactionId.setEditable(false);
             cbItem.setEditable(true);
@@ -358,6 +498,7 @@ public class jplTransaction extends JPanel {
                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
             }
         }
+       
     }//GEN-LAST:event_bnSearchActionPerformed
 
     private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
@@ -407,20 +548,109 @@ public class jplTransaction extends JPanel {
              }
     }//GEN-LAST:event_bnDeleteActionPerformed
 
-    private void tfQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQuantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfQuantityActionPerformed
+    private void bnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete1ActionPerformed
+if (txtReciept.getText().isEmpty())
+{
+    return;
+}       
+            try{
+                 txtReciept.print();
+            }
+       catch(PrinterException ex)
+       {
+           Logger.getLogger(jplTransaction.class.getName()).log(Level.SEVERE, null ,ex);
+       }
+        
+    }//GEN-LAST:event_bnDelete1ActionPerformed
 
-    private void tfTransactionIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTransactionIdFocusLost
-        tfTransactionId.setText(tfTransactionId.getText().toUpperCase());
-    }//GEN-LAST:event_tfTransactionIdFocusLost
+    private void bnDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete2ActionPerformed
+        if (tfUserCode.getText().isEmpty() || tfTransactionId.getText().isEmpty() || tfTransactionDate.getText().isEmpty()|| tfCollector.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Complete all fieds");
+            return;
+        }
+        tfUnitCost.setEditable(true);
+        tfQuantity.setEditable(true);
+        txtReciept.setText(null);
+        txtReciept.append("\n");
+        txtReciept.append("\t     Store Management System\n\n" +
+                
+                "Receipt No:" + tfTransactionId.getText() +"\t\tDate:" + tfTransactionDate.getText()+"\n" +
+                "Collector:"+tfCollector.getText() + "\n" +
+                "+==================================================+\n" +
+                "\t          RECEIPT VOUCHER\n" +
+                "+==================================================+\n" +
+                
+                "Item Name\tItem Description\tSub Total" );
+       
+      bnSave.setEnabled(true);
+    }//GEN-LAST:event_bnDelete2ActionPerformed
+
+    private void bnDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete3ActionPerformed
+if (txtReciept.getText().isEmpty())
+{
+    return;
+}
+        String tot;
+        tot= tfUserCode1.getText();
+        txtReciept.append("\n");
+        txtReciept.append("\n" +
+          
+                "+==================================================+\n" +
+                
+                "\t\tTotal:\t\t\t  ₵"+ tot +
+                "\n\n\tThanks for shopping with us..." 
+        );
+        bnSave.setEnabled(false);
+    }//GEN-LAST:event_bnDelete3ActionPerformed
+
+    private void bnDelete4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bnDelete4ActionPerformed
+
+    private void bnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearch1ActionPerformed
+       try
+       {
+           HashMap para = new HashMap();
+           conn=DBconnection.getConnection();
+           String reportPath=tfReportPath.getText();
+           String transactionId=tfTransactionId.getText();
+           JasperDesign jd = JRXmlLoader.load(reportPath);
+           String sql ="SELECT\n" +
+"     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
+"     transaction.`item` AS transaction_item,\n" +
+"     transaction.`Collector` AS transaction_Collector,\n" +
+"     transaction.`Unit_price` AS transaction_Unit_price,\n" +
+"     transaction.`Quantity` AS transaction_Quantity,\n" +
+"     transaction.`User_code` AS transaction_User_code,\n" +
+"     transaction.`Transaction_date` AS transaction_Transaction_date\n" +
+"FROM\n" +
+"     `transaction` transaction";
+           JRDesignQuery newQuery =new JRDesignQuery();
+           newQuery.setText(sql);
+           jd.setQuery(newQuery);
+           JasperReport jr = JasperCompileManager.compileReport(jd);
+           JasperPrint jp = JasperFillManager.fillReport(jr,para,conn);
+           JasperViewer.viewReport(jp);
+       
+       }
+       catch(Exception e)
+       {
+           JOptionPane.showMessageDialog(null, e);
+       }
+        
+    }//GEN-LAST:event_bnSearch1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnClose;
     private javax.swing.JButton bnDelete;
+    private javax.swing.JButton bnDelete1;
+    private javax.swing.JButton bnDelete2;
+    private javax.swing.JButton bnDelete3;
+    private javax.swing.JButton bnDelete4;
     private javax.swing.JButton bnSave;
     private javax.swing.JButton bnSearch;
+    private javax.swing.JButton bnSearch1;
     private javax.swing.JComboBox<String> cbItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -430,12 +660,16 @@ public class jplTransaction extends JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField tfCollector;
     private javax.swing.JTextField tfQuantity;
+    private javax.swing.JTextField tfReportPath;
     private javax.swing.JTextField tfTransactionDate;
     private javax.swing.JTextField tfTransactionId;
     private javax.swing.JTextField tfUnitCost;
     private javax.swing.JTextField tfUserCode;
+    private javax.swing.JTextField tfUserCode1;
+    private javax.swing.JTextArea txtReciept;
     // End of variables declaration//GEN-END:variables
 }
