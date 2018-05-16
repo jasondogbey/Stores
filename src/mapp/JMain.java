@@ -61,7 +61,7 @@ public class JMain extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jplMain.setBackground(new java.awt.Color(255, 102, 102));
+        jplMain.setBackground(new java.awt.Color(0, 153, 153));
 
         javax.swing.GroupLayout jplMainLayout = new javax.swing.GroupLayout(jplMain);
         jplMain.setLayout(jplMainLayout);
@@ -77,6 +77,7 @@ public class JMain extends JFrame {
         mnuFile.setText("File");
 
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuItems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Item-Bag-icon.png"))); // NOI18N
         mnuItems.setText("Items");
         mnuItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +87,7 @@ public class JMain extends JFrame {
         mnuFile.add(mnuItems);
 
         mnuTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuTransaction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
         mnuTransaction.setText("Transaction");
         mnuTransaction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +97,7 @@ public class JMain extends JFrame {
         mnuFile.add(mnuTransaction);
 
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuSuppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-supplies-icon.png"))); // NOI18N
         mnuSuppliers.setText("Suppliers");
         mnuSuppliers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +106,7 @@ public class JMain extends JFrame {
         });
         mnuFile.add(mnuSuppliers);
 
-        mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Close-icon.png"))); // NOI18N
+        mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-exit Windows-Turn-Off-icon.png"))); // NOI18N
         mnuExit.setText("Exit");
         mnuExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +138,7 @@ public class JMain extends JFrame {
         });
         mnuUsers.add(mnuChangePassword);
 
-        mnuSwitchUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Executive-Green-icon.png"))); // NOI18N
+        mnuSwitchUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Group-icon.png"))); // NOI18N
         mnuSwitchUser.setText("Switch User");
         mnuSwitchUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
