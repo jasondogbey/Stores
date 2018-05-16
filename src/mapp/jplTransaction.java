@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger; 
+import net.proteanit.sql.DbUtils;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -26,7 +27,7 @@ import utility.DBconnection;
  * @author Unknown
  */
 public class jplTransaction extends JPanel {
-    final int pWidth = 800;
+    final int pWidth = 850;
     final int pHeight = 450;
     private static Connection conn;
     /**
@@ -42,6 +43,7 @@ public class jplTransaction extends JPanel {
         this.setVisible(true);
         //bnSearch.setText("Search");
         initialization();
+        fillcombo();
     }
     public void initialization(){
         tfTransactionId.setText("");
@@ -49,10 +51,23 @@ public class jplTransaction extends JPanel {
         tfUnitCost.setText("");
         tfQuantity.setText("");
         tfUserCode.setText("");
-        bnDelete.setEnabled(false);
+        //bnDelete.setEnabled(false);
         bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
         
+    }
+    private void fillcombo(){
+        String query="select Item_name from item";
+        try{
+           
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+            cbItem.addItem(rs.getString("Item_name"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
     }
 
     /**
@@ -82,7 +97,7 @@ public class jplTransaction extends JPanel {
         jLabel8 = new javax.swing.JLabel();
         tfTransactionDate = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
-        cbItem = new javax.swing.JComboBox<String>();
+        cbItem = new javax.swing.JComboBox<>();
         tfCollector = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtReciept = new javax.swing.JTextArea();
@@ -90,9 +105,9 @@ public class jplTransaction extends JPanel {
         bnDelete2 = new javax.swing.JButton();
         bnDelete3 = new javax.swing.JButton();
         tfUserCode1 = new javax.swing.JTextField();
-        tfReportPath = new javax.swing.JTextField();
-        bnDelete4 = new javax.swing.JButton();
         bnSearch1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Collector");
@@ -111,27 +126,33 @@ public class jplTransaction extends JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Transaction Date");
 
+        bnSearch.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-search-icon.png"))); // NOI18N
         bnSearch.setText("Search");
-        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnSearchActionPerformed(evt);
             }
         });
 
+        bnDelete.setBackground(new java.awt.Color(255, 255, 255));
         bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-trash-icon.png"))); // NOI18N
         bnDelete.setText("Delete");
-        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDeleteActionPerformed(evt);
             }
         });
 
+        bnSave.setBackground(new java.awt.Color(255, 255, 255));
         bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Save-icon.png"))); // NOI18N
         bnSave.setText("Save");
-        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnSave.setEnabled(false);
         bnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,11 +161,14 @@ public class jplTransaction extends JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 0, 153));
         jLabel1.setText("Transaction");
 
+        bnClose.setBackground(new java.awt.Color(255, 255, 255));
         bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-close blue-icon.png"))); // NOI18N
         bnClose.setText("Close");
-        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnCloseActionPerformed(evt);
@@ -159,7 +183,6 @@ public class jplTransaction extends JPanel {
 
         tfQuantity.setEditable(false);
 
-        cbItem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbItemActionPerformed(evt);
@@ -173,7 +196,9 @@ public class jplTransaction extends JPanel {
         txtReciept.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jScrollPane2.setViewportView(txtReciept);
 
+        bnDelete1.setBackground(new java.awt.Color(255, 255, 255));
         bnDelete1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-print-icon.png"))); // NOI18N
         bnDelete1.setText("Print");
         bnDelete1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bnDelete1.addActionListener(new java.awt.event.ActionListener() {
@@ -182,18 +207,22 @@ public class jplTransaction extends JPanel {
             }
         });
 
+        bnDelete2.setBackground(new java.awt.Color(255, 255, 255));
         bnDelete2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Add-icon.png"))); // NOI18N
         bnDelete2.setText("New");
-        bnDelete2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnDelete2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDelete2ActionPerformed(evt);
             }
         });
 
+        bnDelete3.setBackground(new java.awt.Color(255, 255, 255));
         bnDelete3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-confirm-security-icon.png"))); // NOI18N
         bnDelete3.setText("Done");
-        bnDelete3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnDelete3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDelete3ActionPerformed(evt);
@@ -202,21 +231,11 @@ public class jplTransaction extends JPanel {
 
         tfUserCode1.setText("0");
 
-        tfReportPath.setEditable(false);
-        tfReportPath.setText("C:\\\\Users\\\\TOMTOM-PC\\\\Documents\\\\NetBeansProjects\\\\Stores-master\\\\src\\\\mapp\\\\report1.jrxml");
-
-        bnDelete4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnDelete4.setText("Browse");
-        bnDelete4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        bnDelete4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnDelete4ActionPerformed(evt);
-            }
-        });
-
+        bnSearch1.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
         bnSearch1.setText("Transactions");
-        bnSearch1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnSearch1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnSearch1ActionPerformed(evt);
@@ -255,60 +274,57 @@ public class jplTransaction extends JPanel {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel8)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(48, 48, 48)
-                                        .addComponent(bnSave)))
+                                    .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(46, 46, 46)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfUserCode)
-                                            .addComponent(tfUnitCost)
-                                            .addComponent(tfQuantity)
-                                            .addComponent(tfCollector)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(tfReportPath, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(bnDelete4))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
+                                        .addGap(18, 18, 18)
                                         .addComponent(bnSearch)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(bnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(bnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(bnDelete)
-                                        .addGap(26, 26, 26)
+                                        .addGap(18, 18, 18)
                                         .addComponent(bnClose)
-                                        .addGap(21, 21, 21)))))))
+                                        .addGap(97, 97, 97))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(tfCollector))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(tfUserCode))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfQuantity)
+                                            .addComponent(tfUnitCost))))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(242, 242, 242))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(bnDelete2)
-                        .addGap(47, 47, 47)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(bnDelete2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
                         .addComponent(bnDelete3)
-                        .addGap(53, 53, 53)
+                        .addGap(55, 55, 55)
                         .addComponent(bnDelete1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(581, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(46, 46, 46)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +333,7 @@ public class jplTransaction extends JPanel {
                             .addComponent(bnDelete1)
                             .addComponent(bnDelete2)
                             .addComponent(bnDelete3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,14 +346,14 @@ public class jplTransaction extends JPanel {
                             .addComponent(tfTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -349,11 +365,7 @@ public class jplTransaction extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfReportPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bnDelete4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bnDelete)
                             .addComponent(bnSave)
@@ -371,6 +383,9 @@ public class jplTransaction extends JPanel {
             JOptionPane.showMessageDialog(null, "Unit Cost fiels or Price field cannot be empty");
             return;
         }
+        String valu,ds;
+                    double intvalue;
+            double newval,newval1;
         String s,q,p;
         Double quantity,price,total;
         q=tfQuantity.getText();
@@ -388,20 +403,31 @@ public class jplTransaction extends JPanel {
        
             txtReciept.append("\n"+cbItem.getSelectedItem().toString()+ "\t\t      "+ p+" X "+ q+"\t\t   ₵" + total);
        
-        String query="insert into transaction values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"')";
+        String query="insert into transaction(Transaction_id,item,Collector,Unit_price,Quantity,User_code,Transaction_date) values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
-               JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
-                tfTransactionId.setText("");
-                cbItem.setSelectedItem("");
-                tfCollector.setText("");
-                tfUnitCost.setText("");
-                tfQuantity.setText("");
-                tfUserCode.setText("");
-                tfTransactionDate.setText("");
-               initialization();
+              
+                
+                String query1 = "Select * from item where Item_name='"+cbItem.getSelectedItem().toString()+"'";
+          
+               ResultSet rs = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs.next()){
+                   
+                    valu=rs.getString("Quantity");
+                    intvalue=Double.parseDouble(valu);
+               ds=tfQuantity.getText();
+                newval1=Double.parseDouble(ds);
+               newval = intvalue - newval1;
+               if (newval >= 0){
+                    String query2 = "update item set Quantity='"+newval+"' where Item_name='"+cbItem.getSelectedItem().toString()+"'";
+                   if (utility.DBconnection.getStatement().executeUpdate(query2)>0){
+                    JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
+               
            }else{
                JOptionPane.showMessageDialog(null, "Could not save data");
+           }
+               }
+                }
            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
@@ -426,9 +452,9 @@ public class jplTransaction extends JPanel {
        {
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
-           String reportPath=tfReportPath.getText();
+           
            String transactionId=tfTransactionId.getText();
-           JasperDesign jd = JRXmlLoader.load(reportPath);
+           JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
 "     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
 "     transaction.`item` AS transaction_item,\n" +
@@ -519,6 +545,10 @@ public class jplTransaction extends JPanel {
     }//GEN-LAST:event_bnCloseActionPerformed
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+ if (tfTransactionId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Enter Item ID");
+                return;  
+            }        
         String query= "delete from transaction where Transaction_id='"+tfTransactionId.getText().trim()+"'";
             try{
                 if(utility.DBconnection.getStatement().executeUpdate(query)>0){
@@ -603,18 +633,14 @@ if (txtReciept.getText().isEmpty())
         bnSave.setEnabled(false);
     }//GEN-LAST:event_bnDelete3ActionPerformed
 
-    private void bnDelete4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bnDelete4ActionPerformed
-
     private void bnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearch1ActionPerformed
        try
        {
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
-           String reportPath=tfReportPath.getText();
+          
            String transactionId=tfTransactionId.getText();
-           JasperDesign jd = JRXmlLoader.load(reportPath);
+           JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
 "     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
 "     transaction.`item` AS transaction_item,\n" +
@@ -647,7 +673,6 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JButton bnDelete1;
     private javax.swing.JButton bnDelete2;
     private javax.swing.JButton bnDelete3;
-    private javax.swing.JButton bnDelete4;
     private javax.swing.JButton bnSave;
     private javax.swing.JButton bnSearch;
     private javax.swing.JButton bnSearch1;
@@ -664,7 +689,6 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField tfCollector;
     private javax.swing.JTextField tfQuantity;
-    private javax.swing.JTextField tfReportPath;
     private javax.swing.JTextField tfTransactionDate;
     private javax.swing.JTextField tfTransactionId;
     private javax.swing.JTextField tfUnitCost;
