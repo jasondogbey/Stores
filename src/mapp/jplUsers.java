@@ -2,11 +2,13 @@
 package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
+import com.sun.glass.events.KeyEvent;
+import net.proteanit.sql.DbUtils;
 
 public class jplUsers extends JPanel {
 
-    final int pWidth = 600;
-    final int pHeight = 420;
+    final int pWidth = 850;
+    final int pHeight = 410;
     
     /**
      * Creates new form jplRegistration
@@ -20,6 +22,7 @@ public class jplUsers extends JPanel {
         this.setLocation(x,y);
         this.setVisible(true);
         initialization();
+        filltable();
     }
 
     private void initialization(){
@@ -34,6 +37,16 @@ public class jplUsers extends JPanel {
         pfPassword.setEditable(false);
         pfConfirmPass.setEditable(false);
         utility.Utility.universalCode=0; 
+    }
+    private void filltable(){
+        String query="select USer_code, User_name, level from account";
+        try{
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            jtUsers.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,16 +69,21 @@ public class jplUsers extends JPanel {
         pfConfirmPass = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtUsers = new javax.swing.JTable();
         bnSearch = new javax.swing.JButton();
         bnDelete = new javax.swing.JButton();
         bnAddNew = new javax.swing.JButton();
         bnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         bnClose = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Executive-Green-icon.png"))); // NOI18N
         jLabel1.setText("User");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -95,13 +113,13 @@ public class jplUsers extends JPanel {
         jLabel5.setText("Level:");
         jLabel5.setToolTipText("");
 
-        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User Level", "1", "2", "3" }));
+        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User Level", "WORKER", "MANAGER", "ADMIN" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Confirm Password:");
         jLabel6.setToolTipText("");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,53 +130,77 @@ public class jplUsers extends JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jtUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtUsersMouseClicked(evt);
+            }
+        });
+        jtUsers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtUsersKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtUsers);
 
+        bnSearch.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-search-icon.png"))); // NOI18N
         bnSearch.setText("Search");
-        bnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnSearchActionPerformed(evt);
             }
         });
 
+        bnDelete.setBackground(new java.awt.Color(255, 255, 255));
         bnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-trash-icon.png"))); // NOI18N
         bnDelete.setText("Delete");
-        bnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnDeleteActionPerformed(evt);
             }
         });
 
+        bnAddNew.setBackground(new java.awt.Color(255, 255, 255));
         bnAddNew.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnAddNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Add-icon.png"))); // NOI18N
         bnAddNew.setText("Add New");
-        bnAddNew.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnAddNew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnAddNewActionPerformed(evt);
             }
         });
 
+        bnSave.setBackground(new java.awt.Color(255, 255, 255));
         bnSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Save-icon.png"))); // NOI18N
         bnSave.setText("Save");
-        bnSave.setActionCommand("Save");
-        bnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnSaveActionPerformed(evt);
             }
         });
 
+        bnClose.setBackground(new java.awt.Color(255, 255, 255));
         bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-close blue-icon.png"))); // NOI18N
         bnClose.setText("Close");
-        bnClose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnCloseActionPerformed(evt);
             }
         });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 0, 153));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Group-icon.png"))); // NOI18N
+        jLabel7.setText("All Users");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -183,35 +225,42 @@ public class jplUsers extends JPanel {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
                                 .addComponent(bnSearch)
-                                .addGap(31, 31, 31)
-                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(18, 18, 18)
+                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addComponent(bnAddNew)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(bnDelete)
-                                .addGap(35, 35, 35)
-                                .addComponent(bnClose))
-                            .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bnClose)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jLabel7))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -240,8 +289,8 @@ public class jplUsers extends JPanel {
                             .addComponent(bnClose)
                             .addComponent(bnSave)
                             .addComponent(bnDelete)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -313,6 +362,7 @@ public class jplUsers extends JPanel {
                pfPassword.setText("");
                pfConfirmPass.setText("");
                initialization();
+               filltable();
            }else{
                JOptionPane.showMessageDialog(null, "Could not save data");
            }
@@ -366,6 +416,7 @@ public class jplUsers extends JPanel {
                     pfPassword.setText("");
                     pfConfirmPass.setText("");
                     initialization();
+                    filltable();
                 }else{
                     JOptionPane.showMessageDialog(null, "Could not update data");
                 }
@@ -386,6 +437,7 @@ public class jplUsers extends JPanel {
                     pfPassword.setText("");
                     pfConfirmPass.setText("");
                     initialization();
+                    filltable();
                 }else{
                     JOptionPane.showMessageDialog(null, "Could not delete data");
                 }
@@ -393,6 +445,62 @@ public class jplUsers extends JPanel {
                  JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
              }
     }//GEN-LAST:event_bnDeleteActionPerformed
+
+    private void jtUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsersMouseClicked
+        try{
+            int row=jtUsers.getSelectedRow();
+            String TableClick=jtUsers.getModel().getValueAt(row, 0).toString();
+            String query="select * from account where User_code='"+TableClick+"'";
+            
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfUserCode.setText(rs.getString("User_code"));
+                    tfName.setText(rs.getString("User_name"));
+                    cbLevel.setSelectedItem(rs.getString("level"));
+                }
+                tfUserCode.setEditable(false);
+                tfName.setEditable(false);
+                cbLevel.setEnabled(false);
+                pfPassword.setEditable(false);
+                pfConfirmPass.setEditable(false);
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnAddNew.setEnabled(false);
+                bnSearch.setText("Edit");
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jtUsersMouseClicked
+
+    private void jtUsersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtUsersKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN||evt.getKeyCode() == KeyEvent.VK_UP){
+          try{
+            int row=jtUsers.getSelectedRow();
+            String TableClick=jtUsers.getModel().getValueAt(row, 0).toString();
+            String query="select * from account where User_code='"+TableClick+"'";
+            
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfUserCode.setText(rs.getString("User_code"));
+                    tfName.setText(rs.getString("User_name"));
+                    cbLevel.setSelectedItem(rs.getString("level"));
+                }
+                tfUserCode.setEditable(false);
+                tfName.setEditable(false);
+                cbLevel.setEnabled(false);
+                pfPassword.setEditable(false);
+                pfConfirmPass.setEditable(false);
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnAddNew.setEnabled(false);
+                bnSearch.setText("Edit");
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }  
+        }
+    }//GEN-LAST:event_jtUsersKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -408,9 +516,10 @@ public class jplUsers extends JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtUsers;
     private javax.swing.JPasswordField pfConfirmPass;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfName;
