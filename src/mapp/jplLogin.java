@@ -9,9 +9,8 @@ public class jplLogin extends JPanel {
     final int pHeight = 300;
     JMenuBar bar;
     JMenuItem reg;
-    JMenu pri;
     
-    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenu pri) {
+    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
@@ -19,10 +18,10 @@ public class jplLogin extends JPanel {
         this.setLocation(x,y);
         this.bar=bar;
         this.reg=reg;
-        this.pri=pri;
+        
         this.bar.setVisible(false);
         this.reg.setVisible(false);
-        this.pri.setVisible(false);
+       
         this.setVisible(true);
         if (utility.DBconnection.getStatus() == true){
             tfIPAddress.setEnabled(false);
@@ -225,13 +224,13 @@ public class jplLogin extends JPanel {
                 this.setVisible(false);
                 this.bar.setVisible(true);
                 if (sLevel.equals("ADMIN")){
-                    this.pri.setVisible(true);
+                    
                     this.reg.setVisible(true);
                 }else if (sLevel.equals("MANAGER")){
-                    this.pri.setVisible(false);
+                    
                     this.reg.setVisible(true);
                 }else if (sLevel.equals("WORKER")){
-                    this.pri.setVisible(false);
+               
                     this.reg.setVisible(false);
                 }
             }else{
