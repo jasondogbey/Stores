@@ -6,7 +6,7 @@ import javax.swing.*;
 public class jplLogin extends JPanel {
 
     final int pWidth = 370;
-    final int pHeight = 250;
+    final int pHeight = 300;
     JMenuBar bar;
     JMenuItem reg;
     JMenu pri;
@@ -58,7 +58,7 @@ public class jplLogin extends JPanel {
         bnConnect = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Login");
@@ -86,9 +86,11 @@ public class jplLogin extends JPanel {
             }
         });
 
+        bnLogin.setBackground(new java.awt.Color(255, 255, 255));
         bnLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Interface-Login-icon.png"))); // NOI18N
         bnLogin.setText("Login");
-        bnLogin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnLoginActionPerformed(evt);
@@ -100,9 +102,11 @@ public class jplLogin extends JPanel {
             }
         });
 
+        bnCancel.setBackground(new java.awt.Color(255, 255, 255));
         bnCancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-exit Windows-Turn-Off-icon.png"))); // NOI18N
         bnCancel.setText("Cancel");
-        bnCancel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnCancelActionPerformed(evt);
@@ -112,8 +116,11 @@ public class jplLogin extends JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("IP Address:");
 
+        bnConnect.setBackground(new java.awt.Color(255, 255, 255));
         bnConnect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-connect-icon.png"))); // NOI18N
         bnConnect.setText("Connect");
+        bnConnect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnConnectActionPerformed(evt);
@@ -140,17 +147,17 @@ public class jplLogin extends JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(bnLogin)
-                                        .addGap(71, 71, 71)
+                                        .addGap(66, 66, 66)
                                         .addComponent(bnCancel))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel2)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel3)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(pfPassword)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -161,7 +168,7 @@ public class jplLogin extends JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(128, 128, 128)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -173,7 +180,7 @@ public class jplLogin extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -182,7 +189,7 @@ public class jplLogin extends JPanel {
                     .addComponent(jLabel4)
                     .addComponent(tfIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bnConnect))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,7 +197,7 @@ public class jplLogin extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnCancel)
                     .addComponent(bnLogin))
