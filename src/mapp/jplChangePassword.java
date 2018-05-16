@@ -56,7 +56,10 @@ public class jplChangePassword extends JPanel {
         pfNewPassword = new javax.swing.JPasswordField();
         pfConfirmPassword = new javax.swing.JPasswordField();
 
+        setBackground(new java.awt.Color(153, 204, 255));
+
         jLabel1.setFont(new java.awt.Font("BubbleGum", 0, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-change-password-icon.png"))); // NOI18N
         jLabel1.setText("Change User Password");
 
         jLabel2.setFont(new java.awt.Font("Californian FB", 1, 14)); // NOI18N
@@ -68,16 +71,22 @@ public class jplChangePassword extends JPanel {
         jLabel4.setFont(new java.awt.Font("Californian FB", 1, 14)); // NOI18N
         jLabel4.setText("Confirm Password:");
 
+        bnConfirm.setBackground(new java.awt.Color(255, 255, 255));
         bnConfirm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-confirm-security-icon.png"))); // NOI18N
         bnConfirm.setText("Confirm");
+        bnConfirm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnConfirmActionPerformed(evt);
             }
         });
 
+        bnCancel.setBackground(new java.awt.Color(255, 255, 255));
         bnCancel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Close-icon.png"))); // NOI18N
         bnCancel.setText("Cancel");
+        bnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bnCancelActionPerformed(evt);
@@ -108,7 +117,7 @@ public class jplChangePassword extends JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(bnConfirm)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                         .addComponent(bnCancel)
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -143,7 +152,7 @@ public class jplChangePassword extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bnConfirm)
                     .addComponent(bnCancel))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
