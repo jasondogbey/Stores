@@ -13,8 +13,7 @@
      transaction.`User_code` AS transaction_User_code,
      transaction.`Transaction_date` AS transaction_Transaction_date
 FROM
-     `transaction` transaction
-]]>
+     `transaction` transaction]]>
 	</queryString>
 	<field name="transaction_Transaction_Id" class="java.lang.String"/>
 	<field name="transaction_item" class="java.lang.String"/>
@@ -50,10 +49,6 @@ FROM
 					</textElement>
 					<text><![CDATA[TRANSACTION REPORT]]></text>
 				</staticText>
-				<image scaleImage="RetainShape">
-					<reportElement x="20" y="11" width="131" height="72"/>
-					<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\TOMTOM-PC\\Documents\\icons\\kstu.png"]]></imageExpression>
-				</image>
 			</frame>
 		</band>
 	</title>
