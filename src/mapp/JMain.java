@@ -2,6 +2,12 @@
 package mapp;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JMain extends JFrame {
     Toolkit tk = Toolkit.getDefaultToolkit();
@@ -14,6 +20,7 @@ public class JMain extends JFrame {
         int y = (d.height-this.getHeight())/2;
         this.setLocation(x,y);
         utility.DBconnection.connection();
+        currentDate();
         displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts)); 
     }
 
@@ -36,6 +43,40 @@ public class JMain extends JFrame {
             return true;
         }
     }
+    public void currentDate(){
+        
+        //Dynamic
+        Thread clock = new Thread(){
+        public void run(){
+            while(true){
+        Calendar cal= new GregorianCalendar();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        lbDate.setText(Integer.toString(day)+"/"+Integer.toString(month+1)+"/"+Integer.toString(year));
+        
+        //Time
+//        int hour = cal.get(Calendar.HOUR);
+//        int minute = cal.get(Calendar.MINUTE);
+//        int second = cal.get(Calendar.SECOND);
+//        lbTime.setText(Integer.toString(hour)+":"+Integer.toString(minute)+":"+Integer.toString(second));
+   
+    Date date = new Date();
+    SimpleDateFormat formatTime= new SimpleDateFormat("hh.mm.ss aa");
+    String srtTime = formatTime.format(date);
+    lbTime.setText(srtTime);
+    
+                try {
+                    sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        };
+        clock.start();
+        
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,16 +91,25 @@ public class JMain extends JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lbDate = new javax.swing.JLabel();
+        lbTime = new javax.swing.JLabel();
         mnuBar = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuItems = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuTransaction = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         mnuSuppliers = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mnuExit = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         mnuUsers = new javax.swing.JMenu();
         mnuChangePassword = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         mnuSwitchUser = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
         mnuAccounts = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
 
         jMenu1.setText("jMenu1");
 
@@ -79,6 +129,7 @@ public class JMain extends JFrame {
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255)));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/ksfl 100px.png"))); // NOI18N
 
@@ -118,32 +169,50 @@ public class JMain extends JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Date:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Time:");
+
+        lbDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbDate.setForeground(new java.awt.Color(255, 255, 255));
+        lbDate.setText("DD/MM/YYYY");
+
+        lbTime.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbTime.setForeground(new java.awt.Color(255, 255, 255));
+        lbTime.setText("00:00:00");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbTime))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbDate)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lbDate))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lbTime))
                 .addGap(32, 32, 32))
         );
 
@@ -158,6 +227,7 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuItems);
+        mnuFile.add(jSeparator1);
 
         mnuTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
         mnuTransaction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
@@ -168,6 +238,7 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuTransaction);
+        mnuFile.add(jSeparator2);
 
         mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         mnuSuppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-supplies-icon.png"))); // NOI18N
@@ -178,6 +249,7 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuSuppliers);
+        mnuFile.add(jSeparator3);
 
         mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-exit Windows-Turn-Off-icon.png"))); // NOI18N
         mnuExit.setText("Exit");
@@ -187,6 +259,7 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuExit);
+        mnuFile.add(jSeparator4);
 
         mnuBar.add(mnuFile);
 
@@ -200,6 +273,7 @@ public class JMain extends JFrame {
             }
         });
         mnuUsers.add(mnuChangePassword);
+        mnuUsers.add(jSeparator6);
 
         mnuSwitchUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Group-icon.png"))); // NOI18N
         mnuSwitchUser.setText("Switch User");
@@ -209,6 +283,7 @@ public class JMain extends JFrame {
             }
         });
         mnuUsers.add(mnuSwitchUser);
+        mnuUsers.add(jSeparator7);
 
         mnuAccounts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_MASK));
         mnuAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Executive-Green-icon.png"))); // NOI18N
@@ -219,6 +294,7 @@ public class JMain extends JFrame {
             }
         });
         mnuUsers.add(mnuAccounts);
+        mnuUsers.add(jSeparator5);
 
         mnuBar.add(mnuUsers);
 
@@ -311,7 +387,16 @@ public class JMain extends JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPanel jplMain;
+    private javax.swing.JLabel lbDate;
+    private javax.swing.JLabel lbTime;
     private javax.swing.JMenuItem mnuAccounts;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuChangePassword;
