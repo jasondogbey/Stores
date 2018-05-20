@@ -8,6 +8,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mapp.jplHome;
 
 public class JMain extends JFrame {
     Toolkit tk = Toolkit.getDefaultToolkit();
@@ -22,6 +23,7 @@ public class JMain extends JFrame {
         utility.DBconnection.connection();
         currentDate();
         displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts)); 
+        //displayForm(new jplHome(jplMain));
     }
 
     public void displayForm(JPanel jp){
@@ -30,6 +32,7 @@ public class JMain extends JFrame {
         jplMain.validate();
         jplMain.repaint();
     }
+    
     private boolean closeOption(){
         if (utility.Utility.universalCode==1){
             int res=JOptionPane.showConfirmDialog(null, "Do you want to save your work?","Warning",JOptionPane.YES_NO_OPTION);
