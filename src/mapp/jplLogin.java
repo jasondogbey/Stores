@@ -2,6 +2,8 @@ package mapp;
 import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.*;
+import mapp.jplHome;
+import mapp.JMain;
 
 public class jplLogin extends JPanel {
 
@@ -9,6 +11,8 @@ public class jplLogin extends JPanel {
     final int pHeight = 300;
     JMenuBar bar;
     JMenuItem reg;
+    JPanel home;
+    
     
     public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg) {
         initComponents();
@@ -18,7 +22,7 @@ public class jplLogin extends JPanel {
         this.setLocation(x,y);
         this.bar=bar;
         this.reg=reg;
-        
+        this.home=jplMain;
         this.bar.setVisible(false);
         this.reg.setVisible(false);
        
@@ -33,6 +37,13 @@ public class jplLogin extends JPanel {
             bnConnect.setEnabled(true);
             bnLogin.setEnabled(false);
         }
+    }
+    
+    public void displayForm(JPanel jp){
+        home.remove(jp);
+        home.add(jp);
+        home.validate();
+        home.repaint();
     }
 
     /**
@@ -223,6 +234,8 @@ public class jplLogin extends JPanel {
             if (pass.equals(password)){
                 this.setVisible(false);
                 this.bar.setVisible(true);
+                
+                displayForm(new jplHome(this.home));
                 if (sLevel.equals("ADMIN")){
                     
                     this.reg.setVisible(true);
