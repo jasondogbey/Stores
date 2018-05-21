@@ -61,7 +61,7 @@ public class jplHome extends JPanel {
         jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button distribute shop-cart-icon.png"))); // NOI18N
-        jButton1.setText("Distribution");
+        jButton1.setText("Distribute");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setIconTextGap(0);
