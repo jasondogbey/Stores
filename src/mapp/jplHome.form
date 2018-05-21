@@ -33,27 +33,27 @@
               <Component id="jLabel1" min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton1" max="32767" attributes="0"/>
-                  <Component id="jButton5" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jButton5" pref="0" max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton6" max="32767" attributes="0"/>
+              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton2" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jButton6" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton7" max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton3" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jButton7" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton4" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jButton8" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jButton8" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="69" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,21 +63,21 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton4" alignment="3" min="-2" pref="145" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" pref="145" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" pref="145" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" pref="145" max="-2" attributes="0"/>
+                  <Component id="jButton4" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                  <Component id="jButton3" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                  <Component id="jButton2" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton8" pref="145" max="32767" attributes="0"/>
+                  <Component id="jButton8" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton7" pref="145" max="32767" attributes="0"/>
+                      <Component id="jButton7" max="32767" attributes="0"/>
                       <Component id="jButton6" max="32767" attributes="0"/>
                       <Component id="jButton5" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="77" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -109,7 +109,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button distribute shop-cart-icon.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Distribution"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
@@ -117,7 +131,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton2"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button-item-Generic-Box-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Items"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -128,7 +156,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton3"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button-suppliers-Pickup-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Suppliers"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
@@ -139,7 +181,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton4"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/botton-collectors-Groups-Military-Personnel-Light-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Collectors"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
@@ -147,7 +203,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton5"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button-user-password-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Change Password"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">
@@ -155,7 +225,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton6"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button-switch-user-group-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Switch User"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton7">
@@ -163,7 +247,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton7"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button-register-user-male-add-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Register User"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
@@ -174,7 +272,21 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jButton8"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mapp/button-Logout-icon.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Logout"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="iconTextGap" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
   </SubComponents>
