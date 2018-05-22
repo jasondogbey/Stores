@@ -10,11 +10,12 @@ public class jplLogin extends JPanel {
     final int pWidth = 420;
     final int pHeight = 230;
     JMenuBar bar;
+    JMenu search;
     JMenuItem reg;
     JPanel home;
     
     
-    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg) {
+    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenu search) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
@@ -22,6 +23,7 @@ public class jplLogin extends JPanel {
         this.setLocation(x,y);
         this.bar=bar;
         this.reg=reg;
+        this.search=search;
         this.home=jplMain;
         this.bar.setVisible(false);
         this.reg.setVisible(false);
@@ -57,7 +59,7 @@ public class jplLogin extends JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfUserCode = new javax.swing.JTextField();
+        tfUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         pfPassword = new javax.swing.JPasswordField();
         bnLogin = new javax.swing.JButton();
@@ -76,14 +78,14 @@ public class jplLogin extends JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Username:");
 
-        tfUserCode.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfUserCodeFocusLost(evt);
+                tfUsernameFocusLost(evt);
             }
         });
-        tfUserCode.addActionListener(new java.awt.event.ActionListener() {
+        tfUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfUserCodeActionPerformed(evt);
+                tfUsernameActionPerformed(evt);
             }
         });
 
@@ -159,7 +161,7 @@ public class jplLogin extends JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(bnLogin)
@@ -195,7 +197,7 @@ public class jplLogin extends JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -210,43 +212,50 @@ public class jplLogin extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnLoginActionPerformed
-     if (tfUserCode.getText().isEmpty() || pfPassword.getText().isEmpty()){
+     if (tfUsername.getText().isEmpty() || pfPassword.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Complete all fieds");
             return;
         }
-        String usercode = tfUserCode.getText();
+        String username = tfUsername.getText();
         String pass = pfPassword.getText();
         String password="";
         String sLevel="";
-        String s = "select password, level from account where User_code='"+usercode+"'";
+        String s = "select password, level from account where Username='"+username+"'";
         try{
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(s);
             while(rs.next()){
                 password=rs.getString("password");
                 sLevel = rs.getString("level");
             }
+            
             if (pass.equals(password)){
                 this.setVisible(false);
                 this.bar.setVisible(true);
                 
-                displayForm(new jplHome(this.home));
+                displayForm(new jplHome(this.home, sLevel));
                 if (sLevel.equals("ADMIN")){
-                    
+                    this.search.setVisible(true);
                     this.reg.setVisible(true);
+                    
+            
                 }else if (sLevel.equals("MANAGER")){
-                    
-                    this.reg.setVisible(true);
-                }else if (sLevel.equals("WORKER")){
-               
+                    this.search.setVisible(true);
                     this.reg.setVisible(false);
+                 
+                }else if (sLevel.equals("STAFF")){
+                    this.search.setVisible(false);
+                    this.reg.setVisible(false);
+                    
                 }
+               
             }else{
                 JOptionPane.showMessageDialog(null,"Password Mismatch");
                 pfPassword.setText("");
             }
+           
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
-            tfUserCode.setText("");
+            tfUsername.setText("");
             pfPassword.setText("");
         }
         
@@ -268,13 +277,13 @@ public class jplLogin extends JPanel {
         }
     }//GEN-LAST:event_pfPasswordKeyPressed
 
-    private void tfUserCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUserCodeFocusLost
-        tfUserCode.setText(tfUserCode.getText().toUpperCase());
-    }//GEN-LAST:event_tfUserCodeFocusLost
+    private void tfUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUsernameFocusLost
+        tfUsername.setText(tfUsername.getText().toUpperCase());
+    }//GEN-LAST:event_tfUsernameFocusLost
 
-    private void tfUserCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserCodeActionPerformed
+    private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfUserCodeActionPerformed
+    }//GEN-LAST:event_tfUsernameActionPerformed
 
     private void bnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnConnectActionPerformed
         utility.DBconnection.Connection(tfIPAddress.getText().trim());
@@ -304,6 +313,6 @@ public class jplLogin extends JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfIPAddress;
-    private javax.swing.JTextField tfUserCode;
+    private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }
