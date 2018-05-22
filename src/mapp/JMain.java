@@ -22,7 +22,7 @@ public class JMain extends JFrame {
         this.setLocation(x,y);
         utility.DBconnection.connection();
         currentDate();
-        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts)); 
+        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuSearch)); 
         //displayForm(new jplHome(jplMain));
     }
 
@@ -98,14 +98,22 @@ public class JMain extends JFrame {
         lbTime = new javax.swing.JLabel();
         mnuBar = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
+        mnuHome = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JPopupMenu.Separator();
         mnuItems = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        mnuTransaction = new javax.swing.JMenuItem();
+        mnuDistribute = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        mnuSuppliers = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mnuExit = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        mnuSearch = new javax.swing.JMenu();
+        mnuDistribution = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        mnuSuppliers = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        mnuCollectors = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
         mnuUsers = new javax.swing.JMenu();
         mnuChangePassword = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
@@ -225,6 +233,10 @@ public class JMain extends JFrame {
 
         mnuFile.setText("File");
 
+        mnuHome.setText("Home");
+        mnuFile.add(mnuHome);
+        mnuFile.add(jSeparator10);
+
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         mnuItems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Item-Bag-icon.png"))); // NOI18N
         mnuItems.setText("Items");
@@ -236,26 +248,16 @@ public class JMain extends JFrame {
         mnuFile.add(mnuItems);
         mnuFile.add(jSeparator1);
 
-        mnuTransaction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuTransaction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
-        mnuTransaction.setText("Transaction");
-        mnuTransaction.addActionListener(new java.awt.event.ActionListener() {
+        mnuDistribute.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuDistribute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
+        mnuDistribute.setText("Distribute");
+        mnuDistribute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuTransactionActionPerformed(evt);
+                mnuDistributeActionPerformed(evt);
             }
         });
-        mnuFile.add(mnuTransaction);
+        mnuFile.add(mnuDistribute);
         mnuFile.add(jSeparator2);
-
-        mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
-        mnuSuppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-supplies-icon.png"))); // NOI18N
-        mnuSuppliers.setText("Suppliers");
-        mnuSuppliers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuSuppliersActionPerformed(evt);
-            }
-        });
-        mnuFile.add(mnuSuppliers);
         mnuFile.add(jSeparator3);
 
         mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-exit Windows-Turn-Off-icon.png"))); // NOI18N
@@ -269,6 +271,30 @@ public class JMain extends JFrame {
         mnuFile.add(jSeparator4);
 
         mnuBar.add(mnuFile);
+
+        mnuSearch.setText("Search");
+
+        mnuDistribution.setText("Distributions");
+        mnuSearch.add(mnuDistribution);
+        mnuSearch.add(jSeparator8);
+
+        mnuSuppliers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuSuppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-supplies-icon.png"))); // NOI18N
+        mnuSuppliers.setText("Suppliers");
+        mnuSuppliers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSuppliersActionPerformed(evt);
+            }
+        });
+        mnuSearch.add(mnuSuppliers);
+        mnuSearch.add(jSeparator9);
+
+        mnuCollectors.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuCollectors.setText("Collectors");
+        mnuSearch.add(mnuCollectors);
+        mnuSearch.add(jSeparator11);
+
+        mnuBar.add(mnuSearch);
 
         mnuUsers.setText("Users");
 
@@ -331,11 +357,11 @@ public class JMain extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnuTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTransactionActionPerformed
+    private void mnuDistributeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDistributeActionPerformed
      if (closeOption()){
-        displayForm(new jplTransaction(jplMain));
+        displayForm(new jplDistribution(jplMain));
      }
-    }//GEN-LAST:event_mnuTransactionActionPerformed
+    }//GEN-LAST:event_mnuDistributeActionPerformed
 
     private void mnuItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemsActionPerformed
         if (closeOption()){
@@ -352,7 +378,7 @@ public class JMain extends JFrame {
 
     private void mnuSwitchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSwitchUserActionPerformed
         if (closeOption()){
-            displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts));      
+            displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuSearch));      
         }
     }//GEN-LAST:event_mnuSwitchUserActionPerformed
 
@@ -395,24 +421,32 @@ public class JMain extends JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JPanel jplMain;
     private javax.swing.JLabel lbDate;
     private javax.swing.JLabel lbTime;
     private javax.swing.JMenuItem mnuAccounts;
     private javax.swing.JMenuBar mnuBar;
     private javax.swing.JMenuItem mnuChangePassword;
+    private javax.swing.JMenuItem mnuCollectors;
+    private javax.swing.JMenuItem mnuDistribute;
+    private javax.swing.JMenuItem mnuDistribution;
     private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenu mnuFile;
+    private javax.swing.JMenuItem mnuHome;
     private javax.swing.JMenuItem mnuItems;
+    private javax.swing.JMenu mnuSearch;
     private javax.swing.JMenuItem mnuSuppliers;
     private javax.swing.JMenuItem mnuSwitchUser;
-    private javax.swing.JMenuItem mnuTransaction;
     private javax.swing.JMenu mnuUsers;
     // End of variables declaration//GEN-END:variables
 }
