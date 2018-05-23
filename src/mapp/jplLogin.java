@@ -12,10 +12,11 @@ public class jplLogin extends JPanel {
     JMenuBar bar;
     JMenu search;
     JMenuItem reg;
+    JMenuItem gohome;
     JPanel home;
     
     
-    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenu search) {
+    public jplLogin(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenuItem gohome, JMenu search) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
@@ -23,11 +24,12 @@ public class jplLogin extends JPanel {
         this.setLocation(x,y);
         this.bar=bar;
         this.reg=reg;
+        this.gohome=gohome;
         this.search=search;
         this.home=jplMain;
         this.bar.setVisible(false);
         this.reg.setVisible(false);
-       
+    
         this.setVisible(true);
         if (utility.DBconnection.getStatus() == true){
             tfIPAddress.setEnabled(false);
@@ -231,21 +233,21 @@ public class jplLogin extends JPanel {
             if (pass.equals(password)){
                 this.setVisible(false);
                 this.bar.setVisible(true);
-                
-                displayForm(new jplHome(this.home, sLevel));
+                utility.Utility.level=sLevel;
+                displayForm(new jplHome(this.home, this.bar, this.reg,this.gohome, this.search));
                 if (sLevel.equals("ADMIN")){
                     this.search.setVisible(true);
                     this.reg.setVisible(true);
-                    
+                   
             
                 }else if (sLevel.equals("MANAGER")){
                     this.search.setVisible(true);
                     this.reg.setVisible(false);
-                 
+                  
                 }else if (sLevel.equals("STAFF")){
                     this.search.setVisible(false);
                     this.reg.setVisible(false);
-                    
+                   
                 }
                
             }else{
@@ -257,6 +259,7 @@ public class jplLogin extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
             tfUsername.setText("");
             pfPassword.setText("");
+            
         }
         
     }//GEN-LAST:event_bnLoginActionPerformed
