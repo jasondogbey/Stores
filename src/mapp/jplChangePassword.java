@@ -12,16 +12,18 @@ public class jplChangePassword extends JPanel {
     final int pWidth = 450;
     final int pHeight = 250;
 
+    JMenuItem gohome;
     /**
      * Creates new form jplChangePassword
      */
-    public jplChangePassword(JPanel jplMain) {
+    public jplChangePassword(JPanel jplMain,JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x,y);
         this.setVisible(true);
+        this.gohome=gohome;
         initialization();
         
         
@@ -84,7 +86,7 @@ public class jplChangePassword extends JPanel {
 
         bnCancel.setBackground(new java.awt.Color(255, 255, 255));
         bnCancel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        bnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Close-icon.png"))); // NOI18N
+        bnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-close blue-icon.png"))); // NOI18N
         bnCancel.setText("Cancel");
         bnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +159,7 @@ public class jplChangePassword extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCancelActionPerformed
-       this.setVisible(false);
+        this.gohome.doClick();
     }//GEN-LAST:event_bnCancelActionPerformed
 
     private void bnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnConfirmActionPerformed
