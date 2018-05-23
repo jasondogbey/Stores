@@ -17,20 +17,38 @@ public class jplHome extends JPanel {
     final int pWidth = 810;
     final int pHeight = 500;
     
-    public jplHome(JPanel jplMain, String level) {
+    JPanel home;
+    JMenuBar bar;
+    JMenu search;
+    JMenuItem reg;
+    JMenuItem gohome;
+   
+    
+    public jplHome(JPanel jplMain, JMenuBar bar,JMenuItem reg, JMenuItem gohome, JMenu search) {
         initComponents();
         this.setSize(pWidth, pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x, y);
         this.setVisible(true);
-        lbPanel.setText(level);
-       
+        lbPanel.setText(utility.Utility.level);
+        this.home=jplMain;
+        this.bar=bar;
+        this.reg=reg;
+        this.gohome=gohome;
+        this.search=search;
+        
+        
     }
     public jplHome() {
         initComponents();
     }
-
+    public void displayForm(JPanel jp){
+            home.removeAll();
+            home.add(jp);
+            home.validate();
+            home.repaint();
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +86,11 @@ public class jplHome extends JPanel {
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setIconTextGap(0);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 153, 153));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,6 +128,11 @@ public class jplHome extends JPanel {
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setIconTextGap(0);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(0, 153, 153));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,6 +142,11 @@ public class jplHome extends JPanel {
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setIconTextGap(0);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(0, 153, 153));
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,6 +156,11 @@ public class jplHome extends JPanel {
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setIconTextGap(0);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(0, 153, 153));
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,6 +184,11 @@ public class jplHome extends JPanel {
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setIconTextGap(0);
         jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,16 +237,36 @@ public class jplHome extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        displayForm(new jplSuppliers(this.home, this.gohome));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        displayForm(new jplItems(this.home,this.gohome));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        displayForm(new jplUsers(this.home));
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        displayForm(new jplDistribution(this.home, this.gohome));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        displayForm(new jplCollectors(this.home, this.gohome));
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        displayForm(new jplChangePassword(this.home, this.gohome));
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        displayForm(new jplLogin(this.home,this.bar,this.reg,this.gohome,this.search));
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        displayForm(new jplLogin(this.home,this.bar,this.reg,this.gohome,this.search));
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
