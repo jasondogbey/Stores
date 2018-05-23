@@ -15,31 +15,53 @@ import net.proteanit.sql.DbUtils;
 public class jplItems extends JPanel {
     final int pWidth = 795;
     final int pHeight = 440;
+    JMenuBar bar;
+    JMenu search;
+    JMenuItem gohome;
+    JPanel home;
+    int SupplierId;
+    String Supplier;
     /**
      * Creates new form jplItems
      */
-    public jplItems(JPanel jplMain) {
+    public jplItems(JPanel jplMain, JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth, pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x, y);
         this.setVisible(true);
+        this.gohome=gohome;
         //bnSearch.setText("Search");
         initialization();
           filltable();
+          fillcombo();
+      
     }
     public void initialization(){
         tfItemId.setText("");
         tfItemName.setText("");
         tfUnitPrice.setText("");
         tfQuantity.setText("");
-        taSuppliers.setText("");
+        //taSuppliers.setText("");
         taLocation.setText("");
         taNotes.setText("");
         bnDelete.setEnabled(false);
         bnSearch.setText("Search");
         
+    }
+    private void fillcombo(){
+        String query="select Supplier_name from supplier";
+        try{
+           
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+            cbSupplier.addItem(rs.getString("Supplier_name"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
     }
     private void filltable(){
         String query="select * from item";
@@ -50,6 +72,12 @@ public class jplItems extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
+    }
+    public void displayForm(JPanel jp){
+        home.remove(jp);
+        home.add(jp);
+        home.validate();
+        home.repaint();
     }
 
     /**
@@ -78,14 +106,13 @@ public class jplItems extends JPanel {
         tfItemName = new javax.swing.JTextField();
         tfUnitPrice = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        taSuppliers = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         taNotes = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         taLocation = new javax.swing.JTextArea();
         bnSave = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        cbSupplier = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -116,7 +143,7 @@ public class jplItems extends JPanel {
         jScrollPane1.setViewportView(jtItems);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 153));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Item-Bag-icon.png"))); // NOI18N
         jLabel1.setText("Items");
 
@@ -180,10 +207,6 @@ public class jplItems extends JPanel {
             }
         });
 
-        taSuppliers.setColumns(20);
-        taSuppliers.setRows(5);
-        jScrollPane2.setViewportView(taSuppliers);
-
         taNotes.setColumns(20);
         taNotes.setRows(5);
         jScrollPane3.setViewportView(taNotes);
@@ -204,7 +227,7 @@ public class jplItems extends JPanel {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 0, 153));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("All Items");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -224,16 +247,6 @@ public class jplItems extends JPanel {
                     .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfQuantity)
-                            .addComponent(tfUnitPrice)
-                            .addComponent(tfItemName)
-                            .addComponent(tfItemId)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +255,17 @@ public class jplItems extends JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(bnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfQuantity)
+                            .addComponent(tfUnitPrice)
+                            .addComponent(tfItemName)
+                            .addComponent(tfItemId)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(cbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,17 +301,17 @@ public class jplItems extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel6)
-                                .addGap(31, 31, 31)
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(cbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
                                 .addComponent(jLabel7)
                                 .addGap(28, 28, 28))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,6 +337,7 @@ public class jplItems extends JPanel {
             String ItemId = tfItemId.getText().trim();
             String query = "Select * from item where Item_id='"+ItemId+"'";
             
+            
             try{
                 ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
                 while(rs.next()){
@@ -321,15 +345,23 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    taSuppliers.setText(rs.getString("Suppliers"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
                 }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+                
                 tfItemId.setEditable(false);
                 tfItemName.setEditable(false);
                 tfUnitPrice.setEditable(false);
                 tfQuantity.setEditable(false);
-                taSuppliers.setEditable(false);
+                cbSupplier.setEnabled(false);
                 taLocation.setEditable(false);
                 taNotes.setEditable(false);
                 
@@ -346,12 +378,26 @@ public class jplItems extends JPanel {
             tfItemName.setEditable(true);
             tfUnitPrice.setEditable(true);
             tfQuantity.setEditable(true);
-            taSuppliers.setEditable(true);
+            cbSupplier.setEnabled(true);
             taLocation.setEditable(true);
             taNotes.setEditable(true);
             bnSearch.setText("Update");
         } else if (bnSearch.getText().equals("Update")){
-            String query = "update item set Item_name='"+tfItemName.getText()+"', Unit_price='"+tfUnitPrice.getText()+"', Quantity='"+tfQuantity.getText()+"', Suppliers='"+taSuppliers.getText()+"', Location='"+taLocation.getText()+"', Notes='"+taNotes.getText()+"' where Item_id='"+tfItemId.getText()+"'";
+            Supplier=cbSupplier.getSelectedItem().toString().trim();
+            String query1 = "Select Supplier_id from supplier where Supplier_name='"+Supplier+"'";
+            
+            try{
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    SupplierId=Integer.parseInt(rs1.getString("Supplier_id"));
+                }
+                } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                tfItemId.setText("");
+            }
+            
+    
+            String query = "update item set Item_name='"+tfItemName.getText()+"', Unit_price='"+tfUnitPrice.getText()+"', Quantity='"+tfQuantity.getText()+"', Supplier_id='"+SupplierId+"', Location='"+taLocation.getText()+"', Notes='"+taNotes.getText()+"' where Item_id='"+tfItemId.getText()+"'";
             try {
                 if (utility.DBconnection.getStatement().executeUpdate(query)>0){
                     JOptionPane.showMessageDialog(null, "Update is Successful");
@@ -359,7 +405,6 @@ public class jplItems extends JPanel {
                     tfItemName.setText("");
                     tfUnitPrice.setText("");
                     tfQuantity.setText("");
-                    taSuppliers.setText("");
                     taLocation.setText("");
                     taNotes.setText("");
                     //bnSearch.setText("Search");
@@ -367,13 +412,16 @@ public class jplItems extends JPanel {
                     tfItemId.setEditable(true);
                     bnSave.setEnabled(true);
                     filltable();
+                    cbSupplier.removeAllItems();
+                    fillcombo();
                 } else {
                     JOptionPane.showMessageDialog(null, "Could not update data");
                     tfItemId.setText("");
                     tfItemName.setText("");
                     tfUnitPrice.setText("");
                     tfQuantity.setText("");
-                    taSuppliers.setText("");
+                    cbSupplier.removeAllItems();
+                    fillcombo();
                     taLocation.setText("");
                     taNotes.setText("");
                     //bnSearch.setText("Search");
@@ -382,7 +430,7 @@ public class jplItems extends JPanel {
                     tfItemName.setEditable(true);
                     tfUnitPrice.setEditable(true);
                     tfQuantity.setEditable(true);
-                    taSuppliers.setEditable(true);
+                    cbSupplier.setEnabled(true);
                     taLocation.setEditable(true);
                     taNotes.setEditable(true);
                 }
@@ -393,7 +441,19 @@ public class jplItems extends JPanel {
     }//GEN-LAST:event_bnSearchActionPerformed
 
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
-        String query="insert into item values ('"+tfItemId.getText()+"','"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfQuantity.getText()+"','"+taSuppliers.getText()+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
+        Supplier=cbSupplier.getSelectedItem().toString().trim();
+            String query1 = "Select Supplier_id from supplier where Supplier_name='"+Supplier+"'";
+            
+            try{
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    SupplierId=Integer.parseInt(rs1.getString("Supplier_id"));
+                }
+                } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                tfItemId.setText("");
+            }
+        String query="insert into item values ('"+tfItemId.getText().trim()+"','"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfQuantity.getText()+"','"+SupplierId+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                JOptionPane.showMessageDialog(null, "Successfully saved Item");
@@ -401,7 +461,8 @@ public class jplItems extends JPanel {
                 tfItemName.setText("");
                 tfUnitPrice.setText("");
                 tfQuantity.setText("");
-                taSuppliers.setText("");
+                cbSupplier.removeAllItems();
+                fillcombo();
                 taLocation.setText("");
                 taNotes.setText("");
                initialization();
@@ -423,7 +484,8 @@ public class jplItems extends JPanel {
                     tfItemName.setText("");
                     tfUnitPrice.setText("");
                     tfQuantity.setText("");
-                    taSuppliers.setText("");
+                    cbSupplier.removeAllItems();
+                    fillcombo();
                     taLocation.setText("");
                     taNotes.setText("");
                     initialization();
@@ -433,7 +495,7 @@ public class jplItems extends JPanel {
                     tfItemName.setEditable(true);
                     tfUnitPrice.setEditable(true);
                     tfQuantity.setEditable(true);
-                    taSuppliers.setEditable(true);
+                   cbSupplier.setEnabled(true);
                     taLocation.setEditable(true);
                     taNotes.setEditable(true);
                 }else{
@@ -454,10 +516,10 @@ public class jplItems extends JPanel {
                     bnSave.doClick();
                 }
             }else{
-                this.setVisible(false);
+                this.gohome.doClick();
             }
         }else{
-            this.setVisible(false);
+            this.gohome.doClick();
         }
     }//GEN-LAST:event_bnCloseActionPerformed
 
@@ -478,15 +540,18 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    taSuppliers.setText(rs.getString("Suppliers"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    cbSupplier.setEnabled(false);
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
                 }
+            
                 tfItemId.setEditable(false);
                 tfItemName.setEditable(false);
                 tfUnitPrice.setEditable(false);
                 tfQuantity.setEditable(false);
-                taSuppliers.setEditable(false);
+                //taSuppliers.setEditable(false);
+                cbSupplier.setEnabled(false);
                 taLocation.setEditable(false);
                 taNotes.setEditable(false);
                 
@@ -515,7 +580,8 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    taSuppliers.setText(rs.getString("Suppliers"));
+                   // taSuppliers.setText(rs.getString("Suppliers"));
+                    cbSupplier.setEnabled(false);
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
                 }
@@ -523,7 +589,8 @@ public class jplItems extends JPanel {
                 tfItemName.setEditable(false);
                 tfUnitPrice.setEditable(false);
                 tfQuantity.setEditable(false);
-                taSuppliers.setEditable(false);
+                //taSuppliers.setEditable(false);
+                cbSupplier.setEnabled(false);
                 taLocation.setEditable(false);
                 taNotes.setEditable(false);
                 
@@ -542,6 +609,7 @@ public class jplItems extends JPanel {
     private javax.swing.JButton bnDelete;
     private javax.swing.JButton bnSave;
     private javax.swing.JButton bnSearch;
+    private javax.swing.JComboBox<String> cbSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -552,13 +620,11 @@ public class jplItems extends JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jtItems;
     private javax.swing.JTextArea taLocation;
     private javax.swing.JTextArea taNotes;
-    private javax.swing.JTextArea taSuppliers;
     private javax.swing.JTextField tfItemId;
     private javax.swing.JTextField tfItemName;
     private javax.swing.JTextField tfQuantity;
