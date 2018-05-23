@@ -29,11 +29,12 @@ import utility.DBconnection;
 public class jplDistribution extends JPanel {
     final int pWidth = 850;
     final int pHeight = 450;
+    JMenuItem gohome;
     private static Connection conn;
     /**
      * Creates new form jplTransaction
      */
-    public jplDistribution(JPanel jplMain) {
+    public jplDistribution(JPanel jplMain,JMenuItem gohome) {
         initComponents();
         
         this.setSize(pWidth, pHeight);
@@ -41,6 +42,7 @@ public class jplDistribution extends JPanel {
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x, y);
         this.setVisible(true);
+        this.gohome=gohome;
         //bnSearch.setText("Search");
         initialization();
         fillcombo();
@@ -537,10 +539,12 @@ public class jplDistribution extends JPanel {
                     bnSave.doClick();
                 }
             }else{
-                this.setVisible(false);
+                //this.setVisible(false);
+                this.gohome.doClick();
             }
         }else{
-            this.setVisible(false);
+            //this.setVisible(false);
+            this.gohome.doClick();
         }
     }//GEN-LAST:event_bnCloseActionPerformed
 
