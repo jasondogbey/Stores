@@ -15,16 +15,19 @@ import net.proteanit.sql.DbUtils;
 public class jplSuppliers extends JPanel {
     final int pWidth = 850;
     final int pHeight = 365;
+    
+    JMenuItem gohome;
     /**
      * Creates new form jplSuppliers
      */
-    public jplSuppliers(JPanel jplMain) {
+    public jplSuppliers(JPanel jplMain,JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth, pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x, y);
         this.setVisible(true);
+        this.gohome=gohome;
         //bnSearch.setText("Search");
         initialization();
         filltable();
@@ -97,7 +100,6 @@ public class jplSuppliers extends JPanel {
         jLabel4.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-supplies-icon.png"))); // NOI18N
         jLabel1.setText("Suppliers");
@@ -191,7 +193,6 @@ public class jplSuppliers extends JPanel {
         jLabel6.setToolTipText("");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(102, 0, 153));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("All Suppliers");
 
@@ -325,11 +326,12 @@ public class jplSuppliers extends JPanel {
                     bnSave.doClick();
                 }
             }else{
-                this.setVisible(false);
+                this.gohome.doClick();
             }
         }else{
-            this.setVisible(false);
+            this.gohome.doClick();
         }
+        
     }//GEN-LAST:event_bnCloseActionPerformed
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
