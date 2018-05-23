@@ -143,7 +143,6 @@ public class jplItems extends JPanel {
         jScrollPane1.setViewportView(jtItems);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Item-Bag-icon.png"))); // NOI18N
         jLabel1.setText("Items");
 
@@ -227,7 +226,6 @@ public class jplItems extends JPanel {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("All Items");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
