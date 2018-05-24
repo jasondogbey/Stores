@@ -22,7 +22,7 @@ public class JMain extends JFrame {
         this.setLocation(x,y);
         utility.DBconnection.connection();
         currentDate();
-        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuSearch)); 
+        displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuHome,mnuSearch)); 
         //displayForm(new jplHome(jplMain));
     }
 
@@ -98,8 +98,8 @@ public class JMain extends JFrame {
         lbTime = new javax.swing.JLabel();
         mnuBar = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
-        mnuHome = new javax.swing.JMenuItem();
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
+        mnuHome = new javax.swing.JMenuItem();
         mnuItems = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuDistribute = new javax.swing.JMenuItem();
@@ -232,10 +232,15 @@ public class JMain extends JFrame {
         );
 
         mnuFile.setText("File");
+        mnuFile.add(jSeparator10);
 
         mnuHome.setText("Home");
+        mnuHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuHomeActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuHome);
-        mnuFile.add(jSeparator10);
 
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         mnuItems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Item-Bag-icon.png"))); // NOI18N
@@ -274,7 +279,13 @@ public class JMain extends JFrame {
 
         mnuSearch.setText("Search");
 
+        mnuDistribution.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
         mnuDistribution.setText("Distributions");
+        mnuDistribution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuDistributionActionPerformed(evt);
+            }
+        });
         mnuSearch.add(mnuDistribution);
         mnuSearch.add(jSeparator8);
 
@@ -291,6 +302,11 @@ public class JMain extends JFrame {
 
         mnuCollectors.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
         mnuCollectors.setText("Collectors");
+        mnuCollectors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCollectorsActionPerformed(evt);
+            }
+        });
         mnuSearch.add(mnuCollectors);
         mnuSearch.add(jSeparator11);
 
@@ -359,39 +375,39 @@ public class JMain extends JFrame {
 
     private void mnuDistributeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDistributeActionPerformed
      if (closeOption()){
-        displayForm(new jplDistribution(jplMain));
+        displayForm(new jplDistribution(jplMain,mnuHome));
      }
     }//GEN-LAST:event_mnuDistributeActionPerformed
 
     private void mnuItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemsActionPerformed
         if (closeOption()){
-        displayForm(new jplItems(jplMain));
+        displayForm(new jplItems(jplMain,mnuHome));
         }
     }//GEN-LAST:event_mnuItemsActionPerformed
 
 
     private void mnuChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuChangePasswordActionPerformed
         if (closeOption()){
-            displayForm(new jplChangePassword(jplMain));
+            displayForm(new jplChangePassword(jplMain, mnuHome));
         }
     }//GEN-LAST:event_mnuChangePasswordActionPerformed
 
     private void mnuSwitchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSwitchUserActionPerformed
         if (closeOption()){
-            displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuSearch));      
+            displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuHome,mnuSearch));      
         }
     }//GEN-LAST:event_mnuSwitchUserActionPerformed
 
 
     private void mnuSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSuppliersActionPerformed
         if (closeOption()){
-        displayForm(new jplSuppliers(jplMain));
+        displayForm(new jplSuppliers(jplMain,mnuHome));
         }
     }//GEN-LAST:event_mnuSuppliersActionPerformed
 
     private void mnuAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAccountsActionPerformed
         if (closeOption()){
-        displayForm(new jplUsers(jplMain));
+        displayForm(new jplUsers(jplMain, mnuHome));
         }
     }//GEN-LAST:event_mnuAccountsActionPerformed
 
@@ -400,6 +416,25 @@ public class JMain extends JFrame {
         System.exit(0);
         }
     }//GEN-LAST:event_mnuExitActionPerformed
+
+    private void mnuHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuHomeActionPerformed
+        if (closeOption()){
+
+        displayForm(new jplHome(jplMain, mnuBar, mnuAccounts,mnuHome, mnuSearch));
+        }
+    }//GEN-LAST:event_mnuHomeActionPerformed
+
+    private void mnuCollectorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCollectorsActionPerformed
+       if (closeOption()){
+        displayForm(new jplCollectors(jplMain,mnuHome));
+        }
+    }//GEN-LAST:event_mnuCollectorsActionPerformed
+
+    private void mnuDistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDistributionActionPerformed
+        if (closeOption()){
+        displayForm(new jplAllDistributions(jplMain,mnuHome));
+        }
+    }//GEN-LAST:event_mnuDistributionActionPerformed
 
 
     public static void main(String args[]) {
