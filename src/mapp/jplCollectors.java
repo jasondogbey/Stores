@@ -31,6 +31,7 @@ public class jplCollectors extends JPanel {
         //bnSearch.setText("Search");
         initialization();
         filltable();
+        tfDistributionId.setEditable(false);
     }
     
     public void initialization(){
@@ -38,6 +39,7 @@ public class jplCollectors extends JPanel {
         tfName.setText("");
         tfAddress.setText("");
         tfDate.setText("");
+        tfDistributionId.setText("");
         bnDelete.setEnabled(false);
         bnSearch.setText("Search");
         
@@ -78,6 +80,8 @@ public class jplCollectors extends JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCollectors = new javax.swing.JTable();
         tfSearch = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        tfDistributionId = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -190,6 +194,10 @@ public class jplCollectors extends JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Distribution ID");
+        jLabel6.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,23 +221,32 @@ public class jplCollectors extends JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel3)
-                                                .addComponent(jLabel5)
-                                                .addComponent(jLabel4))
-                                            .addGap(24, 24, 24))
+                                                .addComponent(jLabel5))
+                                            .addGap(44, 44, 44))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                                         .addComponent(tfAddress)
-                                        .addComponent(tfDate)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addGap(49, 49, 49)
                                             .addComponent(bnDelete)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(bnClose)
                                             .addGap(28, 28, 28)))))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(tfDistributionId))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(tfDate)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0))
         );
@@ -259,11 +276,15 @@ public class jplCollectors extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(tfDistributionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bnSearch)
                             .addComponent(bnDelete)
@@ -296,7 +317,7 @@ public class jplCollectors extends JPanel {
                     tfName.setText(rs.getString("Collector_name"));
                     tfAddress.setText(rs.getString("Address"));
                     tfDate.setText(rs.getString("Date"));
-                    
+                    tfDistributionId.setText(rs.getString("Distribution_Id"));
 
                 }
                 tfCollectorId.setEditable(false);
@@ -413,7 +434,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-               
+                tfDistributionId.setText(rs.getString("Distribution_id"));
             }
             tfCollectorId.setEditable(false);
             tfName.setEditable(false);
@@ -441,7 +462,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-               
+                tfDistributionId.setText(rs.getString("Distribution_id"));
             }
             tfCollectorId.setEditable(false);
             tfName.setEditable(false);
@@ -466,6 +487,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
+                tfDistributionId.setText(rs.getString("Distribution_id"));
             }
             
         }catch(Exception e){
@@ -479,6 +501,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
+                tfDistributionId.setText(rs.getString("Distribution_id"));
             }
             
         }catch(Exception e){
@@ -492,6 +515,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
+                tfDistributionId.setText(rs.getString("Distribution_id"));
             }
             
         }catch(Exception e){
@@ -505,6 +529,21 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
+                tfDistributionId.setText(rs.getString("Distribution_id"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from collector where Distribution_id LIKE '%"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                tfCollectorId.setText(rs.getString("Collector_id"));
+                tfName.setText(rs.getString("Collector_name"));
+                tfAddress.setText(rs.getString("Address"));
+                tfDate.setText(rs.getString("Date"));
+                tfDistributionId.setText(rs.getString("Distribution_id"));
             }
             
         }catch(Exception e){
@@ -530,12 +569,14 @@ public class jplCollectors extends JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jtCollectors;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfCollectorId;
     private javax.swing.JTextField tfDate;
+    private javax.swing.JTextField tfDistributionId;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
