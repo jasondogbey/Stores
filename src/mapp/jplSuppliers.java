@@ -80,7 +80,7 @@ public class jplSuppliers extends JPanel {
         tfProducts = new javax.swing.JTextField();
         tfAddress = new javax.swing.JTextField();
         tfContact = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        tfSearch = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -192,9 +192,17 @@ public class jplSuppliers extends JPanel {
         jLabel6.setText("Products");
         jLabel6.setToolTipText("");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("All Suppliers");
+        tfSearch.setText("Search...");
+        tfSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfSearchMouseClicked(evt);
+            }
+        });
+        tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,8 +213,8 @@ public class jplSuppliers extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -237,20 +245,18 @@ public class jplSuppliers extends JPanel {
                                             .addComponent(bnClose)
                                             .addGap(28, 28, 28)))))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                .addGap(137, 137, 137))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,8 +285,12 @@ public class jplSuppliers extends JPanel {
                             .addComponent(bnSearch)
                             .addComponent(bnDelete)
                             .addComponent(bnSave)
-                            .addComponent(bnClose))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(bnClose))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -493,6 +503,83 @@ public class jplSuppliers extends JPanel {
         }
     }//GEN-LAST:event_jtSuppliersKeyReleased
 
+    private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
+       tfSearch.setText("");
+    }//GEN-LAST:event_tfSearchMouseClicked
+
+    private void tfSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyReleased
+        try{
+            String query = "select * from supplier where Supplier_name LIKE '%"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                tfSupplierId.setText(rs.getString("Supplier_id"));
+                tfName.setText(rs.getString("Supplier_name"));
+                tfAddress.setText(rs.getString("Address"));
+                tfContact.setText(rs.getString("Contact"));
+                tfProducts.setText(rs.getString("Products"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from supplier where Supplier_id LIKE '%"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                tfSupplierId.setText(rs.getString("Supplier_id"));
+                tfName.setText(rs.getString("Supplier_name"));
+                tfAddress.setText(rs.getString("Address"));
+                tfContact.setText(rs.getString("Contact"));
+                tfProducts.setText(rs.getString("Products"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from supplier where Address LIKE '%"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                tfSupplierId.setText(rs.getString("Supplier_id"));
+                tfName.setText(rs.getString("Supplier_name"));
+                tfAddress.setText(rs.getString("Address"));
+                tfContact.setText(rs.getString("Contact"));
+                tfProducts.setText(rs.getString("Products"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from supplier where Contact LIKE '%"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                tfSupplierId.setText(rs.getString("Supplier_id"));
+                tfName.setText(rs.getString("Supplier_name"));
+                tfAddress.setText(rs.getString("Address"));
+                tfContact.setText(rs.getString("Contact"));
+                tfProducts.setText(rs.getString("Products"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from supplier where Products LIKE '%"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                tfSupplierId.setText(rs.getString("Supplier_id"));
+                tfName.setText(rs.getString("Supplier_name"));
+                tfAddress.setText(rs.getString("Address"));
+                tfContact.setText(rs.getString("Contact"));
+                tfProducts.setText(rs.getString("Products"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_tfSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnClose;
@@ -505,7 +592,6 @@ public class jplSuppliers extends JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jtSuppliers;
@@ -513,6 +599,7 @@ public class jplSuppliers extends JPanel {
     private javax.swing.JTextField tfContact;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfProducts;
+    private javax.swing.JTextField tfSearch;
     private javax.swing.JTextField tfSupplierId;
     // End of variables declaration//GEN-END:variables
 }
