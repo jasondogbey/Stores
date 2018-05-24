@@ -56,6 +56,13 @@ public class jplHome extends JPanel {
             return false;
         }
     }
+        public boolean permission1(){
+        if (lbPanel.getText().equals("ADMIN")||lbPanel.getText().equals("MANAGER")){
+            return true;
+        } else{
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -243,7 +250,12 @@ public class jplHome extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        displayForm(new jplSuppliers(this.home, this.gohome));
+        if(!permission1()){
+           JOptionPane.showMessageDialog(null,"You do not have the right permission!");
+       } else {
+           displayForm(new jplSuppliers(this.home, this.gohome));   
+       }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -263,7 +275,12 @@ public class jplHome extends JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        displayForm(new jplCollectors(this.home, this.gohome));
+        if(!permission1()){
+           JOptionPane.showMessageDialog(null,"You do not have the right permission!");
+       } else {
+           displayForm(new jplCollectors(this.home, this.gohome));  
+       }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
