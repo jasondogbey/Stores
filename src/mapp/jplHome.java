@@ -37,7 +37,7 @@ public class jplHome extends JPanel {
         this.reg=reg;
         this.gohome=gohome;
         this.search=search;
-        
+    
         
     }
     public jplHome() {
@@ -49,7 +49,13 @@ public class jplHome extends JPanel {
             home.validate();
             home.repaint();
         }
-
+    public boolean permission(){
+        if (lbPanel.getText().equals("ADMIN")){
+            return true;
+        } else{
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,7 +72,7 @@ public class jplHome extends JPanel {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        bnRegisterUser = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -162,17 +168,17 @@ public class jplHome extends JPanel {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(0, 153, 153));
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-register-user-male-add-icon.png"))); // NOI18N
-        jButton7.setText("Register User");
-        jButton7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setIconTextGap(0);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        bnRegisterUser.setBackground(new java.awt.Color(0, 153, 153));
+        bnRegisterUser.setForeground(new java.awt.Color(255, 255, 255));
+        bnRegisterUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-register-user-male-add-icon.png"))); // NOI18N
+        bnRegisterUser.setText("Register User");
+        bnRegisterUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnRegisterUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bnRegisterUser.setIconTextGap(0);
+        bnRegisterUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bnRegisterUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                bnRegisterUserActionPerformed(evt);
             }
         });
 
@@ -209,7 +215,7 @@ public class jplHome extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bnRegisterUser, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +235,7 @@ public class jplHome extends JPanel {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bnRegisterUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(77, Short.MAX_VALUE))
@@ -244,9 +250,13 @@ public class jplHome extends JPanel {
         displayForm(new jplItems(this.home,this.gohome));
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        displayForm(new jplUsers(this.home));
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void bnRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRegisterUserActionPerformed
+       if(!permission()){
+           JOptionPane.showMessageDialog(null,"You do not have the right permission!");
+       } else {
+           displayForm(new jplUsers(this.home, this.gohome));   
+       }
+    }//GEN-LAST:event_bnRegisterUserActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         displayForm(new jplDistribution(this.home, this.gohome));
@@ -270,13 +280,13 @@ public class jplHome extends JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnRegisterUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel lbPanel;
     // End of variables declaration//GEN-END:variables
