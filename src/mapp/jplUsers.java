@@ -9,18 +9,20 @@ public class jplUsers extends JPanel {
 
     final int pWidth = 850;
     final int pHeight = 410;
+    JMenuItem gohome;
     
     /**
      * Creates new form jplRegistration
      * @param jplMain
      */
-    public jplUsers(JPanel jplMain) {
+    public jplUsers(JPanel jplMain, JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth,pHeight);
         int x = (jplMain.getWidth()-pWidth)/2;
         int y = (jplMain.getHeight()-pHeight)/2;
         this.setLocation(x,y);
         this.setVisible(true);
+        this.gohome=gohome;
         initialization();
         filltable();
     }
@@ -31,7 +33,7 @@ public class jplUsers extends JPanel {
         bnSearch.setEnabled(true);
         bnSearch.setText("Search");
         bnDelete.setEnabled(false);
-        tfUserCode.setEditable(true);
+        tfUsername.setEditable(true);
         tfName.setEditable(false);
         cbLevel.setEnabled(false);
         pfPassword.setEditable(false);
@@ -39,7 +41,7 @@ public class jplUsers extends JPanel {
         utility.Utility.universalCode=0; 
     }
     private void filltable(){
-        String query="select USer_code, User_name, level from account";
+        String query="select Username, Name, level from account";
         try{
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             jtUsers.setModel(DbUtils.resultSetToTableModel(rs));
@@ -59,7 +61,7 @@ public class jplUsers extends JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfUserCode = new javax.swing.JTextField();
+        tfUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tfName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -81,17 +83,16 @@ public class jplUsers extends JPanel {
         setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Executive-Green-icon.png"))); // NOI18N
         jLabel1.setText("User");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("User Code:");
+        jLabel2.setText("Username:");
 
-        tfUserCode.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfUserCodeFocusLost(evt);
+                tfUsernameFocusLost(evt);
             }
         });
 
@@ -113,7 +114,7 @@ public class jplUsers extends JPanel {
         jLabel5.setText("Level:");
         jLabel5.setToolTipText("");
 
-        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User Level", "WORKER", "MANAGER", "ADMIN" }));
+        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User Level", "STAFF", "MANAGER", "ADMIN" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Confirm Password:");
@@ -198,7 +199,6 @@ public class jplUsers extends JPanel {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(102, 0, 153));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Group-icon.png"))); // NOI18N
         jLabel7.setText("All Users");
 
@@ -217,7 +217,7 @@ public class jplUsers extends JPanel {
                                 .addComponent(jLabel4))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfUserCode)
+                                .addComponent(tfUsername)
                                 .addComponent(tfName)
                                 .addComponent(cbLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -265,7 +265,7 @@ public class jplUsers extends JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -295,7 +295,7 @@ public class jplUsers extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private boolean validation(){
-        if (tfUserCode.getText().isEmpty() || tfName.getText().isEmpty() ||
+        if (tfUsername.getText().isEmpty() || tfName.getText().isEmpty() ||
                 cbLevel.getSelectedIndex()==0 || pfPassword.getText().isEmpty() ||
                 pfConfirmPass.getText().isEmpty()){
             return false;
@@ -303,9 +303,9 @@ public class jplUsers extends JPanel {
             return true;
         }
     }
-    private void tfUserCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUserCodeFocusLost
-        tfUserCode.setText(tfUserCode.getText().toUpperCase());
-    }//GEN-LAST:event_tfUserCodeFocusLost
+    private void tfUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUsernameFocusLost
+        tfUsername.setText(tfUsername.getText().toUpperCase());
+    }//GEN-LAST:event_tfUsernameFocusLost
 
     private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
         tfName.setText(tfName.getText().toUpperCase());
@@ -316,7 +316,7 @@ public class jplUsers extends JPanel {
         bnSave.setEnabled(true);
         bnSearch.setEnabled(false);
         bnDelete.setEnabled(false);
-        tfUserCode.setEditable(true);
+        tfUsername.setEditable(true);
         tfName.setEditable(true);
         cbLevel.setEnabled(true);
         pfPassword.setEditable(true);
@@ -326,7 +326,7 @@ public class jplUsers extends JPanel {
 
     private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
         if (utility.Utility.universalCode == 1){
-            int res=JOptionPane.showConfirmDialog(null, "Do you want to save your work?","Warning",JOptionPane.YES_NO_OPTION);
+            int res=JOptionPane.showConfirmDialog(null, "Do you want to save changes?","Warning",JOptionPane.YES_NO_OPTION);
             if (res==JOptionPane.YES_OPTION){
                 if (bnSearch.getText().equals("Update")){
                     bnSearch.doClick();
@@ -334,10 +334,10 @@ public class jplUsers extends JPanel {
                     bnSave.doClick();
                 }
             }else{
-                this.setVisible(false);
+                this.gohome.doClick();
             }
         }else{
-            this.setVisible(false);
+            this.gohome.doClick();
         }
     }//GEN-LAST:event_bnCloseActionPerformed
 
@@ -352,11 +352,11 @@ public class jplUsers extends JPanel {
             pfConfirmPass.setText("");
             return;
         }
-        String s="insert into account values ('"+tfUserCode.getText()+"','"+tfName.getText()+"','"+cbLevel.getSelectedItem()+"','"+pfPassword.getText()+"')";
+        String s="insert into account values ('"+tfUsername.getText()+"','"+tfName.getText()+"','"+cbLevel.getSelectedItem()+"','"+pfPassword.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(s)>0){
                JOptionPane.showMessageDialog(null, "Save is Successful");
-               tfUserCode.setText("");
+               tfUsername.setText("");
                tfName.setText("");
                cbLevel.setSelectedIndex(0);
                pfPassword.setText("");
@@ -373,21 +373,21 @@ public class jplUsers extends JPanel {
 
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
         if (bnSearch.getText().equals("Search")){
-            if (tfUserCode.getText().isEmpty()){
+            if (tfUsername.getText().isEmpty()){
                JOptionPane.showMessageDialog(null,"Enter User Code");
                return;
             }
             
-            String usercode = tfUserCode.getText().trim();
-            String s = "select User_name, level from account where User_code='"+usercode+"'";
+            String username = tfUsername.getText().trim();
+            String s = "select Name, level from account where Username='"+username+"'";
             try{
                 ResultSet rs = utility.DBconnection.getStatement().executeQuery(s);
                 while(rs.next()){
-                    tfUserCode.setText(usercode);
-                    tfName.setText(rs.getString("User_name"));
+                    tfUsername.setText(username);
+                    tfName.setText(rs.getString("Name"));
                     cbLevel.setSelectedItem(rs.getString("level"));
                 }
-                tfUserCode.setEditable(false);
+                tfUsername.setEditable(false);
                 tfName.setEditable(false);
                 cbLevel.setEnabled(false);
                 pfPassword.setEditable(false);
@@ -398,7 +398,7 @@ public class jplUsers extends JPanel {
                 bnSearch.setText("Edit");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
-                tfUserCode.setText("");
+                tfUsername.setText("");
             }
         }else if (bnSearch.getText().equals("Edit")){
             tfName.setEditable(true);
@@ -406,11 +406,11 @@ public class jplUsers extends JPanel {
             bnSearch.setText("Update");
             utility.Utility.universalCode=1;
         }else if (bnSearch.getText().equals("Update")){
-            String s= "update account set User_name='"+tfName.getText()+"', level='"+cbLevel.getSelectedItem()+"' where User_code='"+tfUserCode.getText()+"'";
+            String s= "update account set Name='"+tfName.getText()+"', level='"+cbLevel.getSelectedItem()+"' where Username='"+tfUsername.getText()+"'";
             try{
                 if(utility.DBconnection.getStatement().executeUpdate(s)>0){
                     JOptionPane.showMessageDialog(null, "Update is Successful");
-                    tfUserCode.setText("");
+                    tfUsername.setText("");
                     tfName.setText("");
                     cbLevel.setSelectedIndex(0);
                     pfPassword.setText("");
@@ -427,11 +427,11 @@ public class jplUsers extends JPanel {
     }//GEN-LAST:event_bnSearchActionPerformed
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
-        String s= "delete from account where User_code='"+tfUserCode.getText().trim()+"'";
+        String s= "delete from account where Username='"+tfUsername.getText().trim()+"'";
             try{
                 if(utility.DBconnection.getStatement().executeUpdate(s)>0){
                     JOptionPane.showMessageDialog(null, "Delete is Successful");
-                    tfUserCode.setText("");
+                    tfUsername.setText("");
                     tfName.setText("");
                     cbLevel.setSelectedIndex(0);
                     pfPassword.setText("");
@@ -450,15 +450,15 @@ public class jplUsers extends JPanel {
         try{
             int row=jtUsers.getSelectedRow();
             String TableClick=jtUsers.getModel().getValueAt(row, 0).toString();
-            String query="select * from account where User_code='"+TableClick+"'";
+            String query="select * from account where Username='"+TableClick+"'";
             
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
-                    tfUserCode.setText(rs.getString("User_code"));
-                    tfName.setText(rs.getString("User_name"));
+                    tfUsername.setText(rs.getString("Username"));
+                    tfName.setText(rs.getString("Name"));
                     cbLevel.setSelectedItem(rs.getString("level"));
                 }
-                tfUserCode.setEditable(false);
+                tfUsername.setEditable(false);
                 tfName.setEditable(false);
                 cbLevel.setEnabled(false);
                 pfPassword.setEditable(false);
@@ -478,15 +478,15 @@ public class jplUsers extends JPanel {
           try{
             int row=jtUsers.getSelectedRow();
             String TableClick=jtUsers.getModel().getValueAt(row, 0).toString();
-            String query="select * from account where User_code='"+TableClick+"'";
+            String query="select * from account where Username='"+TableClick+"'";
             
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
-                    tfUserCode.setText(rs.getString("User_code"));
-                    tfName.setText(rs.getString("User_name"));
+                    tfUsername.setText(rs.getString("Username"));
+                    tfName.setText(rs.getString("Name"));
                     cbLevel.setSelectedItem(rs.getString("level"));
                 }
-                tfUserCode.setEditable(false);
+                tfUsername.setEditable(false);
                 tfName.setEditable(false);
                 cbLevel.setEnabled(false);
                 pfPassword.setEditable(false);
@@ -523,6 +523,6 @@ public class jplUsers extends JPanel {
     private javax.swing.JPasswordField pfConfirmPass;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfUserCode;
+    private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }
