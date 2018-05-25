@@ -28,7 +28,7 @@ import utility.DBconnection;
  */
 public class jplDistribution extends JPanel {
     final int pWidth = 850;
-    final int pHeight = 450;
+    final int pHeight = 490;
     JMenuItem gohome;
     JPanel home;
     private static Connection conn;
@@ -49,12 +49,13 @@ public class jplDistribution extends JPanel {
         initialization();
         fillcombo();
     }
+//    INSERT INTO `stores_db`.`collector` (`Collector_id`, `Collector_name`, `Address`, `Date`, `Distribution_id`) VALUES (NULL, 'STEPHEN', 'VOLTA REGION', '02/12/2016', 'T6');
     public void initialization(){
-        tfTransactionId.setText("");
+        tfDistributionId.setText("");
         tfCollector.setText("");
         tfUnitCost.setText("");
         tfQuantity.setText("");
-        tfUserCode.setText("");
+        
         //bnDelete.setEnabled(false);
         bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
@@ -89,14 +90,12 @@ public class jplDistribution extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        tfTransactionId = new javax.swing.JTextField();
+        tfDistributionId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfUnitCost = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tfUserCode = new javax.swing.JTextField();
         bnSearch = new javax.swing.JButton();
         bnDelete = new javax.swing.JButton();
         bnSave = new javax.swing.JButton();
@@ -104,40 +103,42 @@ public class jplDistribution extends JPanel {
         bnClose = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
-        tfTransactionDate = new javax.swing.JTextField();
+        tfDistributionDate = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
         cbItem = new javax.swing.JComboBox<>();
-        tfCollector = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtReciept = new javax.swing.JTextArea();
-        bnDelete1 = new javax.swing.JButton();
-        bnDelete2 = new javax.swing.JButton();
-        bnDelete3 = new javax.swing.JButton();
+        bnPrint = new javax.swing.JButton();
+        bnNew = new javax.swing.JButton();
+        bnDone = new javax.swing.JButton();
         tfUserCode1 = new javax.swing.JTextField();
         bnSearch1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        bnViewAll = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        tfCollectorId = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfCollector = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tfAddress = new javax.swing.JTextField();
+        cbCollectorName = new javax.swing.JComboBox<>();
+        rbCollector = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Collector");
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Item");
+        jLabel4.setText("Item:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Unit Cost");
+        jLabel5.setText("Unit Cost:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Quantity");
+        jLabel6.setText("Quantity:");
 
         tfUnitCost.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Transaction Date");
+        jLabel7.setText("Distribution Date");
 
         bnSearch.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -188,10 +189,7 @@ public class jplDistribution extends JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Transaction ID");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("User Code");
+        jLabel2.setText("Distribution ID:");
 
         tfQuantity.setEditable(false);
 
@@ -208,36 +206,36 @@ public class jplDistribution extends JPanel {
         txtReciept.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jScrollPane2.setViewportView(txtReciept);
 
-        bnDelete1.setBackground(new java.awt.Color(255, 255, 255));
-        bnDelete1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-print-icon.png"))); // NOI18N
-        bnDelete1.setText("Print");
-        bnDelete1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        bnDelete1.addActionListener(new java.awt.event.ActionListener() {
+        bnPrint.setBackground(new java.awt.Color(255, 255, 255));
+        bnPrint.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-print-icon.png"))); // NOI18N
+        bnPrint.setText("Print");
+        bnPrint.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnDelete1ActionPerformed(evt);
+                bnPrintActionPerformed(evt);
             }
         });
 
-        bnDelete2.setBackground(new java.awt.Color(255, 255, 255));
-        bnDelete2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnDelete2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Add-icon.png"))); // NOI18N
-        bnDelete2.setText("New");
-        bnDelete2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bnDelete2.addActionListener(new java.awt.event.ActionListener() {
+        bnNew.setBackground(new java.awt.Color(255, 255, 255));
+        bnNew.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/Button-Add-icon.png"))); // NOI18N
+        bnNew.setText("New");
+        bnNew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnDelete2ActionPerformed(evt);
+                bnNewActionPerformed(evt);
             }
         });
 
-        bnDelete3.setBackground(new java.awt.Color(255, 255, 255));
-        bnDelete3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnDelete3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-confirm-security-icon.png"))); // NOI18N
-        bnDelete3.setText("Done");
-        bnDelete3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bnDelete3.addActionListener(new java.awt.event.ActionListener() {
+        bnDone.setBackground(new java.awt.Color(255, 255, 255));
+        bnDone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnDone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-confirm-security-icon.png"))); // NOI18N
+        bnDone.setText("Done");
+        bnDone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnDelete3ActionPerformed(evt);
+                bnDoneActionPerformed(evt);
             }
         });
 
@@ -254,34 +252,74 @@ public class jplDistribution extends JPanel {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("View All");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bnViewAll.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnViewAll.setText("View All");
+        bnViewAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bnViewAllActionPerformed(evt);
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Customer Details"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Collector Details"));
         jPanel1.setName("Collector Details"); // NOI18N
 
-        jTextField1.setText("jTextField1");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Collector Name:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Collector ID:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Address:");
+
+        rbCollector.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        rbCollector.setText("Select Existing");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(239, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbCollectorName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbCollector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(35, 35, 35)
+                        .addComponent(tfCollectorId))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(29, 29, 29)
+                        .addComponent(tfAddress))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfCollector)))
+                .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCollectorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbCollector))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCollectorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -289,110 +327,89 @@ public class jplDistribution extends JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(bnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(bnDelete2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(bnDelete3)
-                        .addGap(55, 55, 55)
-                        .addComponent(bnDelete1))
+                        .addComponent(bnDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(bnClose)
+                        .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40)
+                                .addComponent(tfDistributionId))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(25, 25, 25)
-                                                .addComponent(tfTransactionDate))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(40, 40, 40)
-                                                .addComponent(tfTransactionId))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(75, 75, 75)
-                                                .addComponent(tfCollector))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addGap(100, 100, 100)
-                                                .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 80, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6)
-                                                    .addComponent(jLabel5)
-                                                    .addComponent(jLabel8))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(68, 68, 68)
-                                                        .addComponent(tfUserCode))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(68, 68, 68)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(tfQuantity)
-                                                            .addComponent(tfUnitCost)))))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(20, 20, 20)
-                                                .addComponent(bnSearch)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(bnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(bnDelete)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(bnClose)
-                                                .addGap(9, 9, 9)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfQuantity)
+                                    .addComponent(tfUnitCost)))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel7)
+                                .addGap(25, 25, 25)
+                                .addComponent(tfDistributionDate))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(100, 100, 100)
+                                        .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(bnViewAll)
+                        .addGap(34, 34, 34)
+                        .addComponent(bnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(bnDone)
+                        .addGap(55, 55, 55)
+                        .addComponent(bnPrint))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(207, 207, 207))))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(tfTransactionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(tfCollector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(tfUserCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                            .addComponent(tfDistributionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(tfUnitCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -400,26 +417,27 @@ public class jplDistribution extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bnDelete)
-                            .addComponent(bnSave)
-                            .addComponent(bnClose)
-                            .addComponent(bnSearch)
-                            .addComponent(bnSearch1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bnDelete1)
-                    .addComponent(bnDelete2)
-                    .addComponent(bnDelete3)
-                    .addComponent(jButton1))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfDistributionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnPrint)
+                        .addComponent(bnDone)
+                        .addComponent(bnViewAll))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnDelete)
+                        .addComponent(bnSave)
+                        .addComponent(bnClose)
+                        .addComponent(bnSearch)
+                        .addComponent(bnSearch1))
+                    .addComponent(bnNew))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -449,7 +467,7 @@ public class jplDistribution extends JPanel {
        
             txtReciept.append("\n"+cbItem.getSelectedItem().toString()+ "\t\t      "+ p+" X "+ q+"\t\t   ₵" + total);
        
-        String query="insert into transaction(Transaction_id,item,Collector,Unit_price,Quantity,User_code,Transaction_date) values ('"+tfTransactionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfUserCode.getText()+"','"+tfTransactionDate.getText()+"')";
+        String query="insert into distribution(Transaction_id,item,Collector,Unit_price,Quantity,User_code,Transaction_date) values ('"+tfDistributionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfQuantity.getText()+"','"+tfDistributionDate.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
               
@@ -489,7 +507,7 @@ public class jplDistribution extends JPanel {
  
         
               if (bnSearch.getText().equals("Search")){
-            if (tfTransactionId.getText().isEmpty()){
+            if (tfDistributionId.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Enter Item ID");
                 return;  
             }
@@ -499,7 +517,7 @@ public class jplDistribution extends JPanel {
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
            
-           String transactionId=tfTransactionId.getText();
+           String transactionId=tfDistributionId.getText();
            JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
 "     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
@@ -525,46 +543,46 @@ public class jplDistribution extends JPanel {
        }
         
         } else if (bnSearch.getText().equals("Edit")){
-            tfTransactionId.setEditable(false);
+            tfDistributionId.setEditable(false);
             cbItem.setEditable(true);
             tfCollector.setEditable(true);
             tfUnitCost.setEditable(true);
             tfQuantity.setEditable(true);
-            tfUserCode.setEditable(true);
-            tfTransactionDate.setEditable(true);
+            
+            tfDistributionDate.setEditable(true);
             bnSearch.setText("Update");
         } else if (bnSearch.getText().equals("Update")){
-            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfUserCode.getText()+"', Transaction_date='"+tfTransactionDate.getText()+"' where Transaction_id='"+tfTransactionId.getText()+"'";
+            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfQuantity.getText()+"', Transaction_date='"+tfDistributionDate.getText()+"' where Transaction_id='"+tfDistributionId.getText()+"'";
             try {
                 if (utility.DBconnection.getStatement().executeUpdate(query)>0){
                     JOptionPane.showMessageDialog(null, "Update is Successful");
-                    tfTransactionId.setText("");
+                    tfDistributionId.setText("");
                     cbItem.setSelectedItem("");
                     tfCollector.setText("");
                     tfUnitCost.setText("");
                     tfQuantity.setText("");
-                    tfUserCode.setText("");
-                    tfTransactionDate.setText("");
+                    
+                    tfDistributionDate.setText("");
                     //bnSearch.setText("Search");
                     initialization();
                 } else {
                     JOptionPane.showMessageDialog(null, "Could not update data");
-                    tfTransactionId.setText("");
+                    tfDistributionId.setText("");
                     cbItem.setSelectedItem("");
                     tfCollector.setText("");
                     tfUnitCost.setText("");
                     tfQuantity.setText("");
-                    tfUserCode.setText("");
-                    tfTransactionDate.setText("");
+                    
+                    tfDistributionDate.setText("");
                     //bnSearch.setText("Search");
                     
-                    tfTransactionId.setEditable(true);
+                    tfDistributionId.setEditable(true);
                     cbItem.setEditable(true);
                     tfCollector.setEditable(true);
                     tfUnitCost.setEditable(true);
                     tfQuantity.setEditable(true);
-                    tfUserCode.setEditable(true);
-                    tfTransactionDate.setEditable(true);
+                   
+                    tfDistributionDate.setEditable(true);
                 }
             } catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
@@ -593,30 +611,30 @@ public class jplDistribution extends JPanel {
     }//GEN-LAST:event_bnCloseActionPerformed
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
- if (tfTransactionId.getText().isEmpty()){
+ if (tfDistributionId.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Enter Item ID");
                 return;  
             }        
-        String query= "delete from transaction where Transaction_id='"+tfTransactionId.getText().trim()+"'";
+        String query= "delete from transaction where Transaction_id='"+tfDistributionId.getText().trim()+"'";
             try{
                 if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                     JOptionPane.showMessageDialog(null, "Delete is Successful");
-                    tfTransactionId.setText("");
+                    tfDistributionId.setText("");
                     cbItem.setSelectedItem("");
                     tfCollector.setText("");
                     tfUnitCost.setText("");
                     tfQuantity.setText("");
-                    tfUserCode.setText("");
-                    tfTransactionDate.setText("");
+                    
+                    tfDistributionDate.setText("");
                     initialization();
                     
-                    tfTransactionId.setEditable(true);
+                    tfDistributionId.setEditable(true);
                     cbItem.setEditable(true);
                     tfCollector.setEditable(true);
                     tfUnitCost.setEditable(true);
                     tfQuantity.setEditable(true);
-                    tfUserCode.setEditable(true);
-                    tfTransactionDate.setEditable(true);
+                   
+                    tfDistributionDate.setEditable(true);
                     
                 }else{
                     JOptionPane.showMessageDialog(null, "Delete not Successful");
@@ -626,7 +644,7 @@ public class jplDistribution extends JPanel {
              }
     }//GEN-LAST:event_bnDeleteActionPerformed
 
-    private void bnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete1ActionPerformed
+    private void bnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPrintActionPerformed
 if (txtReciept.getText().isEmpty())
 {
     return;
@@ -639,10 +657,10 @@ if (txtReciept.getText().isEmpty())
            Logger.getLogger(jplDistribution.class.getName()).log(Level.SEVERE, null ,ex);
        }
         
-    }//GEN-LAST:event_bnDelete1ActionPerformed
+    }//GEN-LAST:event_bnPrintActionPerformed
 
-    private void bnDelete2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete2ActionPerformed
-        if (tfUserCode.getText().isEmpty() || tfTransactionId.getText().isEmpty() || tfTransactionDate.getText().isEmpty()|| tfCollector.getText().isEmpty()){
+    private void bnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNewActionPerformed
+        if (tfDistributionId.getText().isEmpty() || tfDistributionDate.getText().isEmpty()|| tfCollector.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Complete all fieds");
             return;
         }
@@ -652,7 +670,7 @@ if (txtReciept.getText().isEmpty())
         txtReciept.append("\n");
         txtReciept.append("\t     Store Management System\n\n" +
                 
-                "Receipt No:" + tfTransactionId.getText() +"\t\tDate:" + tfTransactionDate.getText()+"\n" +
+                "Receipt No:" + tfDistributionId.getText() +"\t\tDate:" + tfDistributionDate.getText()+"\n" +
                 "Collector:"+tfCollector.getText() + "\n" +
                 "+==================================================+\n" +
                 "\t          RECEIPT VOUCHER\n" +
@@ -661,9 +679,9 @@ if (txtReciept.getText().isEmpty())
                 "Item Name\tItem Description\tSub Total" );
        
       bnSave.setEnabled(true);
-    }//GEN-LAST:event_bnDelete2ActionPerformed
+    }//GEN-LAST:event_bnNewActionPerformed
 
-    private void bnDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDelete3ActionPerformed
+    private void bnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDoneActionPerformed
 if (txtReciept.getText().isEmpty())
 {
     return;
@@ -679,7 +697,7 @@ if (txtReciept.getText().isEmpty())
                 "\n\n\tThanks for shopping with us..." 
         );
         bnSave.setEnabled(false);
-    }//GEN-LAST:event_bnDelete3ActionPerformed
+    }//GEN-LAST:event_bnDoneActionPerformed
 
     private void bnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearch1ActionPerformed
        try
@@ -687,7 +705,7 @@ if (txtReciept.getText().isEmpty())
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
           
-           String transactionId=tfTransactionId.getText();
+           String transactionId=tfDistributionId.getText();
            JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
 "     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
@@ -714,22 +732,23 @@ if (txtReciept.getText().isEmpty())
         
     }//GEN-LAST:event_bnSearch1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bnViewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnViewAllActionPerformed
         displayForm(new jplAllDistributions(this.home,this.gohome));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bnViewAllActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnClose;
     private javax.swing.JButton bnDelete;
-    private javax.swing.JButton bnDelete1;
-    private javax.swing.JButton bnDelete2;
-    private javax.swing.JButton bnDelete3;
+    private javax.swing.JButton bnDone;
+    private javax.swing.JButton bnNew;
+    private javax.swing.JButton bnPrint;
     private javax.swing.JButton bnSave;
     private javax.swing.JButton bnSearch;
     private javax.swing.JButton bnSearch1;
+    private javax.swing.JButton bnViewAll;
+    private javax.swing.JComboBox<String> cbCollectorName;
     private javax.swing.JComboBox<String> cbItem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -738,16 +757,18 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton rbCollector;
+    private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfCollector;
+    private javax.swing.JTextField tfCollectorId;
+    private javax.swing.JTextField tfDistributionDate;
+    private javax.swing.JTextField tfDistributionId;
     private javax.swing.JTextField tfQuantity;
-    private javax.swing.JTextField tfTransactionDate;
-    private javax.swing.JTextField tfTransactionId;
     private javax.swing.JTextField tfUnitCost;
-    private javax.swing.JTextField tfUserCode;
     private javax.swing.JTextField tfUserCode1;
     private javax.swing.JTextArea txtReciept;
     // End of variables declaration//GEN-END:variables
