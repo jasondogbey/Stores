@@ -57,8 +57,17 @@ public class jplDistribution extends JPanel {
         tfQuantity.setText("");
         
         //bnDelete.setEnabled(false);
+        cbCollectorName.setEnabled(false);
         bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
+        
+    }
+    public void initializeCollector(){
+        tfCollectorId.setText("");
+        tfCollector.setText("");
+        tfAddress.setText("");
+        
+        cbCollectorName.setEnabled(false);
         
     }
     private void fillcombo(){
@@ -73,6 +82,41 @@ public class jplDistribution extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
+    }
+    private void fillcomboCollector(){
+        String query="select Collector_name from collector";
+        try{
+           
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+            cbCollectorName.addItem(rs.getString("Collector_name"));
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+    }
+    private void retrieveCollectorDetails(){
+        String query="select * from collector where Collector_name='"+cbCollectorName.getSelectedItem().toString().trim()+"'";
+            
+            try{
+                ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+                while(rs.next()){
+                    tfCollectorId.setText(rs.getString("Collector_id"));
+                    tfCollector.setText(rs.getString("Collector_name"));
+                    tfAddress.setText(rs.getString("Address"));
+                    
+                }
+                tfCollectorId.setEditable(false);
+                tfCollector.setEditable(false);
+                tfAddress.setEditable(false);
+                
+                
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+                cbCollectorName.removeAll();
+                fillcomboCollector();
+            }
     }
     public void displayForm(JPanel jp){
             home.removeAll();
@@ -272,8 +316,19 @@ public class jplDistribution extends JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Address:");
 
+        cbCollectorName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCollectorNameActionPerformed(evt);
+            }
+        });
+
         rbCollector.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         rbCollector.setText("Select Existing");
+        rbCollector.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbCollectorMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -735,6 +790,30 @@ if (txtReciept.getText().isEmpty())
     private void bnViewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnViewAllActionPerformed
         displayForm(new jplAllDistributions(this.home,this.gohome));
     }//GEN-LAST:event_bnViewAllActionPerformed
+
+    private void rbCollectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbCollectorMouseClicked
+        if (rbCollector.isSelected()){
+            fillcomboCollector();
+            cbCollectorName.setEnabled(true);
+            tfCollectorId.setText("");
+            tfCollector.setText("");
+            tfAddress.setText("");
+            tfCollectorId.setEditable(false);
+            tfCollector.setEditable(false);
+            tfAddress.setEditable(false);
+            
+        } else{
+            initializeCollector();
+            tfCollectorId.setEditable(true);
+            tfCollector.setEditable(true);
+            tfAddress.setEditable(true);
+        }
+    }//GEN-LAST:event_rbCollectorMouseClicked
+
+    private void cbCollectorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCollectorNameActionPerformed
+        //JOptionPane.showMessageDialog(null, "You changed");
+        //retrieveCollectorDetails();
+    }//GEN-LAST:event_cbCollectorNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
