@@ -234,6 +234,7 @@ public class jplLogin extends JPanel {
                 this.setVisible(false);
                 this.bar.setVisible(true);
                 utility.Utility.level=sLevel;
+                utility.Utility.username=username;
                 displayForm(new jplHome(this.home, this.bar, this.reg,this.gohome, this.search));
                 if (sLevel.equals("ADMIN")){
                     this.search.setVisible(true);
