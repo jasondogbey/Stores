@@ -67,8 +67,9 @@ public class jplDistribution extends JPanel {
         tfDistributionDate.setEditable(false);
         //tfUnitCost.setEditable(false);
         //tfQuantity.setEditable(false);
-        bnSearch.setText("Search");
+        //bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
+        //bnSearch.setVisible(false);
         
     }
     public void initializeCollector(){
@@ -366,12 +367,6 @@ public class jplDistribution extends JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Address:");
 
-        cbCollectorName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCollectorNameActionPerformed(evt);
-            }
-        });
-
         rbCollector.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         rbCollector.setText("Select Existing");
         rbCollector.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -443,50 +438,45 @@ public class jplDistribution extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bnSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bnSearch1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bnClose)
-                        .addGap(14, 14, 14))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bnClose))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(72, 72, 72)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                    .addComponent(tfUnitCost)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfDistributionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(2, 2, 2))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(34, 34, 34)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(100, 100, 100)
-                                    .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(tfDistributionId))
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                            .addComponent(tfUnitCost)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfDistributionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(2, 2, 2))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(34, 34, 34)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(100, 100, 100)
+                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(40, 40, 40)
+                            .addComponent(tfDistributionId))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
@@ -552,8 +542,8 @@ public class jplDistribution extends JPanel {
                         .addComponent(bnDelete)
                         .addComponent(bnSave)
                         .addComponent(bnClose)
-                        .addComponent(bnSearch)
-                        .addComponent(bnSearch1))
+                        .addComponent(bnSearch1)
+                        .addComponent(bnSearch))
                     .addComponent(bnNew))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -562,7 +552,7 @@ public class jplDistribution extends JPanel {
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
         if (tfQuantity.getText().isEmpty()||tfUnitCost.getText().isEmpty() )
         {
-            JOptionPane.showMessageDialog(null, "Unit Cost fiels or Price field cannot be empty");
+            JOptionPane.showMessageDialog(null, "Unit Cost and Quantity field cannot be empty");
             return;
         }
         String valu,ds;
@@ -585,7 +575,7 @@ public class jplDistribution extends JPanel {
        
             txtReciept.append("\n"+cbItem.getSelectedItem().toString()+ "\t\t      "+ p+" X "+ q+"\t\t   ₵" + total);
        
-        String query="insert into distribution(Transaction_id,item,Collector,Unit_price,Quantity,User_code,Transaction_date) values ('"+tfDistributionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollector.getText()+"', '"+tfUnitCost.getText()+"', '"+tfQuantity.getText()+"','"+tfQuantity.getText()+"','"+tfDistributionDate.getText()+"')";
+        String query="insert into distribution(Distribution_id,Item_id,Collector_id,Quantity,Price,Username,Distribution_date) values ('"+tfDistributionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollectorId.getText()+"', '"+tfQuantity.getText()+"','"+total+"','"+utility.Utility.username+"', '"+tfDistributionDate.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
               
@@ -603,7 +593,7 @@ public class jplDistribution extends JPanel {
                if (newval >= 0){
                     String query2 = "update item set Quantity='"+newval+"' where Item_name='"+cbItem.getSelectedItem().toString()+"'";
                    if (utility.DBconnection.getStatement().executeUpdate(query2)>0){
-                    JOptionPane.showMessageDialog(null, "Successfully saved Transaction");
+                    JOptionPane.showMessageDialog(null, "Successfully saved Distribution");
                
            }else{
                JOptionPane.showMessageDialog(null, "Could not save data");
@@ -622,11 +612,11 @@ public class jplDistribution extends JPanel {
     }//GEN-LAST:event_cbItemActionPerformed
 
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
- 
-        
+        tfDistributionId.setEnabled(true);
+        tfDistributionId.setEditable(true);
               if (bnSearch.getText().equals("Search")){
             if (tfDistributionId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Enter Item ID");
+                JOptionPane.showMessageDialog(null, "Enter Distribution ID");
                 return;  
             }
             
@@ -638,15 +628,15 @@ public class jplDistribution extends JPanel {
            String transactionId=tfDistributionId.getText();
            JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
-"     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
-"     transaction.`item` AS transaction_item,\n" +
-"     transaction.`Collector` AS transaction_Collector,\n" +
-"     transaction.`Unit_price` AS transaction_Unit_price,\n" +
-"     transaction.`Quantity` AS transaction_Quantity,\n" +
-"     transaction.`User_code` AS transaction_User_code,\n" +
-"     transaction.`Transaction_date` AS transaction_Transaction_date\n" +
+"     distribution.`Distribution_id` AS distribution_Distribution_id,\n" +
+"     distribution.`Item_id` AS distribution_Item_id,\n" +
+"     distribution.`Collector_id` AS distribution_Collector_id,\n" +
+"     distribution.`Quantity` AS distribution_Quantity,\n" +
+"     distribution.`Price` AS distribution_Price,\n" +
+"     distribution.`Username` AS distribution_Username,\n" +
+"     distribution.`Distribution_date` AS distribution_Distribution_date\n" +
 "FROM\n" +
-"     `transaction` transaction where Transaction_Id='"+ transactionId + "'";
+"     `distribution` distribution where Distribution_id='"+ transactionId + "'";
            JRDesignQuery newQuery =new JRDesignQuery();
            newQuery.setText(sql);
            jd.setQuery(newQuery);
@@ -660,52 +650,52 @@ public class jplDistribution extends JPanel {
            JOptionPane.showMessageDialog(null, e);
        }
         
-        } else if (bnSearch.getText().equals("Edit")){
-            tfDistributionId.setEditable(false);
-            cbItem.setEditable(true);
-            tfCollector.setEditable(true);
-            tfUnitCost.setEditable(true);
-            tfQuantity.setEditable(true);
-            
-            tfDistributionDate.setEditable(true);
-            bnSearch.setText("Update");
-        } else if (bnSearch.getText().equals("Update")){
-            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfQuantity.getText()+"', Transaction_date='"+tfDistributionDate.getText()+"' where Transaction_id='"+tfDistributionId.getText()+"'";
-            try {
-                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
-                    JOptionPane.showMessageDialog(null, "Update is Successful");
-                    tfDistributionId.setText("");
-                    cbItem.setSelectedItem("");
-                    tfCollector.setText("");
-                    tfUnitCost.setText("");
-                    tfQuantity.setText("");
-                    
-                    tfDistributionDate.setText("");
-                    //bnSearch.setText("Search");
-                    initialization();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Could not update data");
-                    tfDistributionId.setText("");
-                    cbItem.setSelectedItem("");
-                    tfCollector.setText("");
-                    tfUnitCost.setText("");
-                    tfQuantity.setText("");
-                    
-                    tfDistributionDate.setText("");
-                    //bnSearch.setText("Search");
-                    
-                    tfDistributionId.setEditable(true);
-                    cbItem.setEditable(true);
-                    tfCollector.setEditable(true);
-                    tfUnitCost.setEditable(true);
-                    tfQuantity.setEditable(true);
-                   
-                    tfDistributionDate.setEditable(true);
-                }
-            } catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
-            }
-        }
+        } //else if (bnSearch.getText().equals("Edit")){
+//            tfDistributionId.setEditable(false);
+//            cbItem.setEditable(true);
+//            tfCollector.setEditable(true);
+//            tfAddress.setEditable(true);
+//            tfUnitCost.setEditable(true);
+//            tfQuantity.setEditable(true);
+//            
+//            bnSearch.setText("Update");
+//        } else if (bnSearch.getText().equals("Update")){
+//            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfQuantity.getText()+"', Transaction_date='"+tfDistributionDate.getText()+"' where Transaction_id='"+tfDistributionId.getText()+"'";
+//            try {
+//                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
+//                    JOptionPane.showMessageDialog(null, "Update is Successful");
+//                    tfDistributionId.setText("");
+//                    cbItem.setSelectedItem("");
+//                    tfCollector.setText("");
+//                    tfUnitCost.setText("");
+//                    tfQuantity.setText("");
+//                    
+//                    tfDistributionDate.setText("");
+//                    //bnSearch.setText("Search");
+//                    initialization();
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Could not update data");
+//                    tfDistributionId.setText("");
+//                    cbItem.setSelectedItem("");
+//                    tfCollector.setText("");
+//                    tfUnitCost.setText("");
+//                    tfQuantity.setText("");
+//                    
+//                    tfDistributionDate.setText("");
+//                    //bnSearch.setText("Search");
+//                    
+//                    tfDistributionId.setEditable(true);
+//                    cbItem.setEditable(true);
+//                    tfCollector.setEditable(true);
+//                    tfUnitCost.setEditable(true);
+//                    tfQuantity.setEditable(true);
+//                   
+//                    tfDistributionDate.setEditable(true);
+//                }
+//            } catch(Exception e){
+//                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+//            }
+//        }
        
     }//GEN-LAST:event_bnSearchActionPerformed
 
@@ -730,31 +720,26 @@ public class jplDistribution extends JPanel {
     }//GEN-LAST:event_bnCloseActionPerformed
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
- if (tfDistributionId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Enter Item ID");
+        if (tfDistributionId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Enter Distribution ID");
                 return;  
             }        
-        String query= "delete from transaction where Transaction_id='"+tfDistributionId.getText().trim()+"'";
+        String query= "delete from distribution where Distribution_id='"+tfDistributionId.getText().trim()+"'";
             try{
                 if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                     JOptionPane.showMessageDialog(null, "Delete is Successful");
                     tfDistributionId.setText("");
                     cbItem.setSelectedItem("");
+                    tfCollectorId.setText("");
                     tfCollector.setText("");
                     tfUnitCost.setText("");
                     tfQuantity.setText("");
-                    
+                    tfAddress.setText("");
                     tfDistributionDate.setText("");
                     initialization();
                     
-                    tfDistributionId.setEditable(true);
-                    cbItem.setEditable(true);
-                    tfCollector.setEditable(true);
-                    tfUnitCost.setEditable(true);
-                    tfQuantity.setEditable(true);
-                   
-                    tfDistributionDate.setEditable(true);
-                    
+                    tfDistributionId.setEditable(false);
+ 
                 }else{
                     JOptionPane.showMessageDialog(null, "Delete not Successful");
                 }
@@ -829,23 +814,29 @@ if (txtReciept.getText().isEmpty())
     }//GEN-LAST:event_bnDoneActionPerformed
 
     private void bnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearch1ActionPerformed
-       try
+        tfDistributionId.setEnabled(true);
+        tfDistributionId.setEditable(true);
+        if (tfDistributionId.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Enter Distribution ID");
+                return;  
+            }
+        try
        {
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
           
-           String transactionId=tfDistributionId.getText();
+           String distributionId=tfDistributionId.getText();
            JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
-"     transaction.`Transaction_Id` AS transaction_Transaction_Id,\n" +
-"     transaction.`item` AS transaction_item,\n" +
-"     transaction.`Collector` AS transaction_Collector,\n" +
-"     transaction.`Unit_price` AS transaction_Unit_price,\n" +
-"     transaction.`Quantity` AS transaction_Quantity,\n" +
-"     transaction.`User_code` AS transaction_User_code,\n" +
-"     transaction.`Transaction_date` AS transaction_Transaction_date\n" +
+"     distribution.`Distribution_id` AS distribution_Distribution_id,\n" +
+"     distribution.`Item_id` AS distribution_Item_id,\n" +
+"     distribution.`Collector_id` AS distribution_Collector_id,\n" +
+"     distribution.`Quantity` AS distribution_Quantity,\n" +
+"     distribution.`Price` AS distribution_Price,\n" +
+"     distribution.`Username` AS distribution_Username,\n" +
+"     distribution.`Distribution_date` AS distribution_Distribution_date\n" +
 "FROM\n" +
-"     `transaction` transaction";
+"     `distribution` distribution";
            JRDesignQuery newQuery =new JRDesignQuery();
            newQuery.setText(sql);
            jd.setQuery(newQuery);
@@ -885,11 +876,6 @@ if (txtReciept.getText().isEmpty())
             
         }
     }//GEN-LAST:event_rbCollectorMouseClicked
-
-    private void cbCollectorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCollectorNameActionPerformed
-        //JOptionPane.showMessageDialog(null, "You changed");
-        //retrieveCollectorDetails();
-    }//GEN-LAST:event_cbCollectorNameActionPerformed
 
     private void bnRetrieveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRetrieveActionPerformed
         retrieveCollectorDetails();
