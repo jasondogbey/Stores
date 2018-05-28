@@ -37,6 +37,8 @@ public class jplDistribution extends JPanel {
     JMenuItem gohome;
     JPanel home;
     private static Connection conn;
+    int ItemId;
+    double newval,newval1;
     /**
      * Creates new form jplTransaction
      */
@@ -59,13 +61,13 @@ public class jplDistribution extends JPanel {
     public void initialization(){
         tfDistributionId.setText("");
         tfCollector.setText("");
-        tfUnitCost.setText("");
+        tfUnitPrice.setText("");
         tfQuantity.setText("");
         
         //bnDelete.setEnabled(false);
         tfDistributionId.setEditable(false);
         tfDistributionDate.setEditable(false);
-        //tfUnitCost.setEditable(false);
+        tfUnitPrice.setEditable(false);
         //tfQuantity.setEditable(false);
         //bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
@@ -156,10 +158,10 @@ public class jplDistribution extends JPanel {
     
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
-               JOptionPane.showMessageDialog(null, "Successfully saved Item");
+               //JOptionPane.showMessageDialog(null, "Successfully saved Item");
                 
            }else{
-               JOptionPane.showMessageDialog(null, "Could not save data");
+               JOptionPane.showMessageDialog(null, "Could not save Collector");
            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
@@ -173,6 +175,22 @@ public class jplDistribution extends JPanel {
                 while(rs.next()){
                     tfCollectorId.setText(rs.getString("Collector_id"));
                 }
+                
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+            }
+    }
+    private void retrieveItemDetails(){
+        String query="select * from item where Item_name='"+cbItem.getSelectedItem().toString().trim()+"'";
+            
+            try{
+                ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+                while(rs.next()){
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    ItemId=Integer.parseInt(rs.getString("Item_id"));
+                }
+               
+                
                 
             } catch (Exception e){
                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
@@ -192,7 +210,7 @@ public class jplDistribution extends JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tfUnitCost = new javax.swing.JTextField();
+        tfUnitPrice = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         bnSearch = new javax.swing.JButton();
         bnDelete = new javax.swing.JButton();
@@ -222,6 +240,8 @@ public class jplDistribution extends JPanel {
         cbCollectorName = new javax.swing.JComboBox<>();
         rbCollector = new javax.swing.JRadioButton();
         bnRetrieve = new javax.swing.JButton();
+        tfDetails = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -229,7 +249,7 @@ public class jplDistribution extends JPanel {
         jLabel4.setText("Item:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Unit Cost:");
+        jLabel5.setText("Unit Price:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Quantity:");
@@ -287,12 +307,6 @@ public class jplDistribution extends JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Distribution ID:");
-
-        cbItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbItemActionPerformed(evt);
-            }
-        });
 
         txtReciept.setEditable(false);
         txtReciept.setColumns(20);
@@ -432,6 +446,22 @@ public class jplDistribution extends JPanel {
                 .addContainerGap())
         );
 
+        tfDetails.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        tfDetails.setText("Details");
+        tfDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDetailsActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setText("Clear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -457,41 +487,45 @@ public class jplDistribution extends JPanel {
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                            .addComponent(tfUnitCost)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDistributionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(2, 2, 2))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(100, 100, 100)
-                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(40, 40, 40)
-                            .addComponent(tfDistributionId))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 6, Short.MAX_VALUE)
+                            .addComponent(tfUnitPrice)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfDistributionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(100, 100, 100)
+                        .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfDetails))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(40, 40, 40)
+                        .addComponent(tfDistributionId))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(bnViewAll)
-                                .addGap(34, 34, 34)
-                                .addComponent(bnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(bnDone)
-                                .addGap(55, 55, 55)
-                                .addComponent(bnPrint))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
                                 .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(207, 207, 207)))
+                                .addGap(207, 207, 207))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(bnViewAll)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(bnDone)
+                                .addGap(18, 18, 18)
+                                .addComponent(bnPrint)))
                         .addGap(22, 22, 22))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -513,14 +547,15 @@ public class jplDistribution extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfDistributionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfDetails))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(tfUnitCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -534,34 +569,35 @@ public class jplDistribution extends JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bnPrint)
-                        .addComponent(bnDone)
-                        .addComponent(bnViewAll))
+                    .addComponent(bnPrint)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(bnDelete)
                         .addComponent(bnSave)
                         .addComponent(bnClose)
                         .addComponent(bnSearch1)
                         .addComponent(bnSearch))
-                    .addComponent(bnNew))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnNew)
+                        .addComponent(bnDone)
+                        .addComponent(jButton1)
+                        .addComponent(bnViewAll)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
-        if (tfQuantity.getText().isEmpty()||tfUnitCost.getText().isEmpty() )
+        if (tfQuantity.getText().isEmpty()||tfUnitPrice.getText().isEmpty() )
         {
             JOptionPane.showMessageDialog(null, "Unit Cost and Quantity field cannot be empty");
             return;
         }
         String valu,ds;
                     double intvalue;
-            double newval,newval1;
+            
         String s,q,p;
         Double quantity,price,total;
         q=tfQuantity.getText();
-        p=tfUnitCost.getText();
+        p=tfUnitPrice.getText();
         quantity=Double.parseDouble(q);
         price=Double.parseDouble(p);
         total=price * quantity;
@@ -575,7 +611,7 @@ public class jplDistribution extends JPanel {
        
             txtReciept.append("\n"+cbItem.getSelectedItem().toString()+ "\t\t      "+ p+" X "+ q+"\t\t   ₵" + total);
        
-        String query="insert into distribution(Distribution_id,Item_id,Collector_id,Quantity,Price,Username,Distribution_date) values ('"+tfDistributionId.getText()+"','"+cbItem.getSelectedItem().toString()+"','"+tfCollectorId.getText()+"', '"+tfQuantity.getText()+"','"+total+"','"+utility.Utility.username+"', '"+tfDistributionDate.getText()+"')";
+        String query="insert into distribution(Distribution_id,Item_id,Collector_id,Quantity,Price,Username,Distribution_date) values ('"+tfDistributionId.getText()+"','"+ItemId+"','"+tfCollectorId.getText()+"', '"+tfQuantity.getText()+"','"+total+"','"+utility.Utility.username+"', '"+tfDistributionDate.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
               
@@ -590,26 +626,24 @@ public class jplDistribution extends JPanel {
                ds=tfQuantity.getText();
                 newval1=Double.parseDouble(ds);
                newval = intvalue - newval1;
+                }
                if (newval >= 0){
                     String query2 = "update item set Quantity='"+newval+"' where Item_name='"+cbItem.getSelectedItem().toString()+"'";
                    if (utility.DBconnection.getStatement().executeUpdate(query2)>0){
                     JOptionPane.showMessageDialog(null, "Successfully saved Distribution");
+                    tfQuantity.setText("");
                
            }else{
                JOptionPane.showMessageDialog(null, "Could not save data");
            }
                }
-                }
+                
            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
         }
                
     }//GEN-LAST:event_bnSaveActionPerformed
-
-    private void cbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbItemActionPerformed
 
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
         tfDistributionId.setEnabled(true);
@@ -732,7 +766,7 @@ public class jplDistribution extends JPanel {
                     cbItem.setSelectedItem("");
                     tfCollectorId.setText("");
                     tfCollector.setText("");
-                    tfUnitCost.setText("");
+                    tfUnitPrice.setText("");
                     tfQuantity.setText("");
                     tfAddress.setText("");
                     tfDistributionDate.setText("");
@@ -778,7 +812,6 @@ if (txtReciept.getText().isEmpty())
             JOptionPane.showMessageDialog(null,"Complete all fieds");
             return;
         }
-        tfUnitCost.setEditable(true);
         tfQuantity.setEditable(true);
         txtReciept.setText(null);
         txtReciept.append("\n");
@@ -881,6 +914,16 @@ if (txtReciept.getText().isEmpty())
         retrieveCollectorDetails();
     }//GEN-LAST:event_bnRetrieveActionPerformed
 
+    private void tfDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDetailsActionPerformed
+        retrieveItemDetails();
+    }//GEN-LAST:event_tfDetailsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        initialization();
+        initializeCollector();
+        tfDistributionDate.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnClose;
@@ -895,6 +938,7 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JButton bnViewAll;
     private javax.swing.JComboBox<String> cbCollectorName;
     private javax.swing.JComboBox<String> cbItem;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -911,10 +955,11 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfCollector;
     private javax.swing.JTextField tfCollectorId;
+    private javax.swing.JButton tfDetails;
     private javax.swing.JTextField tfDistributionDate;
     private javax.swing.JTextField tfDistributionId;
     private javax.swing.JTextField tfQuantity;
-    private javax.swing.JTextField tfUnitCost;
+    private javax.swing.JTextField tfUnitPrice;
     private javax.swing.JTextField tfUserCode1;
     private javax.swing.JTextArea txtReciept;
     // End of variables declaration//GEN-END:variables
