@@ -34,14 +34,15 @@ public class jplUsers extends JPanel {
         bnSearch.setText("Search");
         bnDelete.setEnabled(false);
         tfUsername.setEditable(true);
-        tfName.setEditable(false);
+        tfFName.setEditable(false);
+        tfLName.setEditable(false);
         cbLevel.setEnabled(false);
         pfPassword.setEditable(false);
         pfConfirmPass.setEditable(false);
         utility.Utility.universalCode=0; 
     }
     private void filltable(){
-        String query="select Username, Name, level from account";
+        String query="select Username, Fname, Lname, level from account";
         try{
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             jtUsers.setModel(DbUtils.resultSetToTableModel(rs));
@@ -63,7 +64,7 @@ public class jplUsers extends JPanel {
         jLabel2 = new javax.swing.JLabel();
         tfUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfName = new javax.swing.JTextField();
+        tfFName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbLevel = new javax.swing.JComboBox();
@@ -79,6 +80,8 @@ public class jplUsers extends JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         bnClose = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tfLName = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -97,12 +100,12 @@ public class jplUsers extends JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Name:");
+        jLabel3.setText("First Name:");
         jLabel3.setToolTipText("");
 
-        tfName.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfFName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfNameFocusLost(evt);
+                tfFNameFocusLost(evt);
             }
         });
 
@@ -202,53 +205,73 @@ public class jplUsers extends JPanel {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-User-Group-icon.png"))); // NOI18N
         jLabel7.setText("All Users");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Last Name:");
+        jLabel8.setToolTipText("");
+
+        tfLName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfLNameFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfUsername)
-                                .addComponent(tfName)
-                                .addComponent(cbLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(bnSearch)
+                                .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(bnAddNew)
-                                .addGap(18, 18, 18)
-                                .addComponent(bnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bnClose)))))
+                                .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bnSearch)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(bnAddNew)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(bnDelete)
+                                    .addGap(21, 21, 21)
+                                    .addComponent(bnClose))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(20, 20, 20)
+                                    .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfFName)
+                                    .addGap(5, 5, 5)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfLName, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(22, 22, 22)
+                                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(28, 28, 28)
+                                            .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
+                        .addGap(77, 77, 77)
                         .addComponent(jLabel7))))
         );
         layout.setVerticalGroup(
@@ -262,27 +285,31 @@ public class jplUsers extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(tfLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(36, 36, 36)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(36, 36, 36)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bnSearch)
                             .addComponent(bnAddNew)
@@ -295,7 +322,7 @@ public class jplUsers extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private boolean validation(){
-        if (tfUsername.getText().isEmpty() || tfName.getText().isEmpty() ||
+        if (tfUsername.getText().isEmpty() || tfFName.getText().isEmpty() || tfLName.getText().isEmpty() ||
                 cbLevel.getSelectedIndex()==0 || pfPassword.getText().isEmpty() ||
                 pfConfirmPass.getText().isEmpty()){
             return false;
@@ -307,9 +334,9 @@ public class jplUsers extends JPanel {
         tfUsername.setText(tfUsername.getText().toUpperCase());
     }//GEN-LAST:event_tfUsernameFocusLost
 
-    private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
-        tfName.setText(tfName.getText().toUpperCase());
-    }//GEN-LAST:event_tfNameFocusLost
+    private void tfFNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFNameFocusLost
+        tfFName.setText(tfFName.getText().toUpperCase());
+    }//GEN-LAST:event_tfFNameFocusLost
 
     private void bnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnAddNewActionPerformed
         bnAddNew.setEnabled(false);
@@ -317,7 +344,8 @@ public class jplUsers extends JPanel {
         bnSearch.setEnabled(false);
         bnDelete.setEnabled(false);
         tfUsername.setEditable(true);
-        tfName.setEditable(true);
+        tfFName.setEditable(true);
+        tfLName.setEditable(true);
         cbLevel.setEnabled(true);
         pfPassword.setEditable(true);
         pfConfirmPass.setEditable(true);
@@ -352,12 +380,13 @@ public class jplUsers extends JPanel {
             pfConfirmPass.setText("");
             return;
         }
-        String s="insert into account values ('"+tfUsername.getText()+"','"+tfName.getText()+"','"+cbLevel.getSelectedItem()+"','"+pfPassword.getText()+"')";
+        String s="insert into account values ('"+tfUsername.getText()+"','"+tfFName.getText()+"','"+tfLName.getText()+"','"+cbLevel.getSelectedItem()+"','"+pfPassword.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(s)>0){
                JOptionPane.showMessageDialog(null, "Save is Successful");
                tfUsername.setText("");
-               tfName.setText("");
+               tfFName.setText("");
+               tfLName.setText("");
                cbLevel.setSelectedIndex(0);
                pfPassword.setText("");
                pfConfirmPass.setText("");
@@ -374,7 +403,7 @@ public class jplUsers extends JPanel {
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
         if (bnSearch.getText().equals("Search")){
             if (tfUsername.getText().isEmpty()){
-               JOptionPane.showMessageDialog(null,"Enter User Code");
+               JOptionPane.showMessageDialog(null,"Enter Username");
                return;
             }
             
@@ -384,11 +413,13 @@ public class jplUsers extends JPanel {
                 ResultSet rs = utility.DBconnection.getStatement().executeQuery(s);
                 while(rs.next()){
                     tfUsername.setText(username);
-                    tfName.setText(rs.getString("Name"));
+                    tfFName.setText(rs.getString("Fname"));
+                    tfLName.setText(rs.getString("Lname"));
                     cbLevel.setSelectedItem(rs.getString("level"));
                 }
                 tfUsername.setEditable(false);
-                tfName.setEditable(false);
+                tfFName.setEditable(false);
+                tfLName.setEditable(false);
                 cbLevel.setEnabled(false);
                 pfPassword.setEditable(false);
                 pfConfirmPass.setEditable(false);
@@ -401,17 +432,19 @@ public class jplUsers extends JPanel {
                 tfUsername.setText("");
             }
         }else if (bnSearch.getText().equals("Edit")){
-            tfName.setEditable(true);
+            tfFName.setEditable(true);
+            tfLName.setEditable(true);
             cbLevel.setEnabled(true);
             bnSearch.setText("Update");
             utility.Utility.universalCode=1;
         }else if (bnSearch.getText().equals("Update")){
-            String s= "update account set Name='"+tfName.getText()+"', level='"+cbLevel.getSelectedItem()+"' where Username='"+tfUsername.getText()+"'";
+            String s= "update account set Fname='"+tfFName.getText()+"', Lname='"+tfLName.getText()+"', level='"+cbLevel.getSelectedItem()+"' where Username='"+tfUsername.getText()+"'";
             try{
                 if(utility.DBconnection.getStatement().executeUpdate(s)>0){
                     JOptionPane.showMessageDialog(null, "Update is Successful");
                     tfUsername.setText("");
-                    tfName.setText("");
+                    tfFName.setText("");
+                    tfLName.setText("");
                     cbLevel.setSelectedIndex(0);
                     pfPassword.setText("");
                     pfConfirmPass.setText("");
@@ -432,7 +465,8 @@ public class jplUsers extends JPanel {
                 if(utility.DBconnection.getStatement().executeUpdate(s)>0){
                     JOptionPane.showMessageDialog(null, "Delete is Successful");
                     tfUsername.setText("");
-                    tfName.setText("");
+                    tfFName.setText("");
+                    tfLName.setText("");
                     cbLevel.setSelectedIndex(0);
                     pfPassword.setText("");
                     pfConfirmPass.setText("");
@@ -455,11 +489,13 @@ public class jplUsers extends JPanel {
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                     tfUsername.setText(rs.getString("Username"));
-                    tfName.setText(rs.getString("Name"));
+                    tfFName.setText(rs.getString("Fname"));
+                    tfLName.setText(rs.getString("Lname"));
                     cbLevel.setSelectedItem(rs.getString("level"));
                 }
                 tfUsername.setEditable(false);
-                tfName.setEditable(false);
+                tfFName.setEditable(false);
+                tfLName.setEditable(false);
                 cbLevel.setEnabled(false);
                 pfPassword.setEditable(false);
                 pfConfirmPass.setEditable(false);
@@ -483,11 +519,13 @@ public class jplUsers extends JPanel {
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                     tfUsername.setText(rs.getString("Username"));
-                    tfName.setText(rs.getString("Name"));
+                    tfFName.setText(rs.getString("Fname"));
+                    tfLName.setText(rs.getString("Lname"));
                     cbLevel.setSelectedItem(rs.getString("level"));
                 }
                 tfUsername.setEditable(false);
-                tfName.setEditable(false);
+                tfFName.setEditable(false);
+                tfLName.setEditable(false);
                 cbLevel.setEnabled(false);
                 pfPassword.setEditable(false);
                 pfConfirmPass.setEditable(false);
@@ -501,6 +539,10 @@ public class jplUsers extends JPanel {
         }  
         }
     }//GEN-LAST:event_jtUsersKeyReleased
+
+    private void tfLNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfLNameFocusLost
+        tfLName.setText(tfLName.getText().toUpperCase());
+    }//GEN-LAST:event_tfLNameFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -517,12 +559,14 @@ public class jplUsers extends JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jtUsers;
     private javax.swing.JPasswordField pfConfirmPass;
     private javax.swing.JPasswordField pfPassword;
-    private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfFName;
+    private javax.swing.JTextField tfLName;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }
