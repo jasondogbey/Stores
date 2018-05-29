@@ -5,25 +5,25 @@
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
-     transaction.`Transaction_Id` AS transaction_Transaction_Id,
-     transaction.`item` AS transaction_item,
-     transaction.`Collector` AS transaction_Collector,
-     transaction.`Unit_price` AS transaction_Unit_price,
-     transaction.`Quantity` AS transaction_Quantity,
-     transaction.`User_code` AS transaction_User_code,
-     transaction.`Transaction_date` AS transaction_Transaction_date
+     distribution.`Distribution_id` AS distribution_Distribution_id,
+     distribution.`Item_id` AS distribution_Item_id,
+     distribution.`Collector_id` AS distribution_Collector_id,
+     distribution.`Quantity` AS distribution_Quantity,
+     distribution.`Price` AS distribution_Price,
+     distribution.`Username` AS distribution_Username,
+     distribution.`Distribution_date` AS distribution_Distribution_date
 FROM
-     `transaction` transaction]]>
+     `distribution` distribution]]>
 	</queryString>
-	<field name="transaction_Transaction_Id" class="java.lang.String"/>
-	<field name="transaction_item" class="java.lang.String"/>
-	<field name="transaction_Collector" class="java.lang.String"/>
-	<field name="transaction_Unit_price" class="java.lang.Integer"/>
-	<field name="transaction_Quantity" class="java.lang.Integer"/>
-	<field name="transaction_User_code" class="java.lang.String"/>
-	<field name="transaction_Transaction_date" class="java.lang.String"/>
-	<group name="transaction_Transaction_Id">
-		<groupExpression><![CDATA[$F{transaction_Transaction_Id}]]></groupExpression>
+	<field name="distribution_Distribution_id" class="java.lang.String"/>
+	<field name="distribution_Item_id" class="java.lang.String"/>
+	<field name="distribution_Collector_id" class="java.lang.String"/>
+	<field name="distribution_Quantity" class="java.lang.Integer"/>
+	<field name="distribution_Price" class="java.lang.Integer"/>
+	<field name="distribution_Username" class="java.lang.String"/>
+	<field name="distribution_Distribution_date" class="java.lang.String"/>
+	<group name="distribution_Distribution_id">
+		<groupExpression><![CDATA[$F{distribution_Distribution_id}]]></groupExpression>
 		<groupFooter>
 			<band/>
 		</groupFooter>
@@ -36,18 +36,18 @@ FROM
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
 				<staticText>
-					<reportElement x="159" y="20" width="307" height="43" forecolor="#FFFFFF"/>
+					<reportElement x="120" y="20" width="346" height="43" forecolor="#FFFFFF"/>
 					<textElement>
 						<font fontName="Times New Roman" size="18" isBold="true" isStrikeThrough="false"/>
 					</textElement>
-					<text><![CDATA[STORE MANAGEMENT SYSTEM]]></text>
+					<text><![CDATA[KsTU STORES MANAGEMENT SYSTEM]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="192" y="63" width="180" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[TRANSACTION REPORT]]></text>
+					<text><![CDATA[DISTRIBUTION REPORT]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -72,14 +72,7 @@ FROM
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Name of Supplier]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="223" y="0" width="78" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Unit Price]]></text>
+				<text><![CDATA[Collector ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="301" y="0" width="67" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
@@ -89,11 +82,18 @@ FROM
 				<text><![CDATA[Quantity]]></text>
 			</staticText>
 			<staticText>
+				<reportElement mode="Opaque" x="223" y="0" width="78" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
 				<reportElement mode="Opaque" x="368" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[User Code]]></text>
+				<text><![CDATA[Username]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="460" y="0" width="95" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
@@ -114,42 +114,42 @@ FROM
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{transaction_item}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{distribution_Item_id}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="92" y="0" width="145" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{transaction_Collector}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="237" y="0" width="64" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{transaction_Unit_price}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{distribution_Collector_id}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="301" y="0" width="67" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{transaction_Quantity}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{distribution_Quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="237" y="0" width="64" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{distribution_Price}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="368" y="0" width="92" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{transaction_User_code}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{distribution_Username}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="460" y="0" width="115" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{transaction_Transaction_date}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{distribution_Distribution_date}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
