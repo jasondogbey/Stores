@@ -362,6 +362,7 @@ public class jplDistribution extends JPanel {
         });
 
         bnViewAll.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnViewAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-view.png"))); // NOI18N
         bnViewAll.setText("View All");
         bnViewAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,6 +456,7 @@ public class jplDistribution extends JPanel {
         });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-clear.png"))); // NOI18N
         jButton1.setText("Clear");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,10 +521,10 @@ public class jplDistribution extends JPanel {
                                 .addGap(31, 31, 31)
                                 .addComponent(bnViewAll)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(bnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bnDone)
                                 .addGap(18, 18, 18)
                                 .addComponent(bnPrint)))
