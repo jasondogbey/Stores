@@ -81,10 +81,10 @@
                               <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="bnViewAll" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="bnViewAll" min="-2" pref="95" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="81" max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" pref="92" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="bnNew" min="-2" pref="59" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>

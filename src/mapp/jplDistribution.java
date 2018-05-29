@@ -518,10 +518,10 @@ public class jplDistribution extends JPanel {
                                 .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(207, 207, 207))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(bnViewAll)
+                                .addGap(20, 20, 20)
+                                .addComponent(bnViewAll, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(bnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -849,18 +849,18 @@ if (txtReciept.getText().isEmpty())
     }//GEN-LAST:event_bnDoneActionPerformed
 
     private void bnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearch1ActionPerformed
-        tfDistributionId.setEnabled(true);
-        tfDistributionId.setEditable(true);
-        if (tfDistributionId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Enter Distribution ID");
-                return;  
-            }
+//        tfDistributionId.setEnabled(true);
+//        tfDistributionId.setEditable(true);
+//        if (tfDistributionId.getText().isEmpty()){
+//                JOptionPane.showMessageDialog(null, "Enter Distribution ID");
+//                return;  
+//            }
         try
        {
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
           
-           String distributionId=tfDistributionId.getText();
+           //String distributionId=tfDistributionId.getText();
            JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
 "     distribution.`Distribution_id` AS distribution_Distribution_id,\n" +
