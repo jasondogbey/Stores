@@ -234,6 +234,7 @@ public class JMain extends JFrame {
         mnuFile.setText("File");
         mnuFile.add(jSeparator10);
 
+        mnuHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-home.png"))); // NOI18N
         mnuHome.setText("Home");
         mnuHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,6 +302,7 @@ public class JMain extends JFrame {
         mnuSearch.add(jSeparator9);
 
         mnuCollectors.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
+        mnuCollectors.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-collector.png"))); // NOI18N
         mnuCollectors.setText("Collectors");
         mnuCollectors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
