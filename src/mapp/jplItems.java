@@ -5,6 +5,7 @@
  */
 package mapp;
 import com.sun.glass.events.KeyEvent;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
@@ -47,6 +48,8 @@ public class jplItems extends JPanel {
         taLocation.setText("");
         taNotes.setText("");
         bnDelete.setEnabled(false);
+        tfItemId.setEditable(false);
+        cbSupplier.setEditable(true);
         bnSearch.setText("Search");
         
     }
@@ -111,8 +114,9 @@ public class jplItems extends JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         taLocation = new javax.swing.JTextArea();
         bnSave = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         cbSupplier = new javax.swing.JComboBox<>();
+        bnClear = new javax.swing.JButton();
+        tfSearch = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -206,6 +210,24 @@ public class jplItems extends JPanel {
             }
         });
 
+        tfItemName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfItemNameMouseClicked(evt);
+            }
+        });
+
+        tfUnitPrice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfUnitPriceMouseClicked(evt);
+            }
+        });
+
+        tfQuantity.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfQuantityMouseClicked(evt);
+            }
+        });
+
         taNotes.setColumns(20);
         taNotes.setRows(5);
         jScrollPane3.setViewportView(taNotes);
@@ -225,8 +247,28 @@ public class jplItems extends JPanel {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("All Items");
+        bnClear.setBackground(new java.awt.Color(255, 255, 255));
+        bnClear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-clear.png"))); // NOI18N
+        bnClear.setText("Clear");
+        bnClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnClearActionPerformed(evt);
+            }
+        });
+
+        tfSearch.setText("Search...");
+        tfSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfSearchMouseClicked(evt);
+            }
+        });
+        tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -249,11 +291,11 @@ public class jplItems extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 30, Short.MAX_VALUE)
                                 .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(41, 41, 41)
+                                .addComponent(bnClear)
+                                .addGap(35, 35, 35))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -263,16 +305,18 @@ public class jplItems extends JPanel {
                             .addComponent(tfItemId)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(cbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbSupplier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(166, 166, 166))))
+                        .addComponent(bnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,9 +324,9 @@ public class jplItems extends JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -314,14 +358,15 @@ public class jplItems extends JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 25, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bnSearch)
-                            .addComponent(bnSave)
-                            .addComponent(bnDelete)
-                            .addComponent(bnClose)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bnSearch)
+                    .addComponent(bnSave)
+                    .addComponent(bnDelete)
+                    .addComponent(bnClear)
+                    .addComponent(bnClose))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -329,6 +374,7 @@ public class jplItems extends JPanel {
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
        if (bnSearch.getText().equals("Search")){
             if (tfItemId.getText().isEmpty()){
+                tfItemId.setEditable(true);
                 JOptionPane.showMessageDialog(null, "Enter Item ID");
                 return;  
             }
@@ -407,7 +453,7 @@ public class jplItems extends JPanel {
                     taNotes.setText("");
                     //bnSearch.setText("Search");
                     initialization();
-                    tfItemId.setEditable(true);
+                    //tfItemId.setEditable(true);
                     bnSave.setEnabled(true);
                     filltable();
                     cbSupplier.removeAllItems();
@@ -451,7 +497,47 @@ public class jplItems extends JPanel {
                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
                 tfItemId.setText("");
             }
-        String query="insert into item values ('"+tfItemId.getText().trim()+"','"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfQuantity.getText()+"','"+SupplierId+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
+            if (tfItemName.getText().isEmpty()&&tfQuantity.getText().isEmpty()&&tfUnitPrice.getText().isEmpty()){
+            tfItemName.setBackground(Color.red);
+            tfQuantity.setBackground(Color.red);
+            tfUnitPrice.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfItemName.getText().isEmpty()&&tfQuantity.getText().isEmpty()){
+            tfItemName.setBackground(Color.red);
+            tfQuantity.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfItemName.getText().isEmpty()&&tfUnitPrice.getText().isEmpty()){
+            tfItemName.setBackground(Color.red);
+            tfUnitPrice.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfQuantity.getText().isEmpty()&&tfUnitPrice.getText().isEmpty()){
+            tfQuantity.setBackground(Color.red);
+            tfUnitPrice.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfItemName.getText().isEmpty()){
+            tfItemName.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (tfQuantity.getText().isEmpty()){
+            tfQuantity.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (tfUnitPrice.getText().isEmpty()){
+            tfUnitPrice.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+        String query="insert into item values (null,'"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfQuantity.getText()+"','"+SupplierId+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                JOptionPane.showMessageDialog(null, "Successfully saved Item");
@@ -489,8 +575,8 @@ public class jplItems extends JPanel {
                     initialization();
                     filltable();
                     
-                    tfItemId.setEditable(true);
-                    tfItemName.setEditable(true);
+                    //tfItemId.setEditable(true);
+                    //tfItemName.setEditable(true);
                     tfUnitPrice.setEditable(true);
                     tfQuantity.setEditable(true);
                    cbSupplier.setEnabled(true);
@@ -601,8 +687,189 @@ public class jplItems extends JPanel {
         }
     }//GEN-LAST:event_jtItemsKeyReleased
 
+    private void tfItemNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfItemNameMouseClicked
+        tfItemName.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfItemNameMouseClicked
+
+    private void tfUnitPriceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfUnitPriceMouseClicked
+        tfUnitPrice.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfUnitPriceMouseClicked
+
+    private void tfQuantityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfQuantityMouseClicked
+        tfQuantity.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfQuantityMouseClicked
+
+    private void bnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnClearActionPerformed
+        initialization();
+        bnSave.setEnabled(true);
+    }//GEN-LAST:event_bnClearActionPerformed
+
+    private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
+        tfSearch.setText("");
+    }//GEN-LAST:event_tfSearchMouseClicked
+
+    private void tfSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyReleased
+        if (tfSearch.getText().isEmpty() )
+        {
+            initialization();
+            return;
+        }
+        tfItemId.setEditable(false);
+                tfItemName.setEditable(false);
+                tfUnitPrice.setEditable(false);
+                tfQuantity.setEditable(false);
+                //taSuppliers.setEditable(false);
+                cbSupplier.setEnabled(false);
+                taLocation.setEditable(false);
+                taNotes.setEditable(false);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+        
+        try{
+            String query = "select * from item where Unit_price LIKE '"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from item where Quantity LIKE '"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from item where Location LIKE '"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from item where Notes LIKE '"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from item where Item_name LIKE '"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "select * from item where Item_id LIKE '"+tfSearch.getText()+"%'";
+            ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+            while(rs.next()){
+                    tfItemId.setText(rs.getString("Item_id"));
+                    tfItemName.setText(rs.getString("Item_name"));
+                    tfUnitPrice.setText(rs.getString("Unit_price"));
+                    tfQuantity.setText(rs.getString("Quantity"));
+                    //taSuppliers.setText(rs.getString("Suppliers"));
+                    SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
+                    taLocation.setText(rs.getString("Location"));
+                    taNotes.setText(rs.getString("Notes"));
+                }
+                String query1 = "Select Supplier_name from supplier where Supplier_id='"+SupplierId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    cbSupplier.setSelectedItem(rs1.getString("Supplier_name"));
+                    Supplier=cbSupplier.getSelectedItem().toString().trim();
+                }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_tfSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnClear;
     private javax.swing.JButton bnClose;
     private javax.swing.JButton bnDelete;
     private javax.swing.JButton bnSave;
@@ -616,7 +883,6 @@ public class jplItems extends JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -626,6 +892,7 @@ public class jplItems extends JPanel {
     private javax.swing.JTextField tfItemId;
     private javax.swing.JTextField tfItemName;
     private javax.swing.JTextField tfQuantity;
+    private javax.swing.JTextField tfSearch;
     private javax.swing.JTextField tfUnitPrice;
     // End of variables declaration//GEN-END:variables
 }
