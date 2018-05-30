@@ -50,7 +50,7 @@ public class jplAllRequisitions extends JPanel {
     }
     
     private void filltable(){
-        String query="select * from distribution";
+        String query="select * from requisition";
         try{
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             jtDistribution.setModel(DbUtils.resultSetToTableModel(rs));
@@ -198,9 +198,6 @@ public class jplAllRequisitions extends JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tfSearchMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tfSearchMouseEntered(evt);
-            }
         });
         tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -318,7 +315,7 @@ public class jplAllRequisitions extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
-        String query= "delete from distribution where Distribution_id='"+tfDistributionId.getText().trim()+"'";
+        String query= "delete from requisition where Requisition_id='"+tfDistributionId.getText().trim()+"'";
         try{
             if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                 JOptionPane.showMessageDialog(null, "Delete is Successful");
@@ -361,11 +358,11 @@ public class jplAllRequisitions extends JPanel {
         try{
             int row=jtDistribution.getSelectedRow();
             String TableClick=jtDistribution.getModel().getValueAt(row, 0).toString();
-            String query="select * from distribution where Distribution_id='"+TableClick+"'";
+            String query="select * from requisition where Requisition_id='"+TableClick+"'";
 
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -373,7 +370,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -408,11 +405,11 @@ public class jplAllRequisitions extends JPanel {
             try{
             int row=jtDistribution.getSelectedRow();
             String TableClick=jtDistribution.getModel().getValueAt(row, 0).toString();
-            String query="select * from distribution where Distribution_id='"+TableClick+"'";
+            String query="select * from requisition where Requisition_id='"+TableClick+"'";
 
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -420,7 +417,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -480,11 +477,11 @@ public class jplAllRequisitions extends JPanel {
                 bnDelete.setEnabled(true);
         
         try{
-            String query = "select * from distribution where Collector_id LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Collector_id LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -492,7 +489,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -511,11 +508,11 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Quantity LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Quantity LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -523,7 +520,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -542,11 +539,11 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Price LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Price LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -554,7 +551,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -573,11 +570,11 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Username LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Username LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -585,7 +582,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -604,11 +601,11 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Distribution_date LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Requisition_date LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -616,7 +613,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -635,11 +632,11 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Distribution_id LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Requisition_id LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -647,7 +644,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -666,11 +663,11 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Item_id LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from requisition where Item_id LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
@@ -678,7 +675,7 @@ public class jplAllRequisitions extends JPanel {
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -708,18 +705,18 @@ public class jplAllRequisitions extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
-            String query = "select * from distribution where Collector_id ='"+CollectorId+"%'";
+            String query = "select * from requisition where Collector_id ='"+CollectorId+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -749,18 +746,18 @@ public class jplAllRequisitions extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
-            String query = "select * from distribution where Item_id ='"+ItemId+"%'";
+            String query = "select * from requisition where Item_id ='"+ItemId+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
                 tfUsername.setText(rs.getString("Username"));
-                tfDate.setText(rs.getString("Distribution_date"));
+                tfDate.setText(rs.getString("Requisition_date"));
             }
             String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
                 ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
@@ -779,10 +776,6 @@ public class jplAllRequisitions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
     }//GEN-LAST:event_tfSearchKeyReleased
-
-    private void tfSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseEntered
-        
-    }//GEN-LAST:event_tfSearchMouseEntered
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
         tfSearch.setText("");
