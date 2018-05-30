@@ -7,6 +7,7 @@ package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
 import com.sun.glass.events.KeyEvent;
+import java.awt.Color;
 import net.proteanit.sql.DbUtils;
 /**
  *
@@ -39,6 +40,7 @@ public class jplSuppliers extends JPanel {
         tfContact.setText("");
         tfProducts.setText("");
         bnDelete.setEnabled(false);
+        tfSupplierId.setEditable(false);
         bnSearch.setText("Search");
         
     }
@@ -81,6 +83,7 @@ public class jplSuppliers extends JPanel {
         tfAddress = new javax.swing.JTextField();
         tfContact = new javax.swing.JTextField();
         tfSearch = new javax.swing.JTextField();
+        bnClear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -187,10 +190,33 @@ public class jplSuppliers extends JPanel {
                 tfNameFocusLost(evt);
             }
         });
+        tfName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfNameMouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Products");
         jLabel6.setToolTipText("");
+
+        tfProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfProductsMouseClicked(evt);
+            }
+        });
+
+        tfAddress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfAddressMouseClicked(evt);
+            }
+        });
+
+        tfContact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfContactMouseClicked(evt);
+            }
+        });
 
         tfSearch.setText("Search...");
         tfSearch.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,6 +227,17 @@ public class jplSuppliers extends JPanel {
         tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfSearchKeyReleased(evt);
+            }
+        });
+
+        bnClear.setBackground(new java.awt.Color(255, 255, 255));
+        bnClear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-clear.png"))); // NOI18N
+        bnClear.setText("Clear");
+        bnClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnClearActionPerformed(evt);
             }
         });
 
@@ -217,37 +254,42 @@ public class jplSuppliers extends JPanel {
                         .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(bnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bnDelete)
+                                .addGap(26, 26, 26)
+                                .addComponent(bnClear)
+                                .addGap(18, 18, 18)
+                                .addComponent(bnClose))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tfSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel6)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                        .addComponent(tfProducts)
-                                        .addComponent(tfAddress)
-                                        .addComponent(tfContact)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGap(10, 10, 10)
-                                            .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(bnDelete)
-                                            .addGap(37, 37, 37)
-                                            .addComponent(bnClose)
-                                            .addGap(28, 28, 28)))))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(137, 137, 137))
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                            .addComponent(tfProducts)
+                                            .addComponent(tfAddress)
+                                            .addComponent(tfContact))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,11 +314,11 @@ public class jplSuppliers extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(tfContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(tfProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -285,7 +327,8 @@ public class jplSuppliers extends JPanel {
                             .addComponent(bnSearch)
                             .addComponent(bnDelete)
                             .addComponent(bnSave)
-                            .addComponent(bnClose))
+                            .addComponent(bnClose)
+                            .addComponent(bnClear))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
@@ -295,10 +338,107 @@ public class jplSuppliers extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSaveActionPerformed
-        String query="insert into supplier values ('"+tfSupplierId.getText()+"','"+tfName.getText()+"','"+tfAddress.getText()+"','"+tfContact.getText()+"','"+tfProducts.getText()+"')";
+        if (tfName.getText().isEmpty()&&tfAddress.getText().isEmpty()&&tfContact.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfAddress.setBackground(Color.red);
+            tfContact.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+        if (tfName.getText().isEmpty()&&tfAddress.getText().isEmpty()&&tfContact.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfAddress.setBackground(Color.red);
+            tfContact.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+        if (tfName.getText().isEmpty()&&tfAddress.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfAddress.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+        if (tfAddress.getText().isEmpty()&&tfContact.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfAddress.setBackground(Color.red);
+            tfContact.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+        if (tfName.getText().isEmpty()&&tfContact.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfContact.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfName.getText().isEmpty()&&tfContact.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfContact.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfName.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfContact.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfContact.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfName.getText().isEmpty()&&tfAddress.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            tfAddress.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfAddress.getText().isEmpty()&&tfContact.getText().isEmpty()){
+            tfAddress.setBackground(Color.red);
+            tfContact.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfAddress.getText().isEmpty()&&tfProducts.getText().isEmpty()){
+            tfAddress.setBackground(Color.red);
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (tfName.getText().isEmpty()){
+            tfName.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (tfContact.getText().isEmpty()){
+            tfContact.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (tfProducts.getText().isEmpty()){
+            tfProducts.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (tfAddress.getText().isEmpty()){
+            tfAddress.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+        if (tfName.getText().isEmpty()||tfAddress.getText().isEmpty()||tfContact.getText().isEmpty()||tfProducts.getText().isEmpty() )
+        {
+            JOptionPane.showMessageDialog(null, "Complete all fields");
+            return;
+        }
+        String query="insert into supplier values (null,'"+tfName.getText()+"','"+tfAddress.getText()+"','"+tfContact.getText()+"','"+tfProducts.getText()+"')";
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
-               JOptionPane.showMessageDialog(null, "Successfully saved Item");
+               JOptionPane.showMessageDialog(null, "Successfully saved Supplier");
                 tfSupplierId.setText("");
                 tfName.setText("");
                 tfAddress.setText("");
@@ -374,6 +514,7 @@ public class jplSuppliers extends JPanel {
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
         if (bnSearch.getText().equals("Search")){
             if (tfSupplierId.getText().isEmpty()){
+                tfSupplierId.setEditable(true);
                 JOptionPane.showMessageDialog(null, "Enter Supplier ID");
                 return;  
             }
@@ -508,8 +649,23 @@ public class jplSuppliers extends JPanel {
     }//GEN-LAST:event_tfSearchMouseClicked
 
     private void tfSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyReleased
+        if (tfSearch.getText().isEmpty() )
+        {
+            initialization();
+            return;
+        }
+        tfSupplierId.setEditable(false);
+                tfName.setEditable(false);
+                tfAddress.setEditable(false);
+                tfContact.setEditable(false);
+                tfProducts.setEditable(false);
+                
+                bnSave.setEnabled(false);
+                bnDelete.setEnabled(true);
+                bnSearch.setText("Edit");
+        
         try{
-            String query = "select * from supplier where Supplier_name LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from supplier where Address LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfSupplierId.setText(rs.getString("Supplier_id"));
@@ -523,7 +679,7 @@ public class jplSuppliers extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from supplier where Supplier_id LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from supplier where Contact LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfSupplierId.setText(rs.getString("Supplier_id"));
@@ -537,7 +693,7 @@ public class jplSuppliers extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from supplier where Address LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from supplier where Products LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfSupplierId.setText(rs.getString("Supplier_id"));
@@ -551,7 +707,7 @@ public class jplSuppliers extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from supplier where Contact LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from supplier where Supplier_name LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfSupplierId.setText(rs.getString("Supplier_id"));
@@ -565,7 +721,7 @@ public class jplSuppliers extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from supplier where Products LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from supplier where Supplier_id LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfSupplierId.setText(rs.getString("Supplier_id"));
@@ -580,8 +736,30 @@ public class jplSuppliers extends JPanel {
         }
     }//GEN-LAST:event_tfSearchKeyReleased
 
+    private void bnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnClearActionPerformed
+        initialization();
+        bnSave.setEnabled(true);
+    }//GEN-LAST:event_bnClearActionPerformed
+
+    private void tfNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNameMouseClicked
+        tfName.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfNameMouseClicked
+
+    private void tfAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfAddressMouseClicked
+        tfAddress.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfAddressMouseClicked
+
+    private void tfContactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfContactMouseClicked
+        tfContact.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfContactMouseClicked
+
+    private void tfProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfProductsMouseClicked
+        tfProducts.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfProductsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnClear;
     private javax.swing.JButton bnClose;
     private javax.swing.JButton bnDelete;
     private javax.swing.JButton bnSave;
