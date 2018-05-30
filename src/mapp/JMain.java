@@ -377,7 +377,7 @@ public class JMain extends JFrame {
 
     private void mnuDistributeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDistributeActionPerformed
      if (closeOption()){
-        displayForm(new jplDistribution(jplMain,mnuHome));
+        displayForm(new jplRequisition(jplMain,mnuHome));
      }
     }//GEN-LAST:event_mnuDistributeActionPerformed
 
@@ -434,7 +434,7 @@ public class JMain extends JFrame {
 
     private void mnuDistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDistributionActionPerformed
         if (closeOption()){
-        displayForm(new jplAllDistributions(jplMain,mnuHome));
+        displayForm(new jplAllRequisitions(jplMain,mnuHome));
         }
     }//GEN-LAST:event_mnuDistributionActionPerformed
 
