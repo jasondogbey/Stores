@@ -94,7 +94,7 @@ public class jplAllDistributions extends JPanel {
         setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Item ID:");
+        jLabel3.setText("Item:");
         jLabel3.setToolTipText("");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -168,7 +168,7 @@ public class jplAllDistributions extends JPanel {
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Collector ID:");
+        jLabel5.setText("Collector:");
         jLabel5.setToolTipText("");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -464,8 +464,23 @@ public class jplAllDistributions extends JPanel {
     }//GEN-LAST:event_tfCollectorIdActionPerformed
 
     private void tfSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyReleased
+        if (tfSearch.getText().isEmpty() )
+        {
+            initialization();
+            return;
+        }
+        tfDistributionId.setEditable(false);
+                tfItemId.setEditable(false);
+                tfCollectorId.setEditable(false);
+                tfQuantity.setEditable(false);
+                tfPrice.setEditable(false);
+                tfUsername.setEditable(false);
+                tfDate.setEditable(false);
+                
+                bnDelete.setEnabled(true);
+        
         try{
-            String query = "select * from distribution where Distribution_id LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Collector_id LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
@@ -496,7 +511,7 @@ public class jplAllDistributions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Item_id LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Quantity LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
@@ -527,7 +542,7 @@ public class jplAllDistributions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Collector_id LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Price LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
@@ -558,7 +573,7 @@ public class jplAllDistributions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Quantity LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Username LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
@@ -589,7 +604,7 @@ public class jplAllDistributions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Price LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Distribution_date LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
@@ -620,7 +635,7 @@ public class jplAllDistributions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Username LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Distribution_id LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
@@ -651,13 +666,95 @@ public class jplAllDistributions extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from distribution where Distribution_date LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from distribution where Item_id LIKE '"+tfSearch.getText()+"%'";
              ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Distribution_id"));
                 //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
+                //tfCollectorId.setText(rs.getString("Collector_id"));
+                CollectorId=Integer.parseInt(rs.getString("Collector_id"));
+                tfQuantity.setText(rs.getString("Quantity"));
+                tfPrice.setText(rs.getString("Price"));
+                tfUsername.setText(rs.getString("Username"));
+                tfDate.setText(rs.getString("Distribution_date"));
+            }
+            String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    tfItemId.setText(rs1.getString("Item_name"));
+                    Item=tfItemId.getText().toString().trim();
+                }
+            String query2 = "Select Collector_name from collector where Collector_id='"+CollectorId+"'";
+                ResultSet rs2 = utility.DBconnection.getStatement().executeQuery(query2);
+                while(rs2.next()){
+                    tfCollectorId.setText(rs2.getString("Collector_name"));
+                    Collector=tfCollectorId.getText().toString().trim();
+                }
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            try{
+            String query = "select * from collector where Collector_name LIKE '"+tfSearch.getText()+"%'";
+             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+           
+             while(rs.next()){
+                CollectorId=Integer.parseInt(rs.getString("Collector_id"));
+            }
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+            String query = "select * from distribution where Collector_id ='"+CollectorId+"%'";
+             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+           
+             while(rs.next()){
+                tfDistributionId.setText(rs.getString("Distribution_id"));
+                //tfItemId.setText(rs.getString("Item_id"));
+                //tfCollectorId.setText(rs.getString("Collector_id"));
+                ItemId=Integer.parseInt(rs.getString("Item_id"));
+                tfQuantity.setText(rs.getString("Quantity"));
+                tfPrice.setText(rs.getString("Price"));
+                tfUsername.setText(rs.getString("Username"));
+                tfDate.setText(rs.getString("Distribution_date"));
+            }
+            String query1 = "Select Item_name from item where Item_id='"+ItemId+"'";
+                ResultSet rs1 = utility.DBconnection.getStatement().executeQuery(query1);
+                while(rs1.next()){
+                    tfItemId.setText(rs1.getString("Item_name"));
+                    Item=tfItemId.getText().toString().trim();
+                }
+            String query2 = "Select Collector_name from collector where Collector_id='"+CollectorId+"'";
+                ResultSet rs2 = utility.DBconnection.getStatement().executeQuery(query2);
+                while(rs2.next()){
+                    tfCollectorId.setText(rs2.getString("Collector_name"));
+                    Collector=tfCollectorId.getText().toString().trim();
+                }
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            try{
+            String query = "select * from item where Item_name LIKE '"+tfSearch.getText()+"%'";
+             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+           
+             while(rs.next()){
+                ItemId=Integer.parseInt(rs.getString("Item_id"));
+            }
+                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+            String query = "select * from distribution where Item_id ='"+ItemId+"%'";
+             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
+           
+             while(rs.next()){
+                tfDistributionId.setText(rs.getString("Distribution_id"));
+                //tfItemId.setText(rs.getString("Item_id"));
                 //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
