@@ -37,7 +37,8 @@ public class jplHome extends JPanel {
         this.reg=reg;
         this.gohome=gohome;
         this.search=search;
-    
+        hide();
+        hide1();
         
     }
     public jplHome() {
@@ -49,18 +50,17 @@ public class jplHome extends JPanel {
             home.validate();
             home.repaint();
         }
-    public boolean permission(){
-        if (lbPanel.getText().equals("ADMIN")){
-            return true;
-        } else{
-            return false;
+    
+        public void hide(){
+        if (!(lbPanel.getText().equals("ADMIN"))){
+         bnRegisterUser.setVisible(false);
         }
     }
-        public boolean permission1(){
-        if (lbPanel.getText().equals("ADMIN")||lbPanel.getText().equals("MANAGER")){
-            return true;
-        } else{
-            return false;
+        public void hide1(){
+        if (!(lbPanel.getText().equals("ADMIN")||lbPanel.getText().equals("MANAGER"))){
+         bnRegisterUser.setVisible(false);
+         bnSupplier.setVisible(false);
+         bnCollector.setVisible(false);
         }
     }
     /**
@@ -75,8 +75,8 @@ public class jplHome extends JPanel {
         lbPanel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bnSupplier = new javax.swing.JButton();
+        bnCollector = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         bnRegisterUser = new javax.swing.JButton();
@@ -119,31 +119,31 @@ public class jplHome extends JPanel {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 153, 153));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-suppliers-Pickup-icon.png"))); // NOI18N
-        jButton3.setText("Suppliers");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setIconTextGap(0);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bnSupplier.setBackground(new java.awt.Color(0, 153, 153));
+        bnSupplier.setForeground(new java.awt.Color(255, 255, 255));
+        bnSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-suppliers-Pickup-icon.png"))); // NOI18N
+        bnSupplier.setText("Suppliers");
+        bnSupplier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnSupplier.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bnSupplier.setIconTextGap(0);
+        bnSupplier.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bnSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bnSupplierActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 153));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/botton-collectors-Groups-Military-Personnel-Light-icon.png"))); // NOI18N
-        jButton4.setText("Collectors");
-        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setIconTextGap(0);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        bnCollector.setBackground(new java.awt.Color(0, 153, 153));
+        bnCollector.setForeground(new java.awt.Color(255, 255, 255));
+        bnCollector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/botton-collectors-Groups-Military-Personnel-Light-icon.png"))); // NOI18N
+        bnCollector.setText("Collectors");
+        bnCollector.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnCollector.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bnCollector.setIconTextGap(0);
+        bnCollector.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bnCollector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                bnCollectorActionPerformed(evt);
             }
         });
 
@@ -221,11 +221,11 @@ public class jplHome extends JPanel {
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bnRegisterUser, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnCollector, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
         );
@@ -235,8 +235,8 @@ public class jplHome extends JPanel {
                 .addComponent(lbPanel)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnCollector, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bnSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
@@ -249,39 +249,31 @@ public class jplHome extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(!permission1()){
-           JOptionPane.showMessageDialog(null,"You do not have the right permission!");
-       } else {
-           displayForm(new jplSuppliers(this.home, this.gohome));   
-       }
+    private void bnSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSupplierActionPerformed
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+           displayForm(new jplSuppliers(this.home, this.gohome));   
+        
+    }//GEN-LAST:event_bnSupplierActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         displayForm(new jplItems(this.home,this.gohome));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void bnRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRegisterUserActionPerformed
-       if(!permission()){
-           JOptionPane.showMessageDialog(null,"You do not have the right permission!");
-       } else {
+
            displayForm(new jplUsers(this.home, this.gohome));   
-       }
+
     }//GEN-LAST:event_bnRegisterUserActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        displayForm(new jplDistribution(this.home, this.gohome));
+        displayForm(new jplRequisition(this.home, this.gohome));
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(!permission1()){
-           JOptionPane.showMessageDialog(null,"You do not have the right permission!");
-       } else {
+    private void bnCollectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCollectorActionPerformed
+
            displayForm(new jplCollectors(this.home, this.gohome));  
-       }
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bnCollectorActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         displayForm(new jplChangePassword(this.home, this.gohome));
@@ -297,11 +289,11 @@ public class jplHome extends JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnCollector;
     private javax.swing.JButton bnRegisterUser;
+    private javax.swing.JButton bnSupplier;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
