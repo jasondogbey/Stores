@@ -331,7 +331,7 @@ public class jplCollectors extends JPanel {
                     tfName.setText(rs.getString("Collector_name"));
                     tfAddress.setText(rs.getString("Address"));
                     tfDate.setText(rs.getString("Date"));
-                    tfDistributionId.setText(rs.getString("Distribution_Id"));
+                    tfDistributionId.setText(rs.getString("Requisition_Id"));
 
                 }
                 tfCollectorId.setEditable(false);
@@ -448,7 +448,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             tfCollectorId.setEditable(false);
             tfName.setEditable(false);
@@ -476,7 +476,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             tfCollectorId.setEditable(false);
             tfName.setEditable(false);
@@ -515,7 +515,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             
         }catch(Exception e){
@@ -529,7 +529,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             
         }catch(Exception e){
@@ -543,7 +543,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             
         }catch(Exception e){
@@ -557,7 +557,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             
         }catch(Exception e){
@@ -571,7 +571,7 @@ public class jplCollectors extends JPanel {
                 tfName.setText(rs.getString("Collector_name"));
                 tfAddress.setText(rs.getString("Address"));
                 tfDate.setText(rs.getString("Date"));
-                tfDistributionId.setText(rs.getString("Distribution_id"));
+                tfDistributionId.setText(rs.getString("Requisition_id"));
             }
             
         }catch(Exception e){
