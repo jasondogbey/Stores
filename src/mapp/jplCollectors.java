@@ -82,6 +82,7 @@ public class jplCollectors extends JPanel {
         tfSearch = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tfDistributionId = new javax.swing.JTextField();
+        bnClear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -183,11 +184,6 @@ public class jplCollectors extends JPanel {
                 tfSearchMouseClicked(evt);
             }
         });
-        tfSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSearchActionPerformed(evt);
-            }
-        });
         tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfSearchKeyReleased(evt);
@@ -197,6 +193,17 @@ public class jplCollectors extends JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Distribution ID");
         jLabel6.setToolTipText("");
+
+        bnClear.setBackground(new java.awt.Color(255, 255, 255));
+        bnClear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-clear.png"))); // NOI18N
+        bnClear.setText("Clear");
+        bnClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -210,42 +217,48 @@ public class jplCollectors extends JPanel {
                         .addGap(39, 39, 39)
                         .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfCollectorId, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel5))
-                                            .addGap(44, 44, 44))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                        .addComponent(tfAddress)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGap(49, 49, 49)
-                                            .addComponent(bnDelete)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(bnClose)
-                                            .addGap(28, 28, 28)))))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(24, 24, 24)
-                                        .addComponent(tfDistributionId))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(24, 24, 24)
-                                        .addComponent(tfDate)))
+                                        .addComponent(tfDate))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(tfDistributionId)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(bnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(bnClear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bnDelete)
+                                .addGap(36, 36, 36)
+                                .addComponent(bnClose)
+                                .addGap(28, 28, 28))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(18, 18, 18))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(65, 65, 65)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfName)
+                                        .addComponent(tfCollectorId, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0))
@@ -288,7 +301,8 @@ public class jplCollectors extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bnSearch)
                             .addComponent(bnDelete)
-                            .addComponent(bnClose))))
+                            .addComponent(bnClose)
+                            .addComponent(bnClear))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -479,8 +493,22 @@ public class jplCollectors extends JPanel {
     }//GEN-LAST:event_jtCollectorsKeyReleased
 
     private void tfSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyReleased
+        if (tfSearch.getText().isEmpty() )
+        {
+            initialization();
+            return;
+        }
+        tfCollectorId.setEditable(false);
+            tfName.setEditable(false);
+            tfAddress.setEditable(false);
+            tfDate.setEditable(false);
+            
+
+            bnDelete.setEnabled(true);
+            bnSearch.setText("Edit");
+        
         try{
-            String query = "select * from collector where Collector_name LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from collector where Address LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfCollectorId.setText(rs.getString("Collector_id"));
@@ -494,7 +522,7 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from collector where Collector_id LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from collector where Date LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfCollectorId.setText(rs.getString("Collector_id"));
@@ -508,7 +536,7 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from collector where Address LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from collector where Distribution_id LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfCollectorId.setText(rs.getString("Collector_id"));
@@ -522,7 +550,7 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from collector where Date LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from collector where Collector_name LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfCollectorId.setText(rs.getString("Collector_id"));
@@ -536,7 +564,7 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from collector where Distribution_id LIKE '%"+tfSearch.getText()+"%'";
+            String query = "select * from collector where Collector_id LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfCollectorId.setText(rs.getString("Collector_id"));
@@ -555,12 +583,14 @@ public class jplCollectors extends JPanel {
         tfSearch.setText("");
     }//GEN-LAST:event_tfSearchMouseClicked
 
-    private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSearchActionPerformed
+    private void bnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnClearActionPerformed
+        initialization();
+        tfCollectorId.setEditable(true);
+    }//GEN-LAST:event_bnClearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnClear;
     private javax.swing.JButton bnClose;
     private javax.swing.JButton bnDelete;
     private javax.swing.JButton bnSearch;
