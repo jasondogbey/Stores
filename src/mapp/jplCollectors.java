@@ -35,6 +35,7 @@ public class jplCollectors extends JPanel {
         findCollectors();
         filltable();
         tfDistributionId.setEditable(false);
+        tfDate.setEditable(false);
     }
     
     public void initialization(){
