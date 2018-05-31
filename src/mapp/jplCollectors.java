@@ -248,7 +248,7 @@ public class jplCollectors extends JPanel {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Distribution ID");
+        jLabel6.setText("Requisition ID");
         jLabel6.setToolTipText("");
 
         bnClear.setBackground(new java.awt.Color(255, 255, 255));
