@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package mapp;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.ResultSet;
 import javax.swing.*;
 import java.awt.print.PrinterException;
@@ -71,9 +73,7 @@ public class jplRequisition extends JPanel {
         //tfQuantity.setEditable(false);
         //bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
-        bnPrint.setVisible(false);
-        //bnSearch.setVisible(false);
-        
+        bnPrint.setVisible(false);   
     }
     public void initializeCollector(){
         tfCollectorId.setText("");
@@ -81,7 +81,7 @@ public class jplRequisition extends JPanel {
         tfAddress.setText("");
         tfCollectorId.setEditable(false);
         cbCollectorName.setEnabled(false);
-        bnRetrieve.setEnabled(false);
+     
         
     }
     private void fillcombo(){
@@ -198,6 +198,7 @@ public class jplRequisition extends JPanel {
             }
     }
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -238,8 +239,6 @@ public class jplRequisition extends JPanel {
         tfAddress = new javax.swing.JTextField();
         cbCollectorName = new javax.swing.JComboBox<>();
         rbCollector = new javax.swing.JRadioButton();
-        bnRetrieve = new javax.swing.JButton();
-        tfDetails = new javax.swing.JButton();
         bnClear = new javax.swing.JButton();
         bnViewAll = new javax.swing.JButton();
 
@@ -295,6 +294,16 @@ public class jplRequisition extends JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Requisition ID:");
+
+        cbItem.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cbItemPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         txtReciept.setEditable(false);
         txtReciept.setColumns(20);
@@ -366,6 +375,16 @@ public class jplRequisition extends JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Address:");
 
+        cbCollectorName.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cbCollectorNamePopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         rbCollector.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         rbCollector.setText("Select Existing");
         rbCollector.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -374,21 +393,13 @@ public class jplRequisition extends JPanel {
             }
         });
 
-        bnRetrieve.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bnRetrieve.setText("Retrieve");
-        bnRetrieve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnRetrieveActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(29, 29, 29)
@@ -396,13 +407,12 @@ public class jplRequisition extends JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(tfCollector))
+                        .addComponent(tfCollector, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbCollectorName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbCollector)
+                        .addComponent(cbCollectorName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(bnRetrieve))
+                        .addComponent(rbCollector)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(35, 35, 35)
@@ -414,8 +424,7 @@ public class jplRequisition extends JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCollectorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbCollector)
-                    .addComponent(bnRetrieve))
+                    .addComponent(rbCollector))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCollectorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -430,14 +439,6 @@ public class jplRequisition extends JPanel {
                     .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        tfDetails.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        tfDetails.setText("Details");
-        tfDetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDetailsActionPerformed(evt);
-            }
-        });
 
         bnClear.setBackground(new java.awt.Color(255, 255, 255));
         bnClear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -483,14 +484,6 @@ public class jplRequisition extends JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel5))
-                            .addGap(72, 72, 72)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                .addComponent(tfUnitPrice)))
-                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel7)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfDistributionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -500,17 +493,24 @@ public class jplRequisition extends JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tfUserCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(100, 100, 100)
-                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfDetails))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(40, 40, 40)
                             .addComponent(tfDistributionId))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(100, 100, 100)
+                                .addComponent(cbItem, 0, 233, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                    .addComponent(tfUnitPrice))))))
                 .addGap(0, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -548,11 +548,10 @@ public class jplRequisition extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfDistributionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfDetails))
+                            .addComponent(cbItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -574,7 +573,7 @@ public class jplRequisition extends JPanel {
                             .addComponent(bnSave)
                             .addComponent(bnClear)
                             .addComponent(bnPrint))
-                        .addGap(0, 6, Short.MAX_VALUE))
+                        .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jScrollPane2)))
@@ -780,7 +779,7 @@ if (txtReciept.getText().isEmpty())
     }//GEN-LAST:event_bnPrintActionPerformed
 
     private void bnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnNewActionPerformed
-
+        retrieveItemDetails();
         tfQuantity.setEditable(true);
         txtReciept.setText(null);
         txtReciept.append("\n");
@@ -866,8 +865,7 @@ if (txtReciept.getText().isEmpty())
             tfCollectorId.setEditable(false);
             tfCollector.setEditable(false);
             tfAddress.setEditable(false);
-            bnRetrieve.setEnabled(true);
-           
+            retrieveCollectorDetails();
             
         } else{
             initializeCollector();
@@ -876,14 +874,6 @@ if (txtReciept.getText().isEmpty())
             
         }
     }//GEN-LAST:event_rbCollectorMouseClicked
-
-    private void bnRetrieveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRetrieveActionPerformed
-        retrieveCollectorDetails();
-    }//GEN-LAST:event_bnRetrieveActionPerformed
-
-    private void tfDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDetailsActionPerformed
-        retrieveItemDetails();
-    }//GEN-LAST:event_tfDetailsActionPerformed
 
     private void bnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnClearActionPerformed
         initialization();
@@ -899,6 +889,14 @@ if (txtReciept.getText().isEmpty())
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUserCode1ActionPerformed
 
+    private void cbCollectorNamePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCollectorNamePopupMenuWillBecomeInvisible
+        retrieveCollectorDetails();
+    }//GEN-LAST:event_cbCollectorNamePopupMenuWillBecomeInvisible
+
+    private void cbItemPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbItemPopupMenuWillBecomeInvisible
+        retrieveItemDetails();
+    }//GEN-LAST:event_cbItemPopupMenuWillBecomeInvisible
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnClear;
@@ -906,7 +904,6 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JButton bnDone;
     private javax.swing.JButton bnNew;
     private javax.swing.JButton bnPrint;
-    private javax.swing.JButton bnRetrieve;
     private javax.swing.JButton bnSave;
     private javax.swing.JButton bnSearch;
     private javax.swing.JButton bnSearch1;
@@ -929,7 +926,6 @@ if (txtReciept.getText().isEmpty())
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfCollector;
     private javax.swing.JTextField tfCollectorId;
-    private javax.swing.JButton tfDetails;
     private javax.swing.JTextField tfDistributionDate;
     private javax.swing.JTextField tfDistributionId;
     private javax.swing.JTextField tfQuantity;
