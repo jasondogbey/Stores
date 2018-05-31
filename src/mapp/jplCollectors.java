@@ -7,6 +7,8 @@ package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
 import com.sun.glass.events.KeyEvent;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 /**
  *
@@ -30,6 +32,7 @@ public class jplCollectors extends JPanel {
         this.gohome=gohome;
         //bnSearch.setText("Search");
         initialization();
+        findCollectors();
         filltable();
         tfDistributionId.setEditable(false);
     }
@@ -54,7 +57,60 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
     }
+     public ArrayList<Collector> ListCollectors(String ValToSearch){
+        ArrayList<Collector> collectorsList = new ArrayList<Collector>();
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM `collector` WHERE CONCAT(`Collector_id`, `Collector_name`, `Address`, `Date`, `Requisition_id`) LIKE '"+ValToSearch+"%'";
+            rs = utility.DBconnection.getStatement().executeQuery(query);
+            Collector collector;
+            while(rs.next()){
+                collector = new Collector(
+                    rs.getInt("Collector_id"),
+                    rs.getString("Collector_name"),
+                    rs.getString("Address"),
+                    rs.getString("Date"),
+                    rs.getString("Requisition_id"));
+                    collectorsList.add(collector);
+                }
 
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "SELECT * FROM `collector` WHERE CONCAT(`Collector_name`, `Address`, `Date`, `Requisition_id`) LIKE '"+ValToSearch+"%'";
+            rs = utility.DBconnection.getStatement().executeQuery(query);
+            Collector collector;
+            while(rs.next()){
+                collector = new Collector(
+                    rs.getInt("Collector_id"),
+                    rs.getString("Collector_name"),
+                    rs.getString("Address"),
+                    rs.getString("Date"),
+                    rs.getString("Requisition_id"));
+                    collectorsList.add(collector);
+                }
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        return collectorsList;
+    }
+    public void findCollectors(){
+        ArrayList<Collector> collectors = ListCollectors(tfSearch.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Collector_id","Collector_name","Address","Date","Requisition_id"});
+        Object[] row= new Object[5];
+        for (int i=0; i< collectors.size(); i++){
+            row[0]= collectors.get(i).getCollector_id();
+            row[1]= collectors.get(i).getCollector_name();
+            row[2]= collectors.get(i).getAddress();
+            row[3]= collectors.get(i).getDate();
+            row[4]= collectors.get(i).getRequisition_id();
+            model.addRow(row);
+        }
+        jtCollectors.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -496,6 +552,7 @@ public class jplCollectors extends JPanel {
         if (tfSearch.getText().isEmpty() )
         {
             initialization();
+            filltable();
             return;
         }
         tfCollectorId.setEditable(false);
@@ -536,7 +593,7 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         try{
-            String query = "select * from collector where Distribution_id LIKE '"+tfSearch.getText()+"%'";
+            String query = "select * from collector where Requisition_id LIKE '"+tfSearch.getText()+"%'";
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfCollectorId.setText(rs.getString("Collector_id"));
@@ -577,6 +634,7 @@ public class jplCollectors extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
+        findCollectors();
     }//GEN-LAST:event_tfSearchKeyReleased
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
