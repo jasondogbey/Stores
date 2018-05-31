@@ -256,7 +256,7 @@ public class JMain extends JFrame {
 
         mnuDistribute.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK));
         mnuDistribute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
-        mnuDistribute.setText("Distribute");
+        mnuDistribute.setText("Requisite");
         mnuDistribute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuDistributeActionPerformed(evt);
@@ -281,7 +281,7 @@ public class JMain extends JFrame {
         mnuSearch.setText("Search");
 
         mnuDistribution.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-transaction chart-icon.png"))); // NOI18N
-        mnuDistribution.setText("Distributions");
+        mnuDistribution.setText("Requisitions");
         mnuDistribution.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuDistributionActionPerformed(evt);

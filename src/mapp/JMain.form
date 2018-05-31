@@ -55,7 +55,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/mapp/button-transaction chart-icon.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Distribute"/>
+                <Property name="text" type="java.lang.String" value="Requisite"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuDistributeActionPerformed"/>
@@ -90,7 +90,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/mapp/button-transaction chart-icon.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Distributions"/>
+                <Property name="text" type="java.lang.String" value="Requisitions"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuDistributionActionPerformed"/>
