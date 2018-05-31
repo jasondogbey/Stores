@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import javax.swing.*;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 /**
  *
@@ -31,6 +33,7 @@ public class jplSuppliers extends JPanel {
         this.gohome=gohome;
         //bnSearch.setText("Search");
         initialization();
+        findSuppliers();
         filltable();
     }
     public void initialization(){
@@ -53,6 +56,60 @@ public class jplSuppliers extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
+    }
+    public ArrayList<Supplier> ListSuppliers(String ValToSearch){
+        ArrayList<Supplier> suppliersList = new ArrayList<Supplier>();
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM `supplier` WHERE CONCAT(`Supplier_id`, `Supplier_name`, `Address`, `Contact`, `Products`) LIKE '"+ValToSearch+"%'";
+            rs = utility.DBconnection.getStatement().executeQuery(query);
+            Supplier supplier;
+            while(rs.next()){
+                supplier = new Supplier(
+                    rs.getInt("Supplier_id"),
+                    rs.getString("Supplier_name"),
+                    rs.getString("Address"),
+                    rs.getString("Contact"),
+                    rs.getString("Products"));
+                    suppliersList.add(supplier);
+                }
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "SELECT * FROM `supplier` WHERE CONCAT(`Supplier_name`, `Address`, `Contact`, `Products`) LIKE '"+ValToSearch+"%'";
+            rs = utility.DBconnection.getStatement().executeQuery(query);
+            Supplier supplier;
+            while(rs.next()){
+                supplier = new Supplier(
+                    rs.getInt("Supplier_id"),
+                    rs.getString("Supplier_name"),
+                    rs.getString("Address"),
+                    rs.getString("Contact"),
+                    rs.getString("Products"));
+                    suppliersList.add(supplier);
+                }
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        return suppliersList;
+    }
+    public void findSuppliers(){
+        ArrayList<Supplier> suppliers = ListSuppliers(tfSearch.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Supplier_id","Supplier_name","Address","Contact","Products"});
+        Object[] row= new Object[5];
+        for (int i=0; i< suppliers.size(); i++){
+            row[0]= suppliers.get(i).getSupplier_id();
+            row[1]= suppliers.get(i).getSupplier_name();
+            row[2]= suppliers.get(i).getAddress();
+            row[3]= suppliers.get(i).getContact();
+            row[4]= suppliers.get(i).getProducts();
+            model.addRow(row);
+        }
+        jtSuppliers.setModel(model);
     }
 
     /**
@@ -652,6 +709,7 @@ public class jplSuppliers extends JPanel {
         if (tfSearch.getText().isEmpty() )
         {
             initialization();
+            filltable();
             return;
         }
         tfSupplierId.setEditable(false);
@@ -734,6 +792,7 @@ public class jplSuppliers extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
+        findSuppliers();
     }//GEN-LAST:event_tfSearchKeyReleased
 
     private void bnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnClearActionPerformed
