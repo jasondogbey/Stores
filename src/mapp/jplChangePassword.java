@@ -1,5 +1,6 @@
 
 package mapp;
+import java.awt.Color;
 import javax.swing.*;
 
 
@@ -95,9 +96,21 @@ public class jplChangePassword extends JPanel {
             }
         });
 
-        pfNewPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pfNewPasswordActionPerformed(evt);
+        pfOldPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pfOldPasswordMouseClicked(evt);
+            }
+        });
+
+        pfNewPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pfNewPasswordMouseClicked(evt);
+            }
+        });
+
+        pfConfirmPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pfConfirmPasswordMouseClicked(evt);
             }
         });
 
@@ -163,6 +176,46 @@ public class jplChangePassword extends JPanel {
     }//GEN-LAST:event_bnCancelActionPerformed
 
     private void bnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnConfirmActionPerformed
+         if (pfOldPassword.getText().isEmpty() && pfNewPassword.getText().isEmpty() && pfConfirmPassword.getText().isEmpty()){
+            pfOldPassword.setBackground(Color.red);
+            pfNewPassword.setBackground(Color.red);
+            pfConfirmPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (pfOldPassword.getText().isEmpty() && pfNewPassword.getText().isEmpty()){
+            pfOldPassword.setBackground(Color.red);
+            pfNewPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (pfOldPassword.getText().isEmpty() && pfConfirmPassword.getText().isEmpty()){
+            pfOldPassword.setBackground(Color.red);
+            pfConfirmPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (pfNewPassword.getText().isEmpty() && pfConfirmPassword.getText().isEmpty()){
+            pfNewPassword.setBackground(Color.red);
+            pfConfirmPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+            if (pfOldPassword.getText().isEmpty()){
+            pfOldPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (pfNewPassword.getText().isEmpty()){
+            pfNewPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            if (pfConfirmPassword.getText().isEmpty()){
+            pfConfirmPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
         if (pfOldPassword.getText().isEmpty() || pfNewPassword.getText().isEmpty() || pfConfirmPassword.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Complete all fieds");
             return;
@@ -201,9 +254,17 @@ public class jplChangePassword extends JPanel {
          
     }//GEN-LAST:event_bnConfirmActionPerformed
 
-    private void pfNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfNewPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pfNewPasswordActionPerformed
+    private void pfOldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfOldPasswordMouseClicked
+        pfOldPassword.setBackground(Color.WHITE);
+    }//GEN-LAST:event_pfOldPasswordMouseClicked
+
+    private void pfNewPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfNewPasswordMouseClicked
+        pfNewPassword.setBackground(Color.WHITE);
+    }//GEN-LAST:event_pfNewPasswordMouseClicked
+
+    private void pfConfirmPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfConfirmPasswordMouseClicked
+        pfConfirmPassword.setBackground(Color.WHITE);
+    }//GEN-LAST:event_pfConfirmPasswordMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
