@@ -1,5 +1,6 @@
 package mapp;
 import com.sun.glass.events.KeyEvent;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.*;
 import mapp.jplHome;
@@ -85,15 +86,20 @@ public class jplLogin extends JPanel {
                 tfUsernameFocusLost(evt);
             }
         });
-        tfUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfUsernameActionPerformed(evt);
+        tfUsername.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfUsernameMouseClicked(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Password:");
 
+        pfPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pfPasswordMouseClicked(evt);
+            }
+        });
         pfPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 pfPasswordKeyPressed(evt);
@@ -214,7 +220,23 @@ public class jplLogin extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnLoginActionPerformed
-     if (tfUsername.getText().isEmpty() || pfPassword.getText().isEmpty()){
+     if (tfUsername.getText().isEmpty() && pfPassword.getText().isEmpty()){
+            tfUsername.setBackground(Color.red);
+            pfPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted fields are required");
+            return;
+        }
+     if (tfUsername.getText().isEmpty()){
+            tfUsername.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+     if (pfPassword.getText().isEmpty()){
+            pfPassword.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+        if (tfUsername.getText().isEmpty() || pfPassword.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Complete all fieds");
             return;
         }
@@ -285,10 +307,6 @@ public class jplLogin extends JPanel {
         tfUsername.setText(tfUsername.getText().toUpperCase());
     }//GEN-LAST:event_tfUsernameFocusLost
 
-    private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfUsernameActionPerformed
-
     private void bnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnConnectActionPerformed
         utility.DBconnection.Connection(tfIPAddress.getText().trim());
         if (utility.DBconnection.getStatus()== true){
@@ -303,6 +321,14 @@ public class jplLogin extends JPanel {
             bnLogin.setEnabled(false);
         }
     }//GEN-LAST:event_bnConnectActionPerformed
+
+    private void tfUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfUsernameMouseClicked
+        tfUsername.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tfUsernameMouseClicked
+
+    private void pfPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfPasswordMouseClicked
+        pfPassword.setBackground(Color.WHITE);
+    }//GEN-LAST:event_pfPasswordMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
