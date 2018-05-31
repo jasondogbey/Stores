@@ -686,7 +686,7 @@ public class jplRequisition extends JPanel {
            jd.setQuery(newQuery);
            JasperReport jr = JasperCompileManager.compileReport(jd);
            JasperPrint jp = JasperFillManager.fillReport(jr,para,conn);
-           JasperViewer.viewReport(jp);
+           JasperViewer.viewReport(jp, false);
        
        }
        catch(Exception e)
@@ -845,7 +845,7 @@ if (txtReciept.getText().isEmpty())
            jd.setQuery(newQuery);
            JasperReport jr = JasperCompileManager.compileReport(jd);
            JasperPrint jp = JasperFillManager.fillReport(jr,para,conn);
-           JasperViewer.viewReport(jp);
+           JasperViewer.viewReport(jp,false);
        
        }
        catch(Exception e)
