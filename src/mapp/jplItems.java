@@ -7,7 +7,9 @@ package mapp;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 /**
  *
@@ -35,9 +37,10 @@ public class jplItems extends JPanel {
         this.gohome=gohome;
         //bnSearch.setText("Search");
         initialization();
-          filltable();
+          
           fillcombo();
-      
+          findItems();
+          filltable();
     }
     public void initialization(){
         tfItemId.setText("");
@@ -82,6 +85,60 @@ public class jplItems extends JPanel {
         home.validate();
         home.repaint();
     }
+    public ArrayList<Item> ListItems(String ValToSearch){
+        ArrayList<Item> itemsList = new ArrayList<Item>();
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM `item` WHERE CONCAT(`Item_id`,`Item_name`, `Unit_price`, `Quantity`, `Supplier_id`) LIKE '"+ValToSearch+"%'";
+            rs = utility.DBconnection.getStatement().executeQuery(query);
+            Item item;
+            while(rs.next()){
+                item = new Item(
+                    rs.getInt("Item_id"),
+                    rs.getString("Item_name"),
+                    rs.getInt("Unit_price"),
+                    rs.getInt("Quantity"),
+                    rs.getInt("Supplier_id"));
+                    itemsList.add(item);
+                }
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        try{
+            String query = "SELECT * FROM `item` WHERE CONCAT(`Item_name`, `Unit_price`, `Quantity`, `Supplier_id`) LIKE '"+ValToSearch+"%'";
+            rs = utility.DBconnection.getStatement().executeQuery(query);
+            Item item;
+            while(rs.next()){
+                item = new Item(
+                    rs.getInt("Item_id"),
+                    rs.getString("Item_name"),
+                    rs.getInt("Unit_price"),
+                    rs.getInt("Quantity"),
+                    rs.getInt("Supplier_id"));
+                    itemsList.add(item);
+                }
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        return itemsList;
+    }
+    public void findItems(){
+        ArrayList<Item> items = ListItems(tfSearch.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Item_id","Item_name","Unit_price","Quantity","Supplier_id"});
+        Object[] row= new Object[5];
+        for (int i=0; i< items.size(); i++){
+            row[0]= items.get(i).getItem_id();
+            row[1]= items.get(i).getItem_name();
+            row[2]= items.get(i).getUnit_price();
+            row[3]= items.get(i).getQuantity();
+            row[4]= items.get(i).getSupplier_id();
+            model.addRow(row);
+        }
+        jtItems.setModel(model);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +174,7 @@ public class jplItems extends JPanel {
         cbSupplier = new javax.swing.JComboBox<>();
         bnClear = new javax.swing.JButton();
         tfSearch = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -270,6 +328,9 @@ public class jplItems extends JPanel {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Search");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -314,7 +375,9 @@ public class jplItems extends JPanel {
                         .addGap(48, 48, 48)
                         .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
                         .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -324,7 +387,8 @@ public class jplItems extends JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -361,12 +425,13 @@ public class jplItems extends JPanel {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bnSearch)
-                    .addComponent(bnSave)
                     .addComponent(bnDelete)
-                    .addComponent(bnClear)
-                    .addComponent(bnClose))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bnSave)
+                        .addComponent(bnClear)
+                        .addComponent(bnClose)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -712,6 +777,7 @@ public class jplItems extends JPanel {
         if (tfSearch.getText().isEmpty() )
         {
             initialization();
+            filltable();
             return;
         }
         tfItemId.setEditable(false);
@@ -865,6 +931,7 @@ public class jplItems extends JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
+        findItems();
     }//GEN-LAST:event_tfSearchKeyReleased
 
 
@@ -883,6 +950,7 @@ public class jplItems extends JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
