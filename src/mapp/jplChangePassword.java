@@ -14,9 +14,7 @@ public class jplChangePassword extends JPanel {
     final int pHeight = 250;
 
     JMenuItem gohome;
-    /**
-     * Creates new form jplChangePassword
-     */
+
     public jplChangePassword(JPanel jplMain,JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth,pHeight);
@@ -25,9 +23,7 @@ public class jplChangePassword extends JPanel {
         this.setLocation(x,y);
         this.setVisible(true);
         this.gohome=gohome;
-        initialization();
-        
-        
+        initialization();   
     }
     
     private void initialization(){
