@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mapp;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
@@ -24,9 +20,7 @@ public class jplItems extends JPanel {
     JPanel home;
     int SupplierId;
     String Supplier;
-    /**
-     * Creates new form jplItems
-     */
+ 
     public jplItems(JPanel jplMain, JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth, pHeight);
@@ -35,7 +29,6 @@ public class jplItems extends JPanel {
         this.setLocation(x, y);
         this.setVisible(true);
         this.gohome=gohome;
-        //bnSearch.setText("Search");
         initialization();
           
           fillcombo();
@@ -47,7 +40,7 @@ public class jplItems extends JPanel {
         tfItemName.setText("");
         tfUnitPrice.setText("");
         tfQuantity.setText("");
-        //taSuppliers.setText("");
+
         taLocation.setText("");
         taNotes.setText("");
         bnDelete.setEnabled(false);
@@ -447,7 +440,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -509,9 +502,9 @@ public class jplItems extends JPanel {
                     tfQuantity.setText("");
                     taLocation.setText("");
                     taNotes.setText("");
-                    //bnSearch.setText("Search");
+
                     initialization();
-                    //tfItemId.setEditable(true);
+
                     bnSave.setEnabled(true);
                     filltable();
                     cbSupplier.removeAllItems();
@@ -526,7 +519,6 @@ public class jplItems extends JPanel {
                     fillcombo();
                     taLocation.setText("");
                     taNotes.setText("");
-                    //bnSearch.setText("Search");
                     
                     tfItemId.setEditable(true);
                     tfItemName.setEditable(true);
@@ -633,8 +625,6 @@ public class jplItems extends JPanel {
                     initialization();
                     filltable();
                     
-                    //tfItemId.setEditable(true);
-                    //tfItemName.setEditable(true);
                     tfUnitPrice.setEditable(true);
                     tfQuantity.setEditable(true);
                    cbSupplier.setEnabled(true);
@@ -682,7 +672,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     cbSupplier.setEnabled(false);
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -692,7 +682,7 @@ public class jplItems extends JPanel {
                 tfItemName.setEditable(false);
                 tfUnitPrice.setEditable(false);
                 tfQuantity.setEditable(false);
-                //taSuppliers.setEditable(false);
+
                 cbSupplier.setEnabled(false);
                 taLocation.setEditable(false);
                 taNotes.setEditable(false);
@@ -722,7 +712,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                   // taSuppliers.setText(rs.getString("Suppliers"));
+
                     cbSupplier.setEnabled(false);
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -731,7 +721,7 @@ public class jplItems extends JPanel {
                 tfItemName.setEditable(false);
                 tfUnitPrice.setEditable(false);
                 tfQuantity.setEditable(false);
-                //taSuppliers.setEditable(false);
+
                 cbSupplier.setEnabled(false);
                 taLocation.setEditable(false);
                 taNotes.setEditable(false);
@@ -794,7 +784,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -817,7 +807,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -840,7 +830,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -863,7 +853,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -886,7 +876,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
@@ -909,7 +899,7 @@ public class jplItems extends JPanel {
                     tfItemName.setText(rs.getString("Item_name"));
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     tfQuantity.setText(rs.getString("Quantity"));
-                    //taSuppliers.setText(rs.getString("Suppliers"));
+
                     SupplierId=Integer.parseInt(rs.getString("Supplier_id"));
                     taLocation.setText(rs.getString("Location"));
                     taNotes.setText(rs.getString("Notes"));
