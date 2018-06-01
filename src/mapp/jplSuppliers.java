@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
@@ -31,7 +27,7 @@ public class jplSuppliers extends JPanel {
         this.setLocation(x, y);
         this.setVisible(true);
         this.gohome=gohome;
-        //bnSearch.setText("Search");
+
         initialization();
         findSuppliers();
         filltable();
@@ -208,11 +204,6 @@ public class jplSuppliers extends JPanel {
         tfSupplierId.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfSupplierIdFocusLost(evt);
-            }
-        });
-        tfSupplierId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSupplierIdActionPerformed(evt);
             }
         });
 
@@ -518,10 +509,6 @@ public class jplSuppliers extends JPanel {
     private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
        
     }//GEN-LAST:event_tfNameFocusLost
-
-    private void tfSupplierIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSupplierIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSupplierIdActionPerformed
 
     private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
         if (utility.Utility.universalCode == 1){
