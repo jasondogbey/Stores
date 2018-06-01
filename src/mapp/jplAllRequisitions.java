@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
@@ -22,10 +18,7 @@ public class jplAllRequisitions extends JPanel {
     JMenuItem gohome;
     int ItemId, CollectorId;
     String Item, Collector;
-     
-    /**
-     * Creates new form jplAllDistributions
-     */
+
     public jplAllRequisitions(JPanel jplMain,JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth, pHeight);
@@ -34,7 +27,6 @@ public class jplAllRequisitions extends JPanel {
         this.setLocation(x, y);
         this.setVisible(true);
         this.gohome=gohome;
-        //bnSearch.setText("Search");
         initialization();
         findRequisitions();
         filltable();
@@ -482,9 +474,7 @@ public class jplAllRequisitions extends JPanel {
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -529,9 +519,7 @@ public class jplAllRequisitions extends JPanel {
             ResultSet rs = utility.DBconnection.getStatement().executeQuery(query);
             while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -615,8 +603,6 @@ public class jplAllRequisitions extends JPanel {
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -652,8 +638,6 @@ public class jplAllRequisitions extends JPanel {
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -677,9 +661,7 @@ public class jplAllRequisitions extends JPanel {
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -708,9 +690,7 @@ public class jplAllRequisitions extends JPanel {
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -739,9 +719,7 @@ public class jplAllRequisitions extends JPanel {
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
@@ -770,9 +748,7 @@ public class jplAllRequisitions extends JPanel {
            
              while(rs.next()){
                 tfDistributionId.setText(rs.getString("Requisition_id"));
-                //tfItemId.setText(rs.getString("Item_id"));
                 ItemId=Integer.parseInt(rs.getString("Item_id"));
-                //tfCollectorId.setText(rs.getString("Collector_id"));
                 CollectorId=Integer.parseInt(rs.getString("Collector_id"));
                 tfQuantity.setText(rs.getString("Quantity"));
                 tfPrice.setText(rs.getString("Price"));
