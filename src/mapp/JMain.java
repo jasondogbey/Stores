@@ -23,7 +23,6 @@ public class JMain extends JFrame {
         utility.DBconnection.connection();
         currentDate();
         displayForm(new jplLogin(jplMain,mnuBar,mnuAccounts,mnuHome,mnuSearch)); 
-        //displayForm(new jplHome(jplMain));
     }
 
     public void displayForm(JPanel jp){
