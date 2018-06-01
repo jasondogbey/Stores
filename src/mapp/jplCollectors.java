@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mapp;
 import java.sql.ResultSet;
 import javax.swing.*;
@@ -19,9 +15,7 @@ public class jplCollectors extends JPanel {
     final int pHeight = 365;
     
     JMenuItem gohome;
-    /**
-     * Creates new form jplCollectors
-     */
+ 
     public jplCollectors(JPanel jplMain, JMenuItem gohome) {
         initComponents();
         this.setSize(pWidth, pHeight);
@@ -30,7 +24,7 @@ public class jplCollectors extends JPanel {
         this.setLocation(x, y);
         this.setVisible(true);
         this.gohome=gohome;
-        //bnSearch.setText("Search");
+
         initialization();
         findCollectors();
         filltable();
@@ -155,11 +149,6 @@ public class jplCollectors extends JPanel {
                 tfCollectorIdFocusLost(evt);
             }
         });
-        tfCollectorId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCollectorIdActionPerformed(evt);
-            }
-        });
 
         bnSearch.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -194,12 +183,6 @@ public class jplCollectors extends JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Collector");
-
-        tfName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfNameFocusLost(evt);
-            }
-        });
 
         bnClose.setBackground(new java.awt.Color(255, 255, 255));
         bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -368,10 +351,6 @@ public class jplCollectors extends JPanel {
         tfCollectorId.setText(tfCollectorId.getText().toUpperCase());
     }//GEN-LAST:event_tfCollectorIdFocusLost
 
-    private void tfCollectorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCollectorIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCollectorIdActionPerformed
-
     private void bnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearchActionPerformed
         if (bnSearch.getText().equals("Search")){
             if (tfCollectorId.getText().isEmpty()){
@@ -470,10 +449,6 @@ public class jplCollectors extends JPanel {
             JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
         }
     }//GEN-LAST:event_bnDeleteActionPerformed
-
-    private void tfNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNameFocusLost
-
-    }//GEN-LAST:event_tfNameFocusLost
 
     private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
         if (utility.Utility.universalCode == 1){
