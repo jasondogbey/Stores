@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mapp;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -41,9 +37,7 @@ public class jplRequisition extends JPanel {
     private static Connection conn;
     int ItemId;
     double newval,newval1;
-    /**
-     * Creates new form jplTransaction
-     */
+    
     public jplRequisition(JPanel jplMain,JMenuItem gohome) {
         initComponents();
         
@@ -54,7 +48,6 @@ public class jplRequisition extends JPanel {
         this.setVisible(true);
         this.home=jplMain;
         this.gohome=gohome;
-        //bnSearch.setText("Search");
         initialization();
         initializeCollector();
         fillcombo();
@@ -66,12 +59,9 @@ public class jplRequisition extends JPanel {
         tfUnitPrice.setText("");
         tfQuantity.setText("");
         
-        //bnDelete.setEnabled(false);
         tfDistributionId.setEditable(false);
         tfDistributionDate.setEditable(false);
         tfUnitPrice.setEditable(false);
-        //tfQuantity.setEditable(false);
-        //bnSearch.setText("Search");
         tfUserCode1.setVisible(false);
         bnPrint.setVisible(false);   
     }
@@ -80,9 +70,7 @@ public class jplRequisition extends JPanel {
         tfCollector.setText("");
         tfAddress.setText("");
         tfCollectorId.setEditable(false);
-        cbCollectorName.setEnabled(false);
-     
-        
+        cbCollectorName.setEnabled(false);   
     }
     private void fillcombo(){
         String query="select Item_name from item";
@@ -155,8 +143,7 @@ public class jplRequisition extends JPanel {
     }
     public void CollectorId(){
         String query="INSERT INTO `stores_db`.`collector` (`Collector_id`, `Collector_name`, `Address`, `Date`, `Requisition_id`) VALUES (NULL,'"+tfCollector.getText()+"','"+tfAddress.getText()+"','"+tfDistributionDate.getText()+"','"+tfDistributionId.getText()+"')";
-        //    INSERT INTO `stores_db`.`collector` (`Collector_id`, `Collector_name`, `Address`, `Date`, `Distribution_id`) VALUES (NULL, 'STEPHEN', 'VOLTA REGION', '02/12/2016', 'T6');
-    
+        
         try{
            if(utility.DBconnection.getStatement().executeUpdate(query)>0){
                //JOptionPane.showMessageDialog(null, "Successfully saved Item");
@@ -189,10 +176,7 @@ public class jplRequisition extends JPanel {
                 while(rs.next()){
                     tfUnitPrice.setText(rs.getString("Unit_price"));
                     ItemId=Integer.parseInt(rs.getString("Item_id"));
-                }
-               
-                
-                
+                }  
             } catch (Exception e){
                 JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
             }
@@ -284,7 +268,6 @@ public class jplRequisition extends JPanel {
         bnClose.setBackground(new java.awt.Color(255, 255, 255));
         bnClose.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-close blue-icon.png"))); // NOI18N
-        bnClose.setText("Close");
         bnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,11 +329,6 @@ public class jplRequisition extends JPanel {
         });
 
         tfUserCode1.setText("0");
-        tfUserCode1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfUserCode1ActionPerformed(evt);
-            }
-        });
 
         bnSearch1.setBackground(new java.awt.Color(255, 255, 255));
         bnSearch1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -498,31 +476,29 @@ public class jplRequisition extends JPanel {
                             .addGap(40, 40, 40)
                             .addComponent(tfDistributionId))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(100, 100, 100)
-                                .addComponent(cbItem, 0, 233, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(72, 72, 72)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                    .addComponent(tfUnitPrice))))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(100, 100, 100)
+                            .addComponent(cbItem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel5))
+                            .addGap(72, 72, 72)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                .addComponent(tfUnitPrice)))))
                 .addGap(0, 15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addComponent(bnSearch)
                         .addGap(47, 47, 47)
                         .addComponent(bnSearch1)
                         .addGap(50, 50, 50)
                         .addComponent(bnViewAll, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bnClose)
+                        .addGap(38, 38, 38)
+                        .addComponent(bnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -694,53 +670,8 @@ public class jplRequisition extends JPanel {
            JOptionPane.showMessageDialog(null, e);
        }
         
-        } //else if (bnSearch.getText().equals("Edit")){
-//            tfDistributionId.setEditable(false);
-//            cbItem.setEditable(true);
-//            tfCollector.setEditable(true);
-//            tfAddress.setEditable(true);
-//            tfUnitCost.setEditable(true);
-//            tfQuantity.setEditable(true);
-//            
-//            bnSearch.setText("Update");
-//        } else if (bnSearch.getText().equals("Update")){
-//            String query = "update transaction set item='"+cbItem.getSelectedItem()+"', Collector='"+tfCollector.getText()+"', Unit_price='"+tfUnitCost.getText()+"', Quantity='"+tfQuantity.getText()+"', User_code='"+tfQuantity.getText()+"', Transaction_date='"+tfDistributionDate.getText()+"' where Transaction_id='"+tfDistributionId.getText()+"'";
-//            try {
-//                if (utility.DBconnection.getStatement().executeUpdate(query)>0){
-//                    JOptionPane.showMessageDialog(null, "Update is Successful");
-//                    tfDistributionId.setText("");
-//                    cbItem.setSelectedItem("");
-//                    tfCollector.setText("");
-//                    tfUnitCost.setText("");
-//                    tfQuantity.setText("");
-//                    
-//                    tfDistributionDate.setText("");
-//                    //bnSearch.setText("Search");
-//                    initialization();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Could not update data");
-//                    tfDistributionId.setText("");
-//                    cbItem.setSelectedItem("");
-//                    tfCollector.setText("");
-//                    tfUnitCost.setText("");
-//                    tfQuantity.setText("");
-//                    
-//                    tfDistributionDate.setText("");
-//                    //bnSearch.setText("Search");
-//                    
-//                    tfDistributionId.setEditable(true);
-//                    cbItem.setEditable(true);
-//                    tfCollector.setEditable(true);
-//                    tfUnitCost.setEditable(true);
-//                    tfQuantity.setEditable(true);
-//                   
-//                    tfDistributionDate.setEditable(true);
-//                }
-//            } catch(Exception e){
-//                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
-//            }
-//        }
-       
+        } 
+      
     }//GEN-LAST:event_bnSearchActionPerformed
 
     private void bnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnCloseActionPerformed
@@ -754,11 +685,9 @@ public class jplRequisition extends JPanel {
                     bnSave.doClick();
                 }
             }else{
-                //this.setVisible(false);
                 this.gohome.doClick();
             }
         }else{
-            //this.setVisible(false);
             this.gohome.doClick();
         }
     }//GEN-LAST:event_bnCloseActionPerformed
@@ -817,18 +746,12 @@ if (txtReciept.getText().isEmpty())
     }//GEN-LAST:event_bnDoneActionPerformed
 
     private void bnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSearch1ActionPerformed
-//        tfDistributionId.setEnabled(true);
-//        tfDistributionId.setEditable(true);
-//        if (tfDistributionId.getText().isEmpty()){
-//                JOptionPane.showMessageDialog(null, "Enter Distribution ID");
-//                return;  
-//            }
+
         try
        {
            HashMap para = new HashMap();
            conn=DBconnection.getConnection();
-          
-           //String distributionId=tfDistributionId.getText();
+
            JasperDesign jd = JRXmlLoader.load("C:\\Users\\unknown\\Documents\\NetBeansProjects\\Stores5\\src\\mapp\\report1.jrxml");
            String sql ="SELECT\n" +
 "     requisition.`Requisition_id` AS requisition_Requisition_id,\n" +
@@ -884,10 +807,6 @@ if (txtReciept.getText().isEmpty())
     private void bnViewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnViewAllActionPerformed
         displayForm(new jplAllRequisitions(this.home,this.gohome));
     }//GEN-LAST:event_bnViewAllActionPerformed
-
-    private void tfUserCode1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserCode1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfUserCode1ActionPerformed
 
     private void cbCollectorNamePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCollectorNamePopupMenuWillBecomeInvisible
         retrieveCollectorDetails();
