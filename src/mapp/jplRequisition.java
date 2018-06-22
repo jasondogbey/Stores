@@ -579,7 +579,14 @@ public class jplRequisition extends JPanel {
         }
         String valu,ds;
                     double intvalue;
-            
+         try {
+        Double.parseDouble(tfQuantity.getText());
+        Double.parseDouble(tfUnitPrice.getText());
+         } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Quantity must be an integer");
+            tfQuantity.setText("");
+            return;
+        }
         String s,q,p;
         Double quantity,price,total;
         q=tfQuantity.getText();
@@ -594,6 +601,7 @@ public class jplRequisition extends JPanel {
         initial=Double.parseDouble(initialString);
         initial = initial + total;
         tfUserCode1.setText(initial.toString());
+          
        
             txtReciept.append("\n"+cbItem.getSelectedItem().toString()+ "\t\t      "+ p+" X "+ q+"\t\t   ₵" + total);
        
