@@ -491,7 +491,19 @@ public class jplItems extends JPanel {
                 tfItemId.setText("");
             }
             
-    
+    try {
+        double q = Double.parseDouble(tfQuantity.getText());
+        double p = Double.parseDouble(tfUnitPrice.getText());
+        if (q<0 || p<0){
+            JOptionPane.showMessageDialog(null, "Quantity & Unit Price cannot be less than zero");
+            return;
+        }
+         } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Quantity & Unit Price must be an integer");
+            tfQuantity.setText("");
+            tfUnitPrice.setText("");
+            return;
+        }
             String query = "update item set Item_name='"+tfItemName.getText()+"', Unit_price='"+tfUnitPrice.getText()+"', Quantity='"+tfQuantity.getText()+"', Supplier_id='"+SupplierId+"', Location='"+taLocation.getText()+"', Notes='"+taNotes.getText()+"' where Item_id='"+tfItemId.getText()+"'";
             try {
                 if (utility.DBconnection.getStatement().executeUpdate(query)>0){
@@ -585,6 +597,19 @@ public class jplItems extends JPanel {
             if (tfUnitPrice.getText().isEmpty()){
             tfUnitPrice.setBackground(Color.red);
             JOptionPane.showMessageDialog(null, "Highlighted field is required");
+            return;
+        }
+            try {
+        double q = Double.parseDouble(tfQuantity.getText());
+        double p = Double.parseDouble(tfUnitPrice.getText());
+        if (q<0 || p<0){
+            JOptionPane.showMessageDialog(null, "Quantity & Unit Price cannot be less than zero");
+            return;
+        }
+         } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Quantity & Unit Price must be an integer");
+            tfQuantity.setText("");
+            tfUnitPrice.setText("");
             return;
         }
         String query="insert into item values (null,'"+tfItemName.getText()+"','"+tfUnitPrice.getText()+"','"+tfQuantity.getText()+"','"+SupplierId+"','"+taLocation.getText()+"','"+taNotes.getText()+"')";
@@ -750,6 +775,12 @@ public class jplItems extends JPanel {
     private void bnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnClearActionPerformed
         initialization();
         bnSave.setEnabled(true);
+        tfItemName.setEditable(true);
+        tfUnitPrice.setEditable(true);
+        tfQuantity.setEditable(true);
+        cbSupplier.setEnabled(true);
+        taLocation.setEditable(true);
+        taNotes.setEditable(true);
     }//GEN-LAST:event_bnClearActionPerformed
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
