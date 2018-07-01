@@ -574,14 +574,18 @@ public class jplRequisition extends JPanel {
         }
         if (tfQuantity.getText().isEmpty()||tfUnitPrice.getText().isEmpty() )
         {
-            JOptionPane.showMessageDialog(null, "Unit Cost and Quantity field cannot be empty");
+            JOptionPane.showMessageDialog(null, "Unit Price and Quantity field cannot be empty");
             return;
         }
         String valu,ds;
                     double intvalue;
          try {
-        Double.parseDouble(tfQuantity.getText());
-        Double.parseDouble(tfUnitPrice.getText());
+        double q = Double.parseDouble(tfQuantity.getText());
+        double p = Double.parseDouble(tfUnitPrice.getText());
+        if (q<0){
+            JOptionPane.showMessageDialog(null, "Quantity cannot be less than zero");
+            return;
+        }
          } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Quantity must be an integer");
             tfQuantity.setText("");
