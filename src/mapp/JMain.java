@@ -57,12 +57,7 @@ public class JMain extends JFrame {
         int day = cal.get(Calendar.DAY_OF_MONTH);
         lbDate.setText(Integer.toString(day)+"/"+Integer.toString(month+1)+"/"+Integer.toString(year));
         
-        //Time
-//        int hour = cal.get(Calendar.HOUR);
-//        int minute = cal.get(Calendar.MINUTE);
-//        int second = cal.get(Calendar.SECOND);
-//        lbTime.setText(Integer.toString(hour)+":"+Integer.toString(minute)+":"+Integer.toString(second));
-   
+        //Time  
     Date date = new Date();
     SimpleDateFormat formatTime= new SimpleDateFormat("hh.mm.ss aa");
     String srtTime = formatTime.format(date);
@@ -76,8 +71,7 @@ public class JMain extends JFrame {
             }
         }
         };
-        clock.start();
-        
+        clock.start();   
     }
    
     @SuppressWarnings("unchecked")
