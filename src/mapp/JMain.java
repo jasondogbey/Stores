@@ -93,6 +93,7 @@ public class JMain extends JFrame {
         mnuFile = new javax.swing.JMenu();
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         mnuHome = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
         mnuItems = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuDistribute = new javax.swing.JMenuItem();
@@ -227,6 +228,7 @@ public class JMain extends JFrame {
         mnuFile.setText("File");
         mnuFile.add(jSeparator10);
 
+        mnuHome.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         mnuHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-home.png"))); // NOI18N
         mnuHome.setText("Home");
         mnuHome.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +237,7 @@ public class JMain extends JFrame {
             }
         });
         mnuFile.add(mnuHome);
+        mnuFile.add(jSeparator12);
 
         mnuItems.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         mnuItems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mapp/button-Item-Bag-icon.png"))); // NOI18N
@@ -453,6 +456,7 @@ public class JMain extends JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
